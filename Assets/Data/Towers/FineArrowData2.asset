@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 230e52fcee5c0f64887d4e247f7d1d89, type: 3}
+  m_Name: FineArrowData2
+  m_EditorClassIdentifier: 
+  towerName: Expert Arrow Tower
+  iconPath: towerIcon/Icon_ItemIcon_Arrow
+  level: 2
+  cost: 10
+  attackRange: 6
+  attackRate: 0.4
+  damage: 3
+  rotateSpeed: 12
+  nextLevelData: {fileID: 11400000, guid: 464ce13621eb92c4fa9e33bd73e55638, type: 2}
+  towerPrefab: {fileID: 5794722645008495564, guid: eef9d2b72b7f7a74f848bb2dedb6c741, type: 3}
+  bulletSpeed: 30
+  bulletPosOffset: {x: 0, y: 0, z: 0}
+  bulletRotOffset: {x: 0, y: 0, z: 0}
