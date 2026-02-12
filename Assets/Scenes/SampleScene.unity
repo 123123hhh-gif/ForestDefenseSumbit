@@ -1220,9 +1220,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1015202281}
         m_TargetAssemblyTypeName: EnemySpawner, Assembly-CSharp
-        m_MethodName: onStartBtn
+        m_MethodName: OnStartBtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2548,7 +2548,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 377192010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30a126d5788d3c64da92b84dcb002923, type: 3}
+  m_Script: {fileID: 11500000, guid: d30849a6f8701eb40ac340561875b299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextWaypoint: {fileID: 1122117636}
@@ -2885,10 +2885,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eae56a9c8f61b44281b28f447bb7521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalColor: {r: 0, g: 1, b: 0, a: 1}
-  occupiedColor: {r: 1, g: 0, b: 0, a: 1}
-  placeRenderer: {fileID: 2067507199}
-  flashInterval: 0.5
 --- !u!1 &404349828
 GameObject:
   m_ObjectHideFlags: 0
@@ -4334,7 +4330,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 510783587}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30a126d5788d3c64da92b84dcb002923, type: 3}
+  m_Script: {fileID: 11500000, guid: d30849a6f8701eb40ac340561875b299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextWaypoint: {fileID: 1502718857}
@@ -5287,8 +5283,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 476a939b47f409248b8f97a9b4698950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmVolume: 1
-  battleVolume: 0.7
 --- !u!4 &570246293
 Transform:
   m_ObjectHideFlags: 0
@@ -6537,10 +6531,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eae56a9c8f61b44281b28f447bb7521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalColor: {r: 0, g: 1, b: 0, a: 1}
-  occupiedColor: {r: 1, g: 0, b: 0, a: 1}
-  placeRenderer: {fileID: 1751821372}
-  flashInterval: 0.5
 --- !u!1 &712563819
 GameObject:
   m_ObjectHideFlags: 0
@@ -7891,10 +7881,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eae56a9c8f61b44281b28f447bb7521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalColor: {r: 0, g: 1, b: 0, a: 1}
-  occupiedColor: {r: 1, g: 0, b: 0, a: 1}
-  placeRenderer: {fileID: 334388608}
-  flashInterval: 0.5
 --- !u!1 &857432613
 GameObject:
   m_ObjectHideFlags: 0
@@ -9074,10 +9060,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eae56a9c8f61b44281b28f447bb7521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalColor: {r: 0, g: 1, b: 0, a: 1}
-  occupiedColor: {r: 1, g: 0, b: 0, a: 1}
-  placeRenderer: {fileID: 1388212483}
-  flashInterval: 0.5
 --- !u!1 &1005540109
 GameObject:
   m_ObjectHideFlags: 0
@@ -9228,23 +9210,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelId: 1
-  startWaypoint: {fileID: 0}
-  enemyPrefab: {fileID: 0}
-  spawnInterval: 1
+  startWaypoint: {fileID: 377192012}
+  enemyPrefab: {fileID: 6206668456784059546, guid: ab2deca2f10d62548877bdfe7b8f7d17, type: 3}
+  spawnInterval: 1.5
   enemySpeedMultiplier: 1
   enemyHealthMultiplier: 1
-  waveCount: 5
-  waveInterval: 10
+  waveCount: 8
+  waveInterval: 6
   maxWaveCount: 20
   minSpawnInterval: 0.5
   maxTotalWaves: 0
   playerHP: 10
   playerHPMax: 0
-  waveTxt: {fileID: 0}
-  startBtn: {fileID: 0}
-  progressPanel: {fileID: 0}
-  waveCountdownTxt: {fileID: 0}
-  waveTimePanel: {fileID: 0}
+  waveTxt: {fileID: 1804778155}
+  startBtn: {fileID: 195873623}
+  progressPanel: {fileID: 2059927365}
+  waveCountdownTxt: {fileID: 875595169}
+  waveTimePanel: {fileID: 500439995}
   currentWave: 1
   isSpawning: 0
 --- !u!1 &1021709467
@@ -9503,10 +9485,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eae56a9c8f61b44281b28f447bb7521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalColor: {r: 0, g: 1, b: 0, a: 1}
-  occupiedColor: {r: 1, g: 0, b: 0, a: 1}
-  placeRenderer: {fileID: 404349832}
-  flashInterval: 0.5
 --- !u!1 &1049104814
 GameObject:
   m_ObjectHideFlags: 0
@@ -10379,10 +10357,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb7bf6e9587347b4bafc5f5a3dc7ac93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  starOnImages:
-  - {fileID: 751708968}
-  - {fileID: 1737675874}
-  - {fileID: 1471458981}
 --- !u!1 &1119513643
 GameObject:
   m_ObjectHideFlags: 0
@@ -10691,7 +10665,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1122117634}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30a126d5788d3c64da92b84dcb002923, type: 3}
+  m_Script: {fileID: 11500000, guid: d30849a6f8701eb40ac340561875b299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextWaypoint: {fileID: 1436181598}
@@ -11669,10 +11643,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eae56a9c8f61b44281b28f447bb7521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalColor: {r: 0, g: 1, b: 0, a: 1}
-  occupiedColor: {r: 1, g: 0, b: 0, a: 1}
-  placeRenderer: {fileID: 1490800646}
-  flashInterval: 0.5
 --- !u!1 &1234189158
 GameObject:
   m_ObjectHideFlags: 0
@@ -12367,10 +12337,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaf44fc845c8e8b4fbf396556bf24b4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevelData: {fileID: 11400000, guid: 347294b4c979a6142b56731a7a69f967, type: 2}
-  gridGroup: {fileID: 463199639}
-  scrollRect: {fileID: 315648418}
-  tipsPanel: {fileID: 368404206}
 --- !u!1 &1351792688
 GameObject:
   m_ObjectHideFlags: 0
@@ -13110,10 +13076,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1687424056edd484cb84ca65065dfac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  valueTxt: {fileID: 722467814}
-  nameTxt: {fileID: 0}
-  iconImage: {fileID: 0}
-  parentPanel: {fileID: 0}
 --- !u!1 &1400596443
 GameObject:
   m_ObjectHideFlags: 0
@@ -13456,18 +13418,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2699c2e3866e1478d313c9768ca0c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradePanel: {fileID: 1163256949}
-  towerNameText: {fileID: 712563821}
-  upgradeCostText: {fileID: 1856215655}
-  upgradeButton: {fileID: 1313893889}
-  sellButton: {fileID: 2087513617}
-  victoryPanel: {fileID: 1103775029}
-  LosePanel: {fileID: 1996364880}
-  SettingPanel: {fileID: 1746525352}
-  TowerSelectPanel: {fileID: 1317272766}
-  tipsPanel: {fileID: 1672064716}
-  bgmSlider: {fileID: 2052572428}
-  sfxSlider: {fileID: 38700233}
 --- !u!4 &1420198886
 Transform:
   m_ObjectHideFlags: 0
@@ -13524,7 +13474,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1436181596}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30a126d5788d3c64da92b84dcb002923, type: 3}
+  m_Script: {fileID: 11500000, guid: d30849a6f8701eb40ac340561875b299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextWaypoint: {fileID: 510783589}
@@ -13990,11 +13940,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1502718855}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30a126d5788d3c64da92b84dcb002923, type: 3}
+  m_Script: {fileID: 11500000, guid: d30849a6f8701eb40ac340561875b299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextWaypoint: {fileID: 0}
-  isLastWaypoint: 1
+  isLastWaypoint: 0
 --- !u!1 &1531234651
 GameObject:
   m_ObjectHideFlags: 0
@@ -14535,10 +14485,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eae56a9c8f61b44281b28f447bb7521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalColor: {r: 0, g: 1, b: 0, a: 1}
-  occupiedColor: {r: 1, g: 0, b: 0, a: 1}
-  placeRenderer: {fileID: 1999940001}
-  flashInterval: 0.5
 --- !u!4 &1626919333
 Transform:
   m_ObjectHideFlags: 0
@@ -16770,10 +16716,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eae56a9c8f61b44281b28f447bb7521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalColor: {r: 0, g: 1, b: 0, a: 1}
-  occupiedColor: {r: 1, g: 0, b: 0, a: 1}
-  placeRenderer: {fileID: 639148092}
-  flashInterval: 0.5
 --- !u!1 &1886233687
 GameObject:
   m_ObjectHideFlags: 0
@@ -16894,10 +16836,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eae56a9c8f61b44281b28f447bb7521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalColor: {r: 0, g: 1, b: 0, a: 1}
-  occupiedColor: {r: 1, g: 0, b: 0, a: 1}
-  placeRenderer: {fileID: 458162739}
-  flashInterval: 0.5
 --- !u!1 &1906272042
 GameObject:
   m_ObjectHideFlags: 0
@@ -18116,10 +18054,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eae56a9c8f61b44281b28f447bb7521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalColor: {r: 0, g: 1, b: 0, a: 1}
-  occupiedColor: {r: 1, g: 0, b: 0, a: 1}
-  placeRenderer: {fileID: 2055124715}
-  flashInterval: 0.5
 --- !u!1 &2023726660
 GameObject:
   m_ObjectHideFlags: 0
