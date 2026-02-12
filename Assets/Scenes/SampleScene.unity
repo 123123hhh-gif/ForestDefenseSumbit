@@ -1220,7 +1220,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1015202279}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: EnemySpawner, Assembly-CSharp
         m_MethodName: onStartBtn
         m_Mode: 1
@@ -9192,7 +9192,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1015202280}
-  - component: {fileID: 1015202279}
+  - component: {fileID: 1015202281}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -9200,38 +9200,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1015202279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1015202278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea0afcd7607532b4188d88d74bc55db3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LevelId: 1
-  startWaypoint: {fileID: 377192012}
-  enemyPrefab: {fileID: 6206668456784059546, guid: ab2deca2f10d62548877bdfe7b8f7d17, type: 3}
-  spawnInterval: 1.5
-  enemySpeedMultiplier: 1
-  enemyHealthMultiplier: 1
-  waveCount: 8
-  waveInterval: 6
-  maxWaveCount: 20
-  minSpawnInterval: 0.5
-  maxTotalWaves: 5
-  playerHP: 10
-  playerHPMax: 0
-  waveTxt: {fileID: 1804778155}
-  startBtn: {fileID: 195873623}
-  progressPanel: {fileID: 2059927365}
-  waveCountdownTxt: {fileID: 1237927042}
-  waveTimePanel: {fileID: 500439995}
-  currentWave: 1
-  isSpawning: 0
 --- !u!4 &1015202280
 Transform:
   m_ObjectHideFlags: 0
@@ -9247,6 +9215,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1015202281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015202278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d0edfee61679c042a9eb9b90d8d1374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelId: 1
+  startWaypoint: {fileID: 0}
+  enemyPrefab: {fileID: 0}
+  spawnInterval: 1
+  enemySpeedMultiplier: 1
+  enemyHealthMultiplier: 1
+  waveCount: 5
+  waveInterval: 10
+  maxWaveCount: 20
+  minSpawnInterval: 0.5
+  maxTotalWaves: 0
+  playerHP: 10
+  playerHPMax: 0
+  waveTxt: {fileID: 0}
+  startBtn: {fileID: 0}
+  progressPanel: {fileID: 0}
+  waveCountdownTxt: {fileID: 0}
+  waveTimePanel: {fileID: 0}
+  currentWave: 1
+  isSpawning: 0
 --- !u!1 &1021709467
 GameObject:
   m_ObjectHideFlags: 0
@@ -19227,7 +19227,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2105954760}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 721c3606febd9c4409ce8772ed8e1413, type: 3}
+  m_Script: {fileID: 11500000, guid: accc2cd0cef28b04eac23ce6c4611fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2141401960

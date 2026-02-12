@@ -7,7 +7,7 @@ public class MainScript : MonoBehaviour
 
     void Start()
     {
-        AudioManager.Instance.PlayBGM(bgmWarriors); // Play menu BGM
+        //AudioManager.Instance.PlayBGM(bgmWarriors); // Play menu BGM
     }
 
     void Update()

@@ -933,8 +933,7 @@ GameObject:
   - component: {fileID: 7330461259042419192}
   - component: {fileID: 8844059114515149737}
   - component: {fileID: -8773617731848240678}
-  - component: {fileID: 16582114555595731}
-  - component: {fileID: 8837678109602272425}
+  - component: {fileID: 5553304301694369521}
   m_Layer: 0
   m_Name: PhantomEnemy
   m_TagString: Enemy
@@ -1005,7 +1004,7 @@ CapsuleCollider:
   m_Height: 2.5826583
   m_Direction: 1
   m_Center: {x: 0, y: 1.4278009, z: 0.10033685}
---- !u!114 &16582114555595731
+--- !u!114 &5553304301694369521
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1014,29 +1013,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6206668456784059546}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eb4be454ec0a3845bab4c64f6811dac, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f3516e0490d77a44a5b4c45c40e24a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 60
   moveSpeed: 2
   damageToPlayer: 1
---- !u!114 &8837678109602272425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6206668456784059546}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e4b4efefc8a5eb4cba9b7d04927cc9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpBarPrefab: {fileID: 1061978079511432575, guid: 6bc795e3fc40fd344a07a35df89f1041, type: 3}
-  hpFollowPoint: {fileID: 3807360802385198382}
-  hpBarOffsetY: 1.5
-  smoothFollowSpeed: 5
-  maxHp: 60
 --- !u!1 &6210127346073472220
 GameObject:
   m_ObjectHideFlags: 0

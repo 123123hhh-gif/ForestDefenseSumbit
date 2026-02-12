@@ -233,8 +233,7 @@ GameObject:
   - component: {fileID: 2195615176126432530}
   - component: {fileID: 3733862018914688943}
   - component: {fileID: 7274895507689497524}
-  - component: {fileID: 2282677540392717768}
-  - component: {fileID: 8402763275340648470}
+  - component: {fileID: 29727280996937577}
   m_Layer: 0
   m_Name: FineEnemy
   m_TagString: Enemy
@@ -307,7 +306,7 @@ CapsuleCollider:
   m_Height: 1.5617664
   m_Direction: 1
   m_Center: {x: 0.0680601, y: 0.7484654, z: 0}
---- !u!114 &2282677540392717768
+--- !u!114 &29727280996937577
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -316,29 +315,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1527090623040330310}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eb4be454ec0a3845bab4c64f6811dac, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f3516e0490d77a44a5b4c45c40e24a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
   moveSpeed: 2
   damageToPlayer: 1
---- !u!114 &8402763275340648470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1527090623040330310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e4b4efefc8a5eb4cba9b7d04927cc9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpBarPrefab: {fileID: 1061978079511432575, guid: 6bc795e3fc40fd344a07a35df89f1041, type: 3}
-  hpFollowPoint: {fileID: 1565388559607657446}
-  hpBarOffsetY: 1.5
-  smoothFollowSpeed: 5
-  maxHp: 100
 --- !u!1 &1750760906195352707
 GameObject:
   m_ObjectHideFlags: 0

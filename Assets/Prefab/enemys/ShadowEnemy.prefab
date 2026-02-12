@@ -1178,9 +1178,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2724915326244445453}
   - component: {fileID: 4316818528186869149}
-  - component: {fileID: 656092857190122839}
-  - component: {fileID: 597913213152216342}
   - component: {fileID: 5552731774920218448}
+  - component: {fileID: 6647267358315766463}
   m_Layer: 0
   m_Name: ShadowEnemy
   m_TagString: Enemy
@@ -1242,38 +1241,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &656092857190122839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4546800064492433773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eb4be454ec0a3845bab4c64f6811dac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  moveSpeed: 2
-  damageToPlayer: 1
---- !u!114 &597913213152216342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4546800064492433773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e4b4efefc8a5eb4cba9b7d04927cc9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpBarPrefab: {fileID: 1061978079511432575, guid: 6bc795e3fc40fd344a07a35df89f1041, type: 3}
-  hpFollowPoint: {fileID: 3328477463945106024}
-  hpBarOffsetY: 1.5
-  smoothFollowSpeed: 5
-  maxHp: 100
 --- !u!136 &5552731774920218448
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1297,6 +1264,21 @@ CapsuleCollider:
   m_Height: 3.0345047
   m_Direction: 1
   m_Center: {x: -0.09, y: 1.02, z: 0.12568092}
+--- !u!114 &6647267358315766463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4546800064492433773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f3516e0490d77a44a5b4c45c40e24a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  moveSpeed: 2
+  damageToPlayer: 1
 --- !u!1 &4585531188346123177
 GameObject:
   m_ObjectHideFlags: 0

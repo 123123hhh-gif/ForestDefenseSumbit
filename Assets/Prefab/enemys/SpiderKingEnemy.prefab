@@ -260,8 +260,7 @@ GameObject:
   - component: {fileID: 1786055230160527066}
   - component: {fileID: 8070986862697390090}
   - component: {fileID: 4944139979523559245}
-  - component: {fileID: 6788632211741437206}
-  - component: {fileID: 1108051268727931051}
+  - component: {fileID: 7882176711715052375}
   m_Layer: 0
   m_Name: SpiderKingEnemy
   m_TagString: Enemy
@@ -354,7 +353,7 @@ CapsuleCollider:
   m_Height: 2.1735647
   m_Direction: 1
   m_Center: {x: 0.01, y: 0.75, z: -0.01}
---- !u!114 &6788632211741437206
+--- !u!114 &7882176711715052375
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -363,29 +362,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 568639069603075517}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eb4be454ec0a3845bab4c64f6811dac, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f3516e0490d77a44a5b4c45c40e24a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
   moveSpeed: 2
   damageToPlayer: 1
---- !u!114 &1108051268727931051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 568639069603075517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e4b4efefc8a5eb4cba9b7d04927cc9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpBarPrefab: {fileID: 1061978079511432575, guid: 6bc795e3fc40fd344a07a35df89f1041, type: 3}
-  hpFollowPoint: {fileID: 1346679611813640291}
-  hpBarOffsetY: 1.5
-  smoothFollowSpeed: 2
-  maxHp: 100
 --- !u!1 &575615557512404535
 GameObject:
   m_ObjectHideFlags: 0
