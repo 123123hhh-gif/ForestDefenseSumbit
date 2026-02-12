@@ -846,7 +846,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1420198885}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: onResetGame
         m_Mode: 1
@@ -2109,7 +2109,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 834936737}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TowerPlace, Assembly-CSharp
         m_MethodName: OnPlacePointClicked
         m_Mode: 1
@@ -2882,9 +2882,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 400537110}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eae56a9c8f61b44281b28f447bb7521, type: 3}
+  m_Script: {fileID: 11500000, guid: 67059c9de092d9e43b8c01e8a69f82d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalColor: {r: 0, g: 1, b: 0, a: 1}
+  occupiedColor: {r: 1, g: 0, b: 0, a: 1}
+  placeRenderer: {fileID: 334388608}
+  flashInterval: 0.5
 --- !u!1 &404349828
 GameObject:
   m_ObjectHideFlags: 0
@@ -2964,7 +2968,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1038974488}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TowerPlace, Assembly-CSharp
         m_MethodName: OnPlacePointClicked
         m_Mode: 1
@@ -3482,7 +3486,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1420198885}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: onSceneSwitcher
         m_Mode: 1
@@ -3611,7 +3615,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1900705880}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TowerPlace, Assembly-CSharp
         m_MethodName: OnPlacePointClicked
         m_Mode: 1
@@ -3837,7 +3841,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1420198885}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: onResetGame
         m_Mode: 1
@@ -4815,7 +4819,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1420198885}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: onSceneSwitcher
         m_Mode: 1
@@ -5866,7 +5870,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1884514085}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TowerPlace, Assembly-CSharp
         m_MethodName: OnPlacePointClicked
         m_Mode: 1
@@ -6528,9 +6532,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 711474718}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eae56a9c8f61b44281b28f447bb7521, type: 3}
+  m_Script: {fileID: 11500000, guid: 67059c9de092d9e43b8c01e8a69f82d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalColor: {r: 0, g: 1, b: 0, a: 1}
+  occupiedColor: {r: 1, g: 0, b: 0, a: 1}
+  placeRenderer: {fileID: 334388608}
+  flashInterval: 0.5
 --- !u!1 &712563819
 GameObject:
   m_ObjectHideFlags: 0
@@ -7577,7 +7585,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1420198885}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: onCloseTowerSelectPanel
         m_Mode: 1
@@ -7878,9 +7886,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 834936735}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eae56a9c8f61b44281b28f447bb7521, type: 3}
+  m_Script: {fileID: 11500000, guid: 67059c9de092d9e43b8c01e8a69f82d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalColor: {r: 0, g: 1, b: 0, a: 1}
+  occupiedColor: {r: 1, g: 0, b: 0, a: 1}
+  placeRenderer: {fileID: 334388608}
+  flashInterval: 0.5
 --- !u!1 &857432613
 GameObject:
   m_ObjectHideFlags: 0
@@ -7965,7 +7977,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1420198885}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: onCloseVictory
         m_Mode: 1
@@ -9057,9 +9069,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 968851444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eae56a9c8f61b44281b28f447bb7521, type: 3}
+  m_Script: {fileID: 11500000, guid: 67059c9de092d9e43b8c01e8a69f82d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalColor: {r: 0, g: 1, b: 0, a: 1}
+  occupiedColor: {r: 1, g: 0, b: 0, a: 1}
+  placeRenderer: {fileID: 334388608}
+  flashInterval: 0.5
 --- !u!1 &1005540109
 GameObject:
   m_ObjectHideFlags: 0
@@ -9482,9 +9498,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1038974486}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eae56a9c8f61b44281b28f447bb7521, type: 3}
+  m_Script: {fileID: 11500000, guid: 67059c9de092d9e43b8c01e8a69f82d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalColor: {r: 0, g: 1, b: 0, a: 1}
+  occupiedColor: {r: 1, g: 0, b: 0, a: 1}
+  placeRenderer: {fileID: 334388608}
+  flashInterval: 0.5
 --- !u!1 &1049104814
 GameObject:
   m_ObjectHideFlags: 0
@@ -9975,7 +9995,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1420198885}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: onSceneSwitcher
         m_Mode: 1
@@ -10478,7 +10498,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1420198885}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: onOpenSetting
         m_Mode: 1
@@ -10679,6 +10699,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1130045237}
+  - component: {fileID: 1130045238}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -10701,6 +10722,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1130045238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130045235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4367db7fb904ee84c93bce5ee375a40d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startGold: 100
+  coinTxt: {fileID: 560287967}
+  hpTxt: {fileID: 371208035}
+  killTxt: {fileID: 1393197084}
+  Remaining: {fileID: 1694010374}
+  bgmWarriors: {fileID: 8300000, guid: 49490e3010247914481b053ec86c8ec1, type: 3}
+  killNum: 0
+  callInterval: 1
 --- !u!1 &1130784765
 GameObject:
   m_ObjectHideFlags: 0
@@ -11640,9 +11681,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1232213089}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eae56a9c8f61b44281b28f447bb7521, type: 3}
+  m_Script: {fileID: 11500000, guid: 67059c9de092d9e43b8c01e8a69f82d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalColor: {r: 0, g: 1, b: 0, a: 1}
+  occupiedColor: {r: 1, g: 0, b: 0, a: 1}
+  placeRenderer: {fileID: 334388608}
+  flashInterval: 0.5
 --- !u!1 &1234189158
 GameObject:
   m_ObjectHideFlags: 0
@@ -12190,7 +12235,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1420198885}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: HideUpgradePanel
         m_Mode: 1
@@ -12807,7 +12852,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 968851446}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TowerPlace, Assembly-CSharp
         m_MethodName: OnPlacePointClicked
         m_Mode: 1
@@ -13377,7 +13422,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1420198885}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: OnSellConfirmed
         m_Mode: 1
@@ -13398,7 +13443,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1420198886}
-  - component: {fileID: 1420198885}
+  - component: {fileID: 1420198887}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -13406,18 +13451,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1420198885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1420198884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a2699c2e3866e1478d313c9768ca0c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1420198886
 Transform:
   m_ObjectHideFlags: 0
@@ -13433,6 +13466,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1420198887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420198884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc9e39e17dac0bb4c88b551b43b478a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradePanel: {fileID: 1163256949}
+  towerNameText: {fileID: 712563821}
+  upgradeCostText: {fileID: 1856215655}
+  upgradeButton: {fileID: 1313893889}
+  sellButton: {fileID: 2087513617}
+  victoryPanel: {fileID: 1103775029}
+  LosePanel: {fileID: 1996364880}
+  SettingPanel: {fileID: 1746525352}
+  TowerSelectPanel: {fileID: 1317272766}
+  tipsPanel: {fileID: 1672064716}
+  bgmSlider: {fileID: 2052572428}
+  sfxSlider: {fileID: 38700233}
 --- !u!1 &1436181596
 GameObject:
   m_ObjectHideFlags: 0
@@ -13816,7 +13873,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1232213091}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TowerPlace, Assembly-CSharp
         m_MethodName: OnPlacePointClicked
         m_Mode: 1
@@ -14211,7 +14268,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1420198885}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: onCloseLose
         m_Mode: 1
@@ -14465,7 +14522,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1626919333}
-  - component: {fileID: 1626919332}
+  - component: {fileID: 1626919334}
   m_Layer: 0
   m_Name: TowerPlace_01
   m_TagString: Untagged
@@ -14473,18 +14530,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1626919332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1626919331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eae56a9c8f61b44281b28f447bb7521, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1626919333
 Transform:
   m_ObjectHideFlags: 0
@@ -14501,6 +14546,22 @@ Transform:
   - {fileID: 1999939999}
   m_Father: {fileID: 196933277}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1626919334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626919331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67059c9de092d9e43b8c01e8a69f82d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalColor: {r: 0, g: 1, b: 0, a: 1}
+  occupiedColor: {r: 1, g: 0, b: 0, a: 1}
+  placeRenderer: {fileID: 334388608}
+  flashInterval: 0.5
 --- !u!1 &1644109154
 GameObject:
   m_ObjectHideFlags: 0
@@ -15741,7 +15802,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 711474720}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TowerPlace, Assembly-CSharp
         m_MethodName: OnPlacePointClicked
         m_Mode: 1
@@ -16713,9 +16774,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1884514083}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eae56a9c8f61b44281b28f447bb7521, type: 3}
+  m_Script: {fileID: 11500000, guid: 67059c9de092d9e43b8c01e8a69f82d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalColor: {r: 0, g: 1, b: 0, a: 1}
+  occupiedColor: {r: 1, g: 0, b: 0, a: 1}
+  placeRenderer: {fileID: 334388608}
+  flashInterval: 0.5
 --- !u!1 &1886233687
 GameObject:
   m_ObjectHideFlags: 0
@@ -16833,9 +16898,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1900705878}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eae56a9c8f61b44281b28f447bb7521, type: 3}
+  m_Script: {fileID: 11500000, guid: 67059c9de092d9e43b8c01e8a69f82d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalColor: {r: 0, g: 1, b: 0, a: 1}
+  occupiedColor: {r: 1, g: 0, b: 0, a: 1}
+  placeRenderer: {fileID: 334388608}
+  flashInterval: 0.5
 --- !u!1 &1906272042
 GameObject:
   m_ObjectHideFlags: 0
@@ -16920,7 +16989,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1420198885}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: onCloseSetting
         m_Mode: 1
@@ -17667,7 +17736,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1626919332}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TowerPlace, Assembly-CSharp
         m_MethodName: OnPlacePointClicked
         m_Mode: 1
@@ -18051,9 +18120,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2016128846}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eae56a9c8f61b44281b28f447bb7521, type: 3}
+  m_Script: {fileID: 11500000, guid: 67059c9de092d9e43b8c01e8a69f82d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalColor: {r: 0, g: 1, b: 0, a: 1}
+  occupiedColor: {r: 1, g: 0, b: 0, a: 1}
+  placeRenderer: {fileID: 334388608}
+  flashInterval: 0.5
 --- !u!1 &2023726660
 GameObject:
   m_ObjectHideFlags: 0
@@ -18330,7 +18403,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2016128848}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TowerPlace, Assembly-CSharp
         m_MethodName: OnPlacePointClicked
         m_Mode: 1
@@ -18569,7 +18642,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 400537112}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TowerPlace, Assembly-CSharp
         m_MethodName: OnPlacePointClicked
         m_Mode: 1
