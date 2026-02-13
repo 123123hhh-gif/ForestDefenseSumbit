@@ -161,7 +161,7 @@ public class GameManager : MonoBehaviour
             EnemySpawner.Instance.spawnInterval = 3f; // Reset spawn interval to default value
 
             EnemySpawner.Instance.playerHP = 10; // Reset player HP to default
-            //EnemySpawner.Instance.initHp(); // Refresh HP UI/logic in spawner (if implemented there)
+            EnemySpawner.Instance.initHp(); // Refresh HP UI/logic in spawner (if implemented there)
 
             if (EnemySpawner.Instance.waveTxt != null) { EnemySpawner.Instance.waveTxt.text = "1/" + EnemySpawner.Instance.maxTotalWaves; } // Reset wave progress text
             if (EnemySpawner.Instance.waveTimePanel != null) { EnemySpawner.Instance.waveTimePanel.SetActive(false); } // Hide wave timer UI
@@ -191,11 +191,11 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        //Arrow[] allArrows = FindObjectsOfType<Arrow>(); // Find all arrow projectiles
-        //foreach (Arrow arrow in allArrows) { if (arrow != null && arrow.gameObject != null) { Destroy(arrow.gameObject); } } // Destroy leftover arrows
+        Arrow[] allArrows = FindObjectsOfType<Arrow>(); // Find all arrow projectiles
+        foreach (Arrow arrow in allArrows) { if (arrow != null && arrow.gameObject != null) { Destroy(arrow.gameObject); } } // Destroy leftover arrows
 
-        //Cannon[] allCannons = FindObjectsOfType<Cannon>(); // Find all cannon projectiles
-        //foreach (Cannon cannon in allCannons) { if (cannon != null && cannon.gameObject != null) { Destroy(cannon.gameObject); } } // Destroy leftover cannon shots
+        Cannon[] allCannons = FindObjectsOfType<Cannon>(); // Find all cannon projectiles
+        foreach (Cannon cannon in allCannons) { if (cannon != null && cannon.gameObject != null) { Destroy(cannon.gameObject); } } // Destroy leftover cannon shots
 
         if (UIManager.Instance != null)
         {

@@ -2109,7 +2109,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 834936737}
         m_TargetAssemblyTypeName: TowerPlace, Assembly-CSharp
         m_MethodName: OnPlacePointClicked
         m_Mode: 1
@@ -2887,7 +2887,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalColor: {r: 0, g: 1, b: 0, a: 1}
   occupiedColor: {r: 1, g: 0, b: 0, a: 1}
-  placeRenderer: {fileID: 334388608}
+  placeRenderer: {fileID: 2067507199}
   flashInterval: 0.5
 --- !u!1 &404349828
 GameObject:
@@ -2968,7 +2968,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1038974488}
         m_TargetAssemblyTypeName: TowerPlace, Assembly-CSharp
         m_MethodName: OnPlacePointClicked
         m_Mode: 1
@@ -3615,7 +3615,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1900705880}
         m_TargetAssemblyTypeName: TowerPlace, Assembly-CSharp
         m_MethodName: OnPlacePointClicked
         m_Mode: 1
@@ -5267,7 +5267,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 570246293}
-  - component: {fileID: 570246292}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -5275,18 +5274,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &570246292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 570246291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 476a939b47f409248b8f97a9b4698950, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &570246293
 Transform:
   m_ObjectHideFlags: 0
@@ -5870,7 +5857,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1884514085}
         m_TargetAssemblyTypeName: TowerPlace, Assembly-CSharp
         m_MethodName: OnPlacePointClicked
         m_Mode: 1
@@ -6028,6 +6015,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 649677921}
   m_CullTransparentMesh: 1
+--- !u!1 &660025311 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5274416899980870705, guid: e8aacc2bf76a6b948a4e0239650cc8c3, type: 3}
+  m_PrefabInstance: {fileID: 5478367064642294413}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &671124503
 GameObject:
   m_ObjectHideFlags: 0
@@ -6277,7 +6269,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1399378520}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TowerItem, Assembly-CSharp
         m_MethodName: onBtnBuild
         m_Mode: 1
@@ -6537,7 +6529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalColor: {r: 0, g: 1, b: 0, a: 1}
   occupiedColor: {r: 1, g: 0, b: 0, a: 1}
-  placeRenderer: {fileID: 334388608}
+  placeRenderer: {fileID: 1751821372}
   flashInterval: 0.5
 --- !u!1 &712563819
 GameObject:
@@ -6884,6 +6876,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 722467812}
   m_CullTransparentMesh: 1
+--- !u!114 &743162409 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 310483387248774622, guid: e8aacc2bf76a6b948a4e0239650cc8c3, type: 3}
+  m_PrefabInstance: {fileID: 5478367064642294413}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &743978418
 GameObject:
   m_ObjectHideFlags: 0
@@ -7585,7 +7588,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1420198887}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: onCloseTowerSelectPanel
         m_Mode: 1
@@ -9074,7 +9077,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalColor: {r: 0, g: 1, b: 0, a: 1}
   occupiedColor: {r: 1, g: 0, b: 0, a: 1}
-  placeRenderer: {fileID: 334388608}
+  placeRenderer: {fileID: 1388212483}
   flashInterval: 0.5
 --- !u!1 &1005540109
 GameObject:
@@ -9503,7 +9506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalColor: {r: 0, g: 1, b: 0, a: 1}
   occupiedColor: {r: 1, g: 0, b: 0, a: 1}
-  placeRenderer: {fileID: 334388608}
+  placeRenderer: {fileID: 404349832}
   flashInterval: 0.5
 --- !u!1 &1049104814
 GameObject:
@@ -11639,6 +11642,22 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5534998074130534401, guid: e8aacc2bf76a6b948a4e0239650cc8c3, type: 3}
   m_PrefabInstance: {fileID: 5478367064642294413}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1203698167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660025311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7eb96503121d4f4093f818871a0ea4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  valueTxt: {fileID: 2113008659}
+  nameTxt: {fileID: 1583932553}
+  iconImage: {fileID: 743162409}
+  parentPanel: {fileID: 0}
 --- !u!1 &1232213089
 GameObject:
   m_ObjectHideFlags: 0
@@ -11686,7 +11705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalColor: {r: 0, g: 1, b: 0, a: 1}
   occupiedColor: {r: 1, g: 0, b: 0, a: 1}
-  placeRenderer: {fileID: 334388608}
+  placeRenderer: {fileID: 1490800646}
   flashInterval: 0.5
 --- !u!1 &1234189158
 GameObject:
@@ -12379,9 +12398,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1317272766}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaf44fc845c8e8b4fbf396556bf24b4c, type: 3}
+  m_Script: {fileID: 11500000, guid: c121d936f4e0e0d49a94d5584bf17ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLevelData: {fileID: 11400000, guid: 347294b4c979a6142b56731a7a69f967, type: 2}
+  gridGroup: {fileID: 463199639}
+  scrollRect: {fileID: 315648418}
+  tipsPanel: {fileID: 368404206}
 --- !u!1 &1351792688
 GameObject:
   m_ObjectHideFlags: 0
@@ -12852,7 +12875,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 968851446}
         m_TargetAssemblyTypeName: TowerPlace, Assembly-CSharp
         m_MethodName: OnPlacePointClicked
         m_Mode: 1
@@ -13118,9 +13141,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1399378518}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1687424056edd484cb84ca65065dfac6, type: 3}
+  m_Script: {fileID: 11500000, guid: b7eb96503121d4f4093f818871a0ea4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  valueTxt: {fileID: 722467814}
+  nameTxt: {fileID: 0}
+  iconImage: {fileID: 0}
+  parentPanel: {fileID: 0}
 --- !u!1 &1400596443
 GameObject:
   m_ObjectHideFlags: 0
@@ -13873,7 +13900,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1232213091}
         m_TargetAssemblyTypeName: TowerPlace, Assembly-CSharp
         m_MethodName: OnPlacePointClicked
         m_Mode: 1
@@ -14333,6 +14360,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1566919242}
   m_CullTransparentMesh: 1
+--- !u!114 &1583932553 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6638879028018955429, guid: e8aacc2bf76a6b948a4e0239650cc8c3, type: 3}
+  m_PrefabInstance: {fileID: 5478367064642294413}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1601199109
 GameObject:
   m_ObjectHideFlags: 0
@@ -14560,7 +14598,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalColor: {r: 0, g: 1, b: 0, a: 1}
   occupiedColor: {r: 1, g: 0, b: 0, a: 1}
-  placeRenderer: {fileID: 334388608}
+  placeRenderer: {fileID: 1999940001}
   flashInterval: 0.5
 --- !u!1 &1644109154
 GameObject:
@@ -15802,7 +15840,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 711474720}
         m_TargetAssemblyTypeName: TowerPlace, Assembly-CSharp
         m_MethodName: OnPlacePointClicked
         m_Mode: 1
@@ -16779,7 +16817,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalColor: {r: 0, g: 1, b: 0, a: 1}
   occupiedColor: {r: 1, g: 0, b: 0, a: 1}
-  placeRenderer: {fileID: 334388608}
+  placeRenderer: {fileID: 639148092}
   flashInterval: 0.5
 --- !u!1 &1886233687
 GameObject:
@@ -16903,7 +16941,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalColor: {r: 0, g: 1, b: 0, a: 1}
   occupiedColor: {r: 1, g: 0, b: 0, a: 1}
-  placeRenderer: {fileID: 334388608}
+  placeRenderer: {fileID: 458162739}
   flashInterval: 0.5
 --- !u!1 &1906272042
 GameObject:
@@ -17736,7 +17774,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1626919334}
         m_TargetAssemblyTypeName: TowerPlace, Assembly-CSharp
         m_MethodName: OnPlacePointClicked
         m_Mode: 1
@@ -18125,7 +18163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalColor: {r: 0, g: 1, b: 0, a: 1}
   occupiedColor: {r: 1, g: 0, b: 0, a: 1}
-  placeRenderer: {fileID: 334388608}
+  placeRenderer: {fileID: 2055124715}
   flashInterval: 0.5
 --- !u!1 &2023726660
 GameObject:
@@ -18403,7 +18441,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2016128848}
         m_TargetAssemblyTypeName: TowerPlace, Assembly-CSharp
         m_MethodName: OnPlacePointClicked
         m_Mode: 1
@@ -18642,7 +18680,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 400537112}
         m_TargetAssemblyTypeName: TowerPlace, Assembly-CSharp
         m_MethodName: OnPlacePointClicked
         m_Mode: 1
@@ -19237,6 +19275,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: accc2cd0cef28b04eac23ce6c4611fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2113008659 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6521977566846351765, guid: e8aacc2bf76a6b948a4e0239650cc8c3, type: 3}
+  m_PrefabInstance: {fileID: 5478367064642294413}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2141401960
 GameObject:
   m_ObjectHideFlags: 0
@@ -19408,10 +19457,14 @@ PrefabInstance:
       propertyPath: tipsPanel
       value: 
       objectReference: {fileID: 368404206}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7177861146056240672, guid: e8aacc2bf76a6b948a4e0239650cc8c3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5274416899980870705, guid: e8aacc2bf76a6b948a4e0239650cc8c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1203698167}
   m_SourcePrefab: {fileID: 100100000, guid: e8aacc2bf76a6b948a4e0239650cc8c3, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
