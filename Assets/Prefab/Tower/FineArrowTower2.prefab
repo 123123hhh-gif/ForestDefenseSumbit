@@ -230,7 +230,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5736591054095724313}
-  - component: {fileID: 7437334258164534501}
+  - component: {fileID: 8281685781847711192}
   m_Layer: 0
   m_Name: FineArrowTower2
   m_TagString: Untagged
@@ -255,7 +255,7 @@ Transform:
   - {fileID: 885134253610859422}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7437334258164534501
+--- !u!114 &8281685781847711192
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -264,14 +264,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5794722645008495564}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1b4f42a48b1ec843935335bfc08a6e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 3060a0c505d41114982d95c130b18bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   baseTransform: {fileID: 913088862664758119}
   turretRoot: {fileID: 885134253610859422}
-  initialData: {fileID: 11400000, guid: bc4dcee5becb3bc4db83847892afd8e3, type: 2}
   _turretFirePoints: {fileID: 0}
   bulletBgm: {fileID: 8300000, guid: 42da1d5a4ac31dd4089a72a25160094a, type: 3}
+  towerPlace: {fileID: 0}
   arrowPrefab: {fileID: 9124997517778106707, guid: 312139f1e40427b4ab2c421586944ef1, type: 3}
   showDebugGizmos: 1
 --- !u!1001 &6592419623893343171

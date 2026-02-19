@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4595122226485762942}
-  - component: {fileID: 8343188024823118438}
+  - component: {fileID: 7038025178210020354}
   m_Layer: 0
   m_Name: FineMagicTower
   m_TagString: Untagged
@@ -66,7 +66,7 @@ Transform:
   - {fileID: 7636313072728734527}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8343188024823118438
+--- !u!114 &7038025178210020354
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,14 +75,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1515312121339962085}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 717f8e030e199ed4b8c81d96abcc72b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f16f86b528e51d449da8306b77834dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   baseTransform: {fileID: 7063384876693040202}
   turretRoot: {fileID: 7636313072728734527}
-  initialData: {fileID: 11400000, guid: 3f94736fcb63c9c42a2ac5eea81fe28d, type: 2}
   _turretFirePoints: {fileID: 0}
   bulletBgm: {fileID: 8300000, guid: b47df27e4eeea3c4bbe0c9d6b8c01922, type: 3}
+  towerPlace: {fileID: 0}
   bulletPrefab: {fileID: 3994506852362298304, guid: 8bce144d082bbdc49b6ac2119e7f5af1, type: 3}
   showDebugGizmos: 1
 --- !u!1 &1720049871055306680
@@ -266,19 +266,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2686312474908910558, guid: da903cb74718ee5458f84fc42a2455a7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1147992174869221431}
+      addedObject: {fileID: 8171153317239360228}
   m_SourcePrefab: {fileID: 100100000, guid: da903cb74718ee5458f84fc42a2455a7, type: 3}
---- !u!4 &2286320786280727829 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8658733412304518826, guid: da903cb74718ee5458f84fc42a2455a7, type: 3}
-  m_PrefabInstance: {fileID: 7462645511706491839}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4816343045362997345 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2686312474908910558, guid: da903cb74718ee5458f84fc42a2455a7, type: 3}
   m_PrefabInstance: {fileID: 7462645511706491839}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1147992174869221431
+--- !u!114 &8171153317239360228
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -287,11 +282,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4816343045362997345}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42844a8aeae8ef64293c137df73e854d, type: 3}
+  m_Script: {fileID: 11500000, guid: d1837ddbb763c0f4ca8c786eae8835e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   firePoints:
-  - {fileID: 2286320786280727829}
+  - {fileID: 0}
   autoCollectChildFirePoints: 1
 --- !u!4 &7636313072728734527 stripped
 Transform:

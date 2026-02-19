@@ -43,21 +43,21 @@ public class FineArrowTower : BaseTower
             targetRot *= Quaternion.Euler(CurrentData.bulletRotOffset);
 
             GameObject arrowObj = Instantiate(arrowPrefab, spawnPos, targetRot);
-            arrowObj.transform.SetParent(null); 
+            arrowObj.transform.SetParent(null);
 
 
-            
-            //ParticleMoverBullet bulletMover = arrowObj.GetComponentInChildren<ParticleMoverBullet>();
-            //if (bulletMover != null)
-            //{
-            //    bulletMover.fatherTower = this;
-            //    bulletMover.SetTarget(_targetEnemy);
-  
-            //}
 
-            if(bulletBgm != null)
+            ParticleMoverBullet bulletMover = arrowObj.GetComponentInChildren<ParticleMoverBullet>();
+            if (bulletMover != null)
             {
-                 //AudioManager.Instance.PlayBattleSFX(bulletBgm);
+                bulletMover.fatherTower = this;
+                bulletMover.SetTarget(_targetEnemy);
+
+            }
+
+            if (bulletBgm != null)
+            {
+                AudioManager.Instance.PlayBattleSFX(bulletBgm);
             }
         }
     }

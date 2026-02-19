@@ -263,7 +263,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8523842259485482519}
-  - component: {fileID: 5764868678333301560}
+  - component: {fileID: 2916361266389637428}
   m_Layer: 0
   m_Name: FineAttackSpeedTurret 1
   m_TagString: Untagged
@@ -288,7 +288,7 @@ Transform:
   - {fileID: 4168883048825334306}
   m_Father: {fileID: 394192916181382128}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5764868678333301560
+--- !u!114 &2916361266389637428
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -297,11 +297,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4389828162757375467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42844a8aeae8ef64293c137df73e854d, type: 3}
+  m_Script: {fileID: 11500000, guid: d1837ddbb763c0f4ca8c786eae8835e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   firePoints:
-  - {fileID: 3224191877917140620}
+  - {fileID: 0}
   autoCollectChildFirePoints: 1
 --- !u!1 &7306096392730689747
 GameObject:
@@ -312,7 +312,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 394192916181382128}
-  - component: {fileID: 3132552051520405714}
+  - component: {fileID: 887783538255655655}
   m_Layer: 0
   m_Name: FineAttackSpeedTower2
   m_TagString: Untagged
@@ -337,7 +337,7 @@ Transform:
   - {fileID: 8523842259485482519}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3132552051520405714
+--- !u!114 &887783538255655655
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -346,14 +346,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7306096392730689747}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d399b2238328b094d855e8d1a34f3e70, type: 3}
+  m_Script: {fileID: 11500000, guid: c1d0827d95000c845995eb6df4a934a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   baseTransform: {fileID: 4993854364278928116}
   turretRoot: {fileID: 8523842259485482519}
-  initialData: {fileID: 0}
   _turretFirePoints: {fileID: 0}
   bulletBgm: {fileID: 8300000, guid: 621142d350e05bc458835aa7bbb34a60, type: 3}
+  towerPlace: {fileID: 0}
   bulletPrefab: {fileID: 8424025423014831780, guid: f9d54d6594548e149a88fc8e17d8f145, type: 3}
   showDebugGizmos: 1
 --- !u!1 &8577507860278779439

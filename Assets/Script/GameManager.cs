@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance; 
+    public static GameManager Instance;
 
     [Header("Basic Configuration")]
     public int startGold = 100; // Initial gold amount when the game starts/resets
@@ -31,12 +31,12 @@ public class GameManager : MonoBehaviour
         if (Instance == null) { Instance = this; } else { Destroy(gameObject); return; } // Ensure only one GameManager exists
 
         _currentGold = startGold; // Initialize gold at the start
-        UpdateGoldUI(); 
+        UpdateGoldUI();
     }
 
     void Start()
     {
-        //AudioManager.Instance.PlayBGM(bgmWarriors); 
+        //AudioManager.Instance.PlayBGM(bgmWarriors);
     }
 
     void Update()
@@ -45,9 +45,9 @@ public class GameManager : MonoBehaviour
 
         if (timer >= callInterval) // Run periodic logic once per interval to reduce per-frame cost
         {
-            PerSecondMethod(); 
-            CheckVictoryCondition(); 
-            timer -= callInterval; 
+            PerSecondMethod();
+            CheckVictoryCondition();
+            timer -= callInterval;
         }
     }
 
@@ -62,9 +62,9 @@ public class GameManager : MonoBehaviour
     {
         if (isGameOver || EnemySpawner.Instance.maxTotalWaves == 0 || EnemySpawner.Instance.isSpawning) { return; } // Skip if game already ended, waves not configured, or still spawning
 
-        bool allWavesSpawned = EnemySpawner.Instance.currentWave >= EnemySpawner.Instance.maxTotalWaves; 
-        bool noEnemiesAlive = EnemyManager.Instance.GetAllAliveEnemies().Count == 0; 
-        bool playerAlive = EnemySpawner.Instance.playerHP > 0; 
+        bool allWavesSpawned = EnemySpawner.Instance.currentWave >= EnemySpawner.Instance.maxTotalWaves;
+        bool noEnemiesAlive = EnemyManager.Instance.GetAllAliveEnemies().Count == 0;
+        bool playerAlive = EnemySpawner.Instance.playerHP > 0;
 
         if (allWavesSpawned && noEnemiesAlive && playerAlive) { OnVictory(); } // Win if all waves done, no enemies remain, and player survived
     }
@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
         EnemySpawner.Instance.StopSpawnWaves(); // Stop any further spawning to freeze wave system
         UIManager.Instance.onOpenVictory(); // Open victory UI panel
 
-        Debug.Log("Game victory."); 
+        Debug.Log("Game victory.");
     }
 
     public void TakeDamage(int damageToPlayer)
@@ -88,12 +88,12 @@ public class GameManager : MonoBehaviour
 
         hpTxt.text = num + ""; // Update HP UI immediately when damage occurs
 
-        if (num <= 0) 
+        if (num <= 0)
         {
-            isGameOver = true; 
-            UIManager.Instance.onOpenLose(); 
+            isGameOver = true;
+            UIManager.Instance.onOpenLose();
             EnemySpawner.Instance.StopSpawnWaves(); // Stop wave spawning immediately
-            Debug.Log("Game lose."); 
+            Debug.Log("Game lose.");
         }
     }
 
@@ -104,8 +104,8 @@ public class GameManager : MonoBehaviour
         Vector3 spawnPos = place.PlacePosition; // Use the placement node position as spawn location
         spawnPos.y += 0.2f; // Slightly raise tower to avoid z-fighting / clipping into ground
 
-        GameObject towerObj = Instantiate(_data.towerPrefab, spawnPos, Quaternion.identity); 
-        BaseTower tower = towerObj.GetComponent<BaseTower>(); 
+        GameObject towerObj = Instantiate(_data.towerPrefab, spawnPos, Quaternion.identity);
+        BaseTower tower = towerObj.GetComponent<BaseTower>();
 
         if (tower != null)
         {
@@ -114,8 +114,8 @@ public class GameManager : MonoBehaviour
             place.SetTower(tower); // Mark the TowerPlace as occupied and store reference
         }
 
-        UIManager.Instance.onCloseTowerSelectPanel(); 
-        return tower; 
+        UIManager.Instance.onCloseTowerSelectPanel();
+        return tower;
     }
 
     public bool CheckEnoughGold(int cost)
@@ -127,14 +127,14 @@ public class GameManager : MonoBehaviour
     {
         _currentGold -= cost; // Decrease current gold by cost
         UpdateGoldUI(); // Refresh gold UI after spending
-        Debug.Log($"Gold remaining: {_currentGold}"); 
+        Debug.Log($"Gold remaining: {_currentGold}");
     }
 
     public void AddGold(int amount)
     {
         _currentGold += amount; // Increase gold after rewards (e.g., enemy killed)
         UpdateGoldUI(); // Refresh gold UI after gain
-        Debug.Log($"Gold gained: {amount}, remaining: {_currentGold}"); 
+        Debug.Log($"Gold gained: {amount}, remaining: {_currentGold}");
     }
 
     private void UpdateGoldUI()
@@ -199,10 +199,10 @@ public class GameManager : MonoBehaviour
 
         if (UIManager.Instance != null)
         {
-            UIManager.Instance.onCloseVictory(); 
-            UIManager.Instance.onCloseLose(); 
-            UIManager.Instance.HideUpgradePanel(); 
-            UIManager.Instance.onCloseTowerSelectPanel(); 
+            UIManager.Instance.onCloseVictory();
+            UIManager.Instance.onCloseLose();
+            UIManager.Instance.HideUpgradePanel();
+            UIManager.Instance.onCloseTowerSelectPanel();
         }
 
         UpdateGoldUI(); // Refresh gold UI after resetting

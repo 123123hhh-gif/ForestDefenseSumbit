@@ -360,7 +360,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 9023441495072086133}
         m_TargetAssemblyTypeName: TowerItem, Assembly-CSharp
         m_MethodName: onBtnBuild
         m_Mode: 1

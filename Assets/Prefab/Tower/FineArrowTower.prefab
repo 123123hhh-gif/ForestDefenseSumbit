@@ -230,7 +230,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5736591054095724313}
-  - component: {fileID: 7437334258164534501}
+  - component: {fileID: 6183136111439382577}
   m_Layer: 0
   m_Name: FineArrowTower
   m_TagString: Untagged
@@ -255,7 +255,7 @@ Transform:
   - {fileID: 3418917359877921246}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7437334258164534501
+--- !u!114 &6183136111439382577
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -264,14 +264,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5794722645008495564}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1b4f42a48b1ec843935335bfc08a6e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 3060a0c505d41114982d95c130b18bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   baseTransform: {fileID: 913088862664758119}
   turretRoot: {fileID: 3418917359877921246}
-  initialData: {fileID: 11400000, guid: 5dccc0a44579da54ebb69eb50a1b63a2, type: 2}
   _turretFirePoints: {fileID: 0}
   bulletBgm: {fileID: 8300000, guid: 42da1d5a4ac31dd4089a72a25160094a, type: 3}
+  towerPlace: {fileID: 0}
   arrowPrefab: {fileID: 9124997517778106707, guid: 312139f1e40427b4ab2c421586944ef1, type: 3}
   showDebugGizmos: 1
 --- !u!1001 &8666673257045031299
@@ -356,7 +356,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3304242964979450099, guid: dd14bcbeadacf884891d24edb54aa8f4, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8880615188105845814}
+      addedObject: {fileID: 6854140146491629518}
   m_SourcePrefab: {fileID: 100100000, guid: dd14bcbeadacf884891d24edb54aa8f4, type: 3}
 --- !u!4 &3418917359877921246 stripped
 Transform:
@@ -368,7 +368,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3304242964979450099, guid: dd14bcbeadacf884891d24edb54aa8f4, type: 3}
   m_PrefabInstance: {fileID: 8666673257045031299}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8880615188105845814
+--- !u!114 &6854140146491629518
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -377,14 +377,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6169142111378930032}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42844a8aeae8ef64293c137df73e854d, type: 3}
+  m_Script: {fileID: 11500000, guid: d1837ddbb763c0f4ca8c786eae8835e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   firePoints:
-  - {fileID: 7426150062753401535}
+  - {fileID: 0}
   autoCollectChildFirePoints: 1
---- !u!4 &7426150062753401535 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2254272934197769020, guid: dd14bcbeadacf884891d24edb54aa8f4, type: 3}
-  m_PrefabInstance: {fileID: 8666673257045031299}
-  m_PrefabAsset: {fileID: 0}

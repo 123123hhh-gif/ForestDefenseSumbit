@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 816054066191953897}
-  - component: {fileID: -1224514049903413427}
+  - component: {fileID: 4705278850872164623}
   m_Layer: 0
   m_Name: ArrowTower
   m_TagString: Untagged
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 4984413692234398315}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-1224514049903413427
+--- !u!114 &4705278850872164623
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,16 +43,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5705853567439927279}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3060a0c505d41114982d95c130b18bdc, type: 3}
+  m_Script: {fileID: 11500000, guid: 76d238a95ce3a414dad66561b00b9fd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   baseTransform: {fileID: 6657548156125023065}
-  turretRoot: {fileID: 6752369213492084802, guid: 0a08deb33d151b44cbcee32573d6e90d, type: 3}
+  turretRoot: {fileID: 4984413692234398315}
   _turretFirePoints: {fileID: 0}
   bulletBgm: {fileID: 8300000, guid: 42da1d5a4ac31dd4089a72a25160094a, type: 3}
   towerPlace: {fileID: 0}
   arrowPrefab: {fileID: 7645728094443894953, guid: 5638c7301d64c8648ab72674a0a92f5f, type: 3}
-  showDebugGizmos: 1
+  arrowSpeed: 50
 --- !u!1 &6853968211175317227
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,7 +252,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8576548072568118061, guid: 0a08deb33d151b44cbcee32573d6e90d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3401955191211657031}
+      addedObject: {fileID: 47529986126720556}
   m_SourcePrefab: {fileID: 100100000, guid: 0a08deb33d151b44cbcee32573d6e90d, type: 3}
 --- !u!4 &4984413692234398315 stripped
 Transform:
@@ -264,7 +264,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8576548072568118061, guid: 0a08deb33d151b44cbcee32573d6e90d, type: 3}
   m_PrefabInstance: {fileID: 1772463175904770601}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3401955191211657031
+--- !u!114 &47529986126720556
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -273,13 +273,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8043157174877708548}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3060a0c505d41114982d95c130b18bdc, type: 3}
+  m_Script: {fileID: 11500000, guid: d1837ddbb763c0f4ca8c786eae8835e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseTransform: {fileID: 0}
-  turretRoot: {fileID: 0}
-  _turretFirePoints: {fileID: 0}
-  bulletBgm: {fileID: 0}
-  towerPlace: {fileID: 0}
-  arrowPrefab: {fileID: 0}
-  showDebugGizmos: 1
+  firePoints:
+  - {fileID: 0}
+  autoCollectChildFirePoints: 1
