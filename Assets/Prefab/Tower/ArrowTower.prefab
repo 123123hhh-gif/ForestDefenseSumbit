@@ -46,12 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3060a0c505d41114982d95c130b18bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseTransform: {fileID: 0}
-  turretRoot: {fileID: 0}
+  baseTransform: {fileID: 6657548156125023065}
+  turretRoot: {fileID: 6752369213492084802, guid: 0a08deb33d151b44cbcee32573d6e90d, type: 3}
   _turretFirePoints: {fileID: 0}
-  bulletBgm: {fileID: 0}
+  bulletBgm: {fileID: 8300000, guid: 42da1d5a4ac31dd4089a72a25160094a, type: 3}
   towerPlace: {fileID: 0}
-  arrowPrefab: {fileID: 0}
+  arrowPrefab: {fileID: 7645728094443894953, guid: 5638c7301d64c8648ab72674a0a92f5f, type: 3}
   showDebugGizmos: 1
 --- !u!1 &6853968211175317227
 GameObject:

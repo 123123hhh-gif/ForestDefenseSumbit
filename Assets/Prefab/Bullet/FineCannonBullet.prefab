@@ -9894,7 +9894,7 @@ GameObject:
   - component: {fileID: 3988562114820414946}
   - component: {fileID: 3845814668500636106}
   - component: {fileID: 3782616126332858608}
-  - component: {fileID: 4394095320064004300}
+  - component: {fileID: 3963736327228246326}
   m_Layer: 0
   m_Name: Projectile 18
   m_TagString: Untagged
@@ -14845,7 +14845,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4394095320064004300
+--- !u!114 &3963736327228246326
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14854,15 +14854,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3862534831903736596}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 288d93eb75dfc5b479d41f8037aa5fdf, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a68f98208e0c21428087241be9903fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
   hitOffset: 0.1
   UseFirePointRotation: 0
-  hit: {fileID: 1299586717950946, guid: 5740ae2e014a8b14886dad7e67951070, type: 3}
+  hit: {fileID: 1105495686751570, guid: 4328596502e67c1468c5794bdd5067b4, type: 3}
   flash: {fileID: 1920765516895132, guid: df8bef245b1373047a1e1320f5ed6ac2, type: 3}
-  damage: 10
+  maxFlyDistance: 50
+  maxLifeTime: 5
+  fatherTower: {fileID: 0}
 --- !u!1 &3862553206180058036
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6144049388825904485}
-  - component: {fileID: 1627238203175611206}
+  - component: {fileID: 9093629488186069274}
   m_Layer: 0
   m_Name: FineMultipleTurret3
   m_TagString: Untagged
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 5205800041837174045}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1627238203175611206
+--- !u!114 &9093629488186069274
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,11 +43,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 208984272580222755}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42844a8aeae8ef64293c137df73e854d, type: 3}
+  m_Script: {fileID: 11500000, guid: d1837ddbb763c0f4ca8c786eae8835e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   firePoints:
-  - {fileID: 4524931630172250892}
+  - {fileID: 0}
   autoCollectChildFirePoints: 1
 --- !u!1 &1994879195936528221
 GameObject:

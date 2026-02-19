@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1038368653810548864}
-  - component: {fileID: 6379592711754896541}
+  - component: {fileID: 6673942341872488512}
   m_Layer: 0
   m_Name: FineMagicTurret3
   m_TagString: Untagged
@@ -65,7 +65,7 @@ Transform:
   - {fileID: 3289650704042781879}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6379592711754896541
+--- !u!114 &6673942341872488512
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,11 +74,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2686312474908910558}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42844a8aeae8ef64293c137df73e854d, type: 3}
+  m_Script: {fileID: 11500000, guid: d1837ddbb763c0f4ca8c786eae8835e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   firePoints:
-  - {fileID: 8658733412304518826}
+  - {fileID: 0}
   autoCollectChildFirePoints: 1
 --- !u!1001 &3289650704042653233
 PrefabInstance:

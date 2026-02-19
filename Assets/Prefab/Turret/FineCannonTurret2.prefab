@@ -208,7 +208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6479146271451599168}
   - component: {fileID: 6479146271444418210}
-  - component: {fileID: 7745862318288763573}
+  - component: {fileID: 2699037323978215146}
   m_Layer: 0
   m_Name: FineCannonTurret2
   m_TagString: Untagged
@@ -254,7 +254,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7745862318288763573
+--- !u!114 &2699037323978215146
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -263,9 +263,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6479146271451696486}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42844a8aeae8ef64293c137df73e854d, type: 3}
+  m_Script: {fileID: 11500000, guid: d1837ddbb763c0f4ca8c786eae8835e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   firePoints:
-  - {fileID: 9201073877782637864}
+  - {fileID: 0}
   autoCollectChildFirePoints: 1
