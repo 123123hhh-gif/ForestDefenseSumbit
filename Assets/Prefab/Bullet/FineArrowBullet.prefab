@@ -9755,7 +9755,7 @@ GameObject:
   - component: {fileID: 438582888876382154}
   - component: {fileID: 294107119387808690}
   - component: {fileID: 375957225689435424}
-  - component: {fileID: 6166659795075112616}
+  - component: {fileID: 7686563076483159764}
   m_Layer: 0
   m_Name: Projectile 1
   m_TagString: Untagged
@@ -14696,7 +14696,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.3
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6166659795075112616
+--- !u!114 &7686563076483159764
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14705,10 +14705,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 347258810175633038}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 288d93eb75dfc5b479d41f8037aa5fdf, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a68f98208e0c21428087241be9903fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
   hitOffset: 0.1
   UseFirePointRotation: 0
   hit: {fileID: 1438542530079480, guid: 21710859533a00746ad2bdd323061a2d, type: 3}
