@@ -57,7 +57,7 @@ public class FineArrowTower : BaseTower
 
             if (bulletBgm != null)
             {
-                AudioManager.Instance.PlayBattleSFX(bulletBgm);
+                //AudioManager.Instance.PlayBattleSFX(bulletBgm);
             }
         }
     }

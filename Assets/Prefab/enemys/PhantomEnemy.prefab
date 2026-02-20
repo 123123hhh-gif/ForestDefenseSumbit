@@ -934,6 +934,7 @@ GameObject:
   - component: {fileID: 8844059114515149737}
   - component: {fileID: -8773617731848240678}
   - component: {fileID: 5553304301694369521}
+  - component: {fileID: -1723584083488089672}
   m_Layer: 0
   m_Name: PhantomEnemy
   m_TagString: Enemy
@@ -1019,6 +1020,23 @@ MonoBehaviour:
   maxHealth: 60
   moveSpeed: 2
   damageToPlayer: 1
+--- !u!114 &-1723584083488089672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6206668456784059546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16f0b7baa1f85a14e822634df355e6d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpBarPrefab: {fileID: 1061978079511432575, guid: 6bc795e3fc40fd344a07a35df89f1041, type: 3}
+  hpFollowPoint: {fileID: 3807360802385198382}
+  hpBarOffsetY: 1.5
+  smoothFollowSpeed: 5
+  maxHp: 30
 --- !u!1 &6210127346073472220
 GameObject:
   m_ObjectHideFlags: 0

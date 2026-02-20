@@ -381,5 +381,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoints:
-  - {fileID: 0}
+  - {fileID: 7426150062753401535}
   autoCollectChildFirePoints: 1
+--- !u!4 &7426150062753401535 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2254272934197769020, guid: dd14bcbeadacf884891d24edb54aa8f4, type: 3}
+  m_PrefabInstance: {fileID: 8666673257045031299}
+  m_PrefabAsset: {fileID: 0}

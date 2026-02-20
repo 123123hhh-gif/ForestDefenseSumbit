@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoints:
-  - {fileID: 0}
+  - {fileID: 8658733412304518826}
   autoCollectChildFirePoints: 1
 --- !u!1001 &3289650704042653233
 PrefabInstance:

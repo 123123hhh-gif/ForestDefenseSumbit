@@ -2,102 +2,162 @@ using UnityEngine;
 
 public class BaseEnemy : MonoBehaviour
 {
-    [Header("Enemy Stats")]
-    public int maxHealth = 100; // Maximum health of the enemy
-    public float moveSpeed = 2f; // Movement speed along the path
-    public int damageToPlayer = 1; // Damage dealt when reaching the end (reserved for later integration)
+    [Header("敌人属性")]
+    public int maxHealth = 100;
 
-    private int _currentHealth; // Current health value
-    private bool _isDead = false; // Whether the enemy is dead
-    private bool _hasReachedEnd = false; // Whether the enemy has reached the end waypoint
-    private Waypoint _currentWaypoint; // Current target waypoint
 
-    public bool IsDead => _isDead; // Public read-only flag for death state
+    public float moveSpeed = 2f;
+
+    public int damageToPlayer = 1;
+
+    private int _currentHealth;
+    private bool _isDead = false;
+    private Waypoint _currentWaypoint; // 当前目标路径点
+    private bool _hasReachedEnd = false;
+
+    // 公开属性
+    public bool IsDead => _isDead;
+
+
 
     private void Start()
     {
-        _currentHealth = maxHealth; // Initialize health on spawn
-        // NOTE: Registration to EnemyManager is intentionally removed for early-stage compilation stability.
+        _currentHealth = maxHealth;
+        // 生成时自动注册到管理器
+        if (EnemyManager.Instance != null)
+        {
+            EnemyManager.Instance.AddEnemy(this);
+        }
     }
 
     private void Update()
     {
-        if (_isDead || _hasReachedEnd || _currentWaypoint == null) return; // Skip if inactive or no path
+        if (_isDead || _hasReachedEnd || _currentWaypoint == null) return;
 
-        ApplyDebuff(); // Hook for derived classes (optional)
-        MoveToWaypoint(); // Core movement logic
+        addDebuff();
+
+        MoveToWaypoint();
     }
 
+    // 设置起始路径点
     public void SetStartWaypoint(Waypoint startWaypoint)
     {
-        _currentWaypoint = startWaypoint; // Assign starting waypoint
-        _hasReachedEnd = false; // Reset end flag for reuse
+        _currentWaypoint = startWaypoint;
+        _hasReachedEnd = false;
     }
 
-    protected virtual void ApplyDebuff()
+    protected virtual void addDebuff()
     {
-        // Intentionally empty: override in derived enemies if needed.
+
     }
 
+    // 向路径点移动
     protected virtual void MoveToWaypoint()
     {
-        if (_currentWaypoint == null) return; // Safety check
+        if (_currentWaypoint == null) return;
 
-        Vector3 targetPos = _currentWaypoint.transform.position; // Waypoint world position
-        Vector3 direction = new Vector3(targetPos.x - transform.position.x, 0f, targetPos.z - transform.position.z); // Lock to XZ plane
+        // 1. 计算方向（锁定Y轴，只在XZ平面移动）
+        Vector3 targetPos = _currentWaypoint.transform.position;
+        Vector3 direction = new Vector3(targetPos.x - transform.position.x, 0, targetPos.z - transform.position.z);
+        direction.Normalize();
 
-        if (direction.sqrMagnitude > 0.0001f)
+        // 2. 仅在水平方向上转向，避免上下旋转
+        if (direction.magnitude > 0.1f)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(direction.normalized); // Compute facing direction
-            transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f); // Keep upright rotation
+            // 计算目标旋转，强制Y轴为当前值，只修改X和Z轴
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            targetRotation = Quaternion.Euler(0, targetRotation.eulerAngles.y, 0);
+
+            // 瞬间转向，无缓冲
+            transform.rotation = targetRotation;
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime); // Move toward waypoint
+        // 3. 用 MoveTowards 替代 Translate，移动更精准
+        transform.position = Vector3.MoveTowards(
+            transform.position,
+            targetPos,
+            moveSpeed * Time.deltaTime
+        );
 
-        if (Vector3.Distance(transform.position, targetPos) < 0.1f) // Arrived at waypoint
+        // 4. 到达路径点后切换下一个
+        if (Vector3.Distance(transform.position, targetPos) < 0.1f)
         {
             if (_currentWaypoint.isLastWaypoint)
             {
-                OnReachEnd(); // Handle reaching the end of the path
+                OnReachEnd();
                 return;
             }
-
-            _currentWaypoint = _currentWaypoint.nextWaypoint; // Advance to next waypoint
+            _currentWaypoint = _currentWaypoint.nextWaypoint;
         }
     }
 
+    // 到达终点的核心逻辑（单独抽离，确保只执行一次）
     private void OnReachEnd()
     {
-        if (_hasReachedEnd || _isDead) return; // Ensure end logic runs only once
-        _hasReachedEnd = true; // Mark reached end
+        if (_hasReachedEnd || _isDead) return;
+        _hasReachedEnd = true;
+        Debug.Log($"{gameObject.name} 到达终点，扣血{damageToPlayer}");
 
-        Debug.Log($"{gameObject.name} reached the end. Damage reserved: {damageToPlayer}"); // Placeholder log
 
-        // NOTE: GameManager damage call is intentionally removed for early-stage compilation stability.
-        Destroy(gameObject); // Remove enemy at the end for now
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.TakeDamage(damageToPlayer);
+        }
+
+        DestroyEnemy();
     }
 
+    // 受伤逻辑
     public void TakeDamage(int damage)
     {
-        if (_isDead) return; // Ignore damage after death
+        if (_isDead) return;
 
-        _currentHealth -= damage; // Apply damage
-        Debug.Log($"{gameObject.name} took {damage} damage. HP left: {_currentHealth}"); // Debug log in English
+        _currentHealth -= damage;
+        Debug.Log($"{gameObject.name} 受到 {damage} 伤害，剩余血量：{_currentHealth}");
 
-        // NOTE: MonsterHpBar update is intentionally removed for early-stage compilation stability.
+        MonsterHpBar hp = this.GetComponent<MonsterHpBar>();
+        hp.TakeDamage(damage);
+        hp.maxHp = maxHealth;
 
         if (_currentHealth <= 0)
         {
-            Die(); // Trigger death when HP is depleted
+            Die();
         }
     }
 
+    // 死亡逻辑
     protected virtual void Die()
     {
-        _isDead = true; // Mark dead state
-        Debug.Log($"{gameObject.name} died."); // Debug log in English
+        _isDead = true;
+        Debug.Log($"{gameObject.name} 死亡");
 
-        // NOTE: Reward / kill count logic is intentionally removed for early-stage compilation stability.
-        Destroy(gameObject, 0.2f); // Slight delay to allow effects later if needed
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.AddGold(10);
+            GameManager.Instance.killNum++;
+        }
+
+        DestroyEnemy();
+    }
+
+    // 统一的敌人销毁逻辑
+    private void DestroyEnemy()
+    {
+        if (EnemyManager.Instance != null)
+        {
+            EnemyManager.Instance.RemoveEnemy(this);
+        }
+        Destroy(gameObject, 1.1f);
+    }
+
+    // 防止敌人被意外销毁时未移除
+    private void OnDestroy()
+    {
+
+        if (EnemyManager.Instance != null)
+        {
+            EnemyManager.Instance.RemoveEnemy(this);
+        }
     }
 }

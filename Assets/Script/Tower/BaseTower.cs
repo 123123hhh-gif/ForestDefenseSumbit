@@ -64,6 +64,7 @@ public class BaseTower : MonoBehaviour, IPointerClickHandler
 
     protected virtual bool HasTarget()
     {
+        
         if (_targetEnemy == null)
         {
             return false;
@@ -78,7 +79,7 @@ public class BaseTower : MonoBehaviour, IPointerClickHandler
     protected virtual void ValidateTarget()
     {
         if (_targetEnemy == null) return;
-
+        Debug.Log("not return");
         BaseEnemy enemy = _targetEnemy.GetComponent<BaseEnemy>();
 
         if (enemy == null || enemy.IsDead || !IsTargetInRange())

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoints:
-  - {fileID: 0}
+  - {fileID: 2254272934197769020}
   autoCollectChildFirePoints: 1
 --- !u!1 &4402037813479410456
 GameObject:

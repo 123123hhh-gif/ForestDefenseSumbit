@@ -21,7 +21,7 @@ MonoBehaviour:
   damage: 10
   rotateSpeed: 9
   nextLevelData: {fileID: 11400000, guid: 8c5824c0c10c8e74fb2a6cf3463487de, type: 2}
-  towerPrefab: {fileID: 1515312121339962085, guid: 5d824ce0fec1e564c89d76e30a2e8574, type: 3}
+  towerPrefab: {fileID: 1515312121339962085, guid: 4ee436e01db115641aaa51fca7f5d3e8, type: 3}
   bulletSpeed: 30
   bulletPosOffset: {x: 0, y: 0, z: 0}
   bulletRotOffset: {x: 0, y: 0, z: 0}

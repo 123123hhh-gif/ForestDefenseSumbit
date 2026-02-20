@@ -119,7 +119,7 @@ public class UIManager : MonoBehaviour
                 break;
         }
 
-        // Text tipsText = tipsPanel.transform.Find("desc").GetComponent<Text>();
+        //Text tipsText = tipsPanel.transform.Find("desc").GetComponent<Text>();
 
         // Find the desc component under tipsPanel and assign value
         TextMeshProUGUI tipsText = tipsPanel.transform.Find("desc").GetComponent<TextMeshProUGUI>();
@@ -191,9 +191,9 @@ public class UIManager : MonoBehaviour
     // Open victory panel
     public void onOpenVictory()
     {
-        //VictoryPanel victoryP = victoryPanel.GetComponent<VictoryPanel>();
-        //victoryP.UpdateStarsByHp(EnemySpawner.Instance.playerHP,EnemySpawner.Instance.playerHPMax);
-        //showGameObjectPanel(victoryPanel);
+        VictoryPanel victoryP = victoryPanel.GetComponent<VictoryPanel>();
+        victoryP.UpdateStarsByHp(EnemySpawner.Instance.playerHP, EnemySpawner.Instance.playerHPMax);
+        showGameObjectPanel(victoryPanel);
     }
 
     // Close victory panel

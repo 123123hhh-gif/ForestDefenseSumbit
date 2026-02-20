@@ -267,5 +267,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoints:
-  - {fileID: 0}
+  - {fileID: 9201073877782637864}
   autoCollectChildFirePoints: 1

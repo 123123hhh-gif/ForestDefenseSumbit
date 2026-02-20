@@ -13,7 +13,7 @@ public class FineCannonTower : BaseTower
 
     protected override void Shoot()
     {
-        if (_targetEnemy == null || bulletPrefab == null || _turretFirePoints == null) 
+        if (_targetEnemy == null || bulletPrefab == null || _turretFirePoints == null)
         {
             Debug.LogWarning("塔射击条件不足：目标/预制体/射击点管理器为空");
             return;
@@ -36,20 +36,20 @@ public class FineCannonTower : BaseTower
             targetRot *= Quaternion.Euler(CurrentData.bulletRotOffset);
 
             GameObject obj = Instantiate(bulletPrefab, spawnPos, targetRot);
-            obj.transform.SetParent(null); 
-            
-            // ParticleMoverBullet bulletMover = arrowObj.GetComponent<ParticleMoverBullet>();
-            //ParticleMoverBullet bulletMover = obj.GetComponentInChildren<ParticleMoverBullet>();
-            //if (bulletMover != null)
-            //{
-            //    bulletMover.fatherTower = this;
-            //    bulletMover.SetTarget(_targetEnemy);
-             
-            //}
+            obj.transform.SetParent(null);
 
-            if(bulletBgm != null)
+            // ParticleMoverBullet bulletMover = arrowObj.GetComponent<ParticleMoverBullet>();
+            ParticleMoverBullet bulletMover = obj.GetComponentInChildren<ParticleMoverBullet>();
+            if (bulletMover != null)
             {
-                 //AudioManager.Instance.PlayBattleSFX(bulletBgm);
+                bulletMover.fatherTower = this;
+                bulletMover.SetTarget(_targetEnemy);
+                // bulletMover.OnHit += OnBulletHitEnemy;
+            }
+
+            if (bulletBgm != null)
+            {
+                AudioManager.Instance.PlayBattleSFX(bulletBgm);
             }
         }
     }
