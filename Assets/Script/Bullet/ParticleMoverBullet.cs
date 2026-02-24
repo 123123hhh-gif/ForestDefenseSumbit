@@ -27,12 +27,12 @@ public class ParticleMoverBullet : MonoBehaviour
         StartCoroutine(TimeoutDestroy());
 
         speed = fatherTower != null ? fatherTower.CurrentData.bulletSpeed : 15f;
-        
+
         if (flash != null)
         {
-            var flashInstance = Instantiate(flash, transform.position, transform.rotation); 
+            var flashInstance = Instantiate(flash, transform.position, transform.rotation);
             ParticleSystem flashPs = flashInstance.GetComponent<ParticleSystem>();
-            if (flashPs != null) 
+            if (flashPs != null)
             {
                 Destroy(flashInstance, flashPs.main.duration);
             }
@@ -42,7 +42,7 @@ public class ParticleMoverBullet : MonoBehaviour
                 if (flashPsParts != null)
                     Destroy(flashInstance, flashPsParts.main.duration);
                 else
-                    Destroy(flashInstance, 1f); 
+                    Destroy(flashInstance, 1f);
             }
         }
     }
@@ -56,15 +56,6 @@ public class ParticleMoverBullet : MonoBehaviour
     {
 
 
-        // if (_targetEnemy != null && !_targetEnemy.IsDead) {
-  
-        //     Vector3 dirToTarget = (targetEnemy.position - transform.position).normalized;
-     
-        //     Quaternion targetRot = Quaternion.LookRotation(dirToTarget);
-        //     transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, rotateSpeed * Time.deltaTime);
-
-        //     transform.position += transform.forward * speed * Time.deltaTime;
-        // }
 
         if (speed != 0 && _targetEnemy != null)
         {
@@ -73,7 +64,7 @@ public class ParticleMoverBullet : MonoBehaviour
             Quaternion targetRot = Quaternion.LookRotation(dirToTarget);
 
 
-            if(fatherTower == null || fatherTower.CurrentData == null)
+            if (fatherTower == null || fatherTower.CurrentData == null)
             {
                 Debug.Log("Tower upgrade in progress. Lost parent class.");
 
@@ -94,64 +85,64 @@ public class ParticleMoverBullet : MonoBehaviour
         }
     }
 
-void OnCollisionEnter(Collision collision)
-{
-    Debug.Log("Collision object：" + collision.gameObject.name);
-    if(collision.gameObject.CompareTag("Enemy") == false)
+    void OnCollisionEnter(Collision collision)
     {
-        return; 
-    }
-    speed = 0;
-    ContactPoint contact = collision.contacts[0];
-    Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
-    Vector3 pos = contact.point + contact.normal * hitOffset;
+        Debug.Log("碰撞对象：" + collision.gameObject.name);
+        if (collision.gameObject.CompareTag("Enemy") == false)
+        {
+            return;
+        }
+        speed = 0;
+        ContactPoint contact = collision.contacts[0];
+        Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+        Vector3 pos = contact.point + contact.normal * hitOffset;
 
-        // Generate the hit effect (retaining your original logic)
+
         if (hit != null)
-    {
-        var hitInstance = Instantiate(hit, pos, rot);
-        if (UseFirePointRotation)
-        { 
-            hitInstance.transform.rotation = gameObject.transform.rotation * Quaternion.Euler(0, 180f, 0); 
-        }
-        else
-        { 
-            hitInstance.transform.rotation = rot; 
-        }
-
-        ParticleSystem hitPs = hitInstance.GetComponent<ParticleSystem>();
-        if (hitPs != null) 
         {
-            Destroy(hitInstance, hitPs.main.duration);
-        }
-        else
-        {
-            var hitPsParts = hitInstance.transform.GetChild(0).GetComponent<ParticleSystem>();
-            if (hitPsParts != null)
-                Destroy(hitInstance, hitPsParts.main.duration);
+            var hitInstance = Instantiate(hit, pos, rot);
+            if (UseFirePointRotation)
+            {
+                hitInstance.transform.rotation = gameObject.transform.rotation * Quaternion.Euler(0, 180f, 0);
+            }
             else
-                Destroy(hitInstance, 1f); 
+            {
+                hitInstance.transform.rotation = rot;
+            }
+
+            ParticleSystem hitPs = hitInstance.GetComponent<ParticleSystem>();
+            if (hitPs != null)
+            {
+                Destroy(hitInstance, hitPs.main.duration);
+            }
+            else
+            {
+                var hitPsParts = hitInstance.transform.GetChild(0).GetComponent<ParticleSystem>();
+                if (hitPsParts != null)
+                    Destroy(hitInstance, hitPsParts.main.duration);
+                else
+                    Destroy(hitInstance, 1f);
+            }
         }
+
+
+        // BaseEnemy enemy = collision.collider.GetComponent<BaseEnemy>();
+        BaseEnemy enemy = collision.collider.GetComponentInParent<BaseEnemy>();
+        if (enemy != null && !enemy.IsDead && fatherTower != null && fatherTower.CurrentData != null)
+        {
+            enemy.TakeDamage(fatherTower.CurrentData.damage);
+        }
+
+        DestroyBullet();
+
+
     }
-
-
-    // BaseEnemy enemy = collision.collider.GetComponent<BaseEnemy>();
-    BaseEnemy enemy = collision.collider.GetComponentInParent<BaseEnemy>();
-    if (enemy != null && !enemy.IsDead && fatherTower != null && fatherTower.CurrentData != null) 
-    {
-        enemy.TakeDamage(fatherTower.CurrentData.damage);
-    }
-
-    DestroyBullet();
-
-
-}
 
 
     private void DestroyBullet()
     {
-        speed = 0; 
-        Destroy(gameObject); 
+        speed = 0;
+        Destroy(gameObject);
     }
 
 

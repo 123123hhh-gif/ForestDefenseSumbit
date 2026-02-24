@@ -16,17 +16,16 @@ public class FineArrowTower : BaseTower
  
     protected override void Shoot()
     {
-
-        if (_targetEnemy == null || arrowPrefab == null || _turretFirePoints == null) 
+        if (_targetEnemy == null || arrowPrefab == null || _turretFirePoints == null)
         {
-            Debug.LogWarning("弓箭塔射击条件不足：目标/预制体/射击点管理器为空");
+            Debug.LogWarning("Arrow turret shooting conditions insufficient: Target/Prefab/Fire Point Manager is null");
             return;
         }
 
         List<Transform> firePoints = _turretFirePoints.GetAllFirePoints();
         if (firePoints.Count == 0)
         {
-            Debug.LogWarning("弓箭塔没有可用的射击点！");
+            Debug.LogWarning("No available fire points for arrow turret!");
             return;
         }
 
@@ -57,7 +56,7 @@ public class FineArrowTower : BaseTower
 
             if (bulletBgm != null)
             {
-                //AudioManager.Instance.PlayBattleSFX(bulletBgm);
+                AudioManager.Instance.PlayBattleSFX(bulletBgm);
             }
         }
     }

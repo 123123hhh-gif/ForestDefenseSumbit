@@ -36,13 +36,13 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        //AudioManager.Instance.PlayBGM(bgmWarriors);
+        AudioManager.Instance.PlayBGM(bgmWarriors);
     }
 
     void Update()
     {
         timer += Time.deltaTime; // Accumulate time each frame
-        Debug.Log("game manager");
+
         if (timer >= callInterval) // Run periodic logic once per interval to reduce per-frame cost
         {
             PerSecondMethod();

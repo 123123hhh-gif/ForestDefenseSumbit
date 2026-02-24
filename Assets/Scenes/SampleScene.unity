@@ -5267,6 +5267,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 570246293}
+  - component: {fileID: 570246294}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -5289,6 +5290,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &570246294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570246291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fd860c56a44bce469599ecff3ba2374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmVolume: 1
+  battleVolume: 0.7
 --- !u!1 &579954171
 GameObject:
   m_ObjectHideFlags: 0
@@ -9222,13 +9237,13 @@ MonoBehaviour:
   waveInterval: 6
   maxWaveCount: 20
   minSpawnInterval: 0.5
-  maxTotalWaves: 0
+  maxTotalWaves: 5
   playerHP: 10
   playerHPMax: 0
   waveTxt: {fileID: 1804778155}
   startBtn: {fileID: 195873623}
   progressPanel: {fileID: 2059927365}
-  waveCountdownTxt: {fileID: 875595169}
+  waveCountdownTxt: {fileID: 1237927042}
   waveTimePanel: {fileID: 500439995}
   currentWave: 1
   isSpawning: 0
@@ -14011,7 +14026,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextWaypoint: {fileID: 0}
-  isLastWaypoint: 0
+  isLastWaypoint: 1
 --- !u!1 &1531234651
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,14 +15,14 @@ public class FineCannonTower : BaseTower
     {
         if (_targetEnemy == null || bulletPrefab == null || _turretFirePoints == null)
         {
-            Debug.LogWarning("塔射击条件不足：目标/预制体/射击点管理器为空");
+            Debug.LogWarning("Tower shooting conditions insufficient: Target/Prefab/Fire Point Manager is null");
             return;
         }
 
         List<Transform> firePoints = _turretFirePoints.GetAllFirePoints();
         if (firePoints.Count == 0)
         {
-            Debug.LogWarning("塔没有可用的射击点！");
+            Debug.LogWarning("No available fire points for tower!");
             return;
         }
 
@@ -38,13 +38,13 @@ public class FineCannonTower : BaseTower
             GameObject obj = Instantiate(bulletPrefab, spawnPos, targetRot);
             obj.transform.SetParent(null);
 
-            // ParticleMoverBullet bulletMover = arrowObj.GetComponent<ParticleMoverBullet>();
+
             ParticleMoverBullet bulletMover = obj.GetComponentInChildren<ParticleMoverBullet>();
             if (bulletMover != null)
             {
                 bulletMover.fatherTower = this;
                 bulletMover.SetTarget(_targetEnemy);
-                // bulletMover.OnHit += OnBulletHitEnemy;
+
             }
 
             if (bulletBgm != null)
@@ -66,16 +66,16 @@ public class FineCannonTower : BaseTower
         {
             if (firePoint == null) continue;
 
-            // 绘制原始射击点（白色球）
+            // Draw original fire point (white sphere)
             Gizmos.color = Color.white;
             Gizmos.DrawWireSphere(firePoint.position, 0.1f);
 
-            // 绘制偏移后的发射位置（红色球）
+            // Draw offset spawn position (red sphere)
             Vector3 spawnPos = firePoint.TransformPoint(CurrentData.bulletPosOffset);
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(spawnPos, 0.1f);
 
-            // 绘制子弹朝向（红色线，指向敌人）
+            // Draw bullet direction (red line pointing to enemy)
             Vector3 dirToEnemy = _targetEnemy.position - spawnPos;
             Quaternion targetRot = Quaternion.LookRotation(dirToEnemy) * Quaternion.Euler(CurrentData.bulletRotOffset);
             Gizmos.DrawLine(spawnPos, spawnPos + targetRot * Vector3.forward * 2f);

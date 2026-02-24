@@ -31,7 +31,7 @@ public class TurretFirePoints : MonoBehaviour
             if (child.CompareTag(FIRE_POINT_TAG))
             {
                 firePoints.Add(child);
-                Debug.Log($"炮塔{gameObject.name}自动收集到射击点：{child.name}");
+                Debug.Log($"Turret {gameObject.name} automatically collected fire point: {child.name}");
             }
         }
     }

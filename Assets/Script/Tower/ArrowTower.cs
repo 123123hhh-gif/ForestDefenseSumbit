@@ -11,14 +11,14 @@ public class ArrowTower : BaseTower
 
         if (_targetEnemy == null || arrowPrefab == null || _turretFirePoints == null) 
         {
-            Debug.LogWarning("弓箭塔射击条件不足：目标/预制体/射击点管理器为空");
+            Debug.LogWarning("Insufficient shooting conditions for the bow and arrow tower: The target/ prefab/ shooting point manager is empty");
             return;
         }
 
         List<Transform> firePoints = _turretFirePoints.GetAllFirePoints();
         if (firePoints.Count == 0)
         {
-            Debug.LogWarning("弓箭塔没有可用的射击点！");
+            Debug.LogWarning("There are no available shooting points on the bow and arrow tower!");
             return;
         }
 
@@ -39,7 +39,7 @@ public class ArrowTower : BaseTower
 
             if(bulletBgm != null)
             {
-                 //AudioManager.Instance.PlayBattleSFX(bulletBgm);
+                AudioManager.Instance.PlayBattleSFX(bulletBgm);
             }
         }
     }

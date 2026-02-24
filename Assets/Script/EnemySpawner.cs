@@ -3,7 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine.UI;
 
-// Spawn enemies at fixed intervals, control waves - Singleton version
+// Spawn enemies at fixed intervals and control waves - Singleton version
 public class EnemySpawner : MonoBehaviour
 {
     // Singleton instance (Core)
@@ -13,7 +13,7 @@ public class EnemySpawner : MonoBehaviour
     {
         get
         {
-            // If instance is null, try to find in scene
+            // If instance is null, try to find it in the scene
             if (_instance == null)
             {
                 _instance = FindObjectOfType<EnemySpawner>();
@@ -32,20 +32,21 @@ public class EnemySpawner : MonoBehaviour
     [Header("LEVELID")]
     public int LevelId = 1;
 
-    [Header("Spawn Settings")]
-    public Waypoint startWaypoint; // Enemy start waypoint
+    [Header("Generate configuration")]
+    public Waypoint startWaypoint; // Enemy starting waypoint
     public GameObject enemyPrefab; // Enemy prefab
     public float spawnInterval = 1f; // Spawn interval (seconds)
 
     public float enemySpeedMultiplier = 1f; // Enemy speed multiplier
+
     public float enemyHealthMultiplier = 1f; // Enemy health multiplier
     public int waveCount = 5; // Number of enemies per wave
-    public float waveInterval = 10f; // Wave interval (seconds between waves)
+    public float waveInterval = 10f; // Wave interval
 
-    [Header("Difficulty Limits")]
+    [Header("Difficulty Limitation")]
     public int maxWaveCount = 20; // Maximum number of enemies per wave
     public float minSpawnInterval = 0.5f; // Minimum spawn interval
-    public int maxTotalWaves = 0; // Maximum total waves (0 = infinite)
+    public int maxTotalWaves = 0; // Maximum total waves (0 means infinite)
 
     public int playerHP = 10;
     [HideInInspector]
@@ -59,22 +60,28 @@ public class EnemySpawner : MonoBehaviour
     public TextMeshProUGUI waveCountdownTxt;
     public GameObject waveTimePanel;
 
+
     public Coroutine spawnCoroutine;
     public int currentWave = 1;
     public bool isSpawning = false;
 
+
     private void Awake()
     {
+
         if (_instance == null)
         {
             _instance = this;
+
             // DontDestroyOnLoad(gameObject);
         }
         else if (_instance != this)
         {
+
             Destroy(gameObject);
             return;
         }
+
 
         if (waveCountdownTxt != null && waveTimePanel != null)
         {
@@ -85,7 +92,9 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
+
         // StartSpawnWaves();
+
     }
 
     public void initHp()
@@ -101,6 +110,8 @@ public class EnemySpawner : MonoBehaviour
         }
         startBtn.enabled = false;
 
+
+
         StartSpawnWaves();
     }
 
@@ -112,22 +123,28 @@ public class EnemySpawner : MonoBehaviour
         spawnCoroutine = StartCoroutine(SpawnEnemyWaves());
     }
 
+
     private IEnumerator SpawnEnemyWaves()
     {
+
         currentWave = 1;
+
 
         while (isSpawning && (maxTotalWaves == 0 || currentWave <= maxTotalWaves))
         {
             Debug.Log($"Spawning wave {currentWave} enemies");
             waveTxt.text = currentWave + "/" + maxTotalWaves;
 
+
             for (int i = 0; i < waveCount && isSpawning; i++)
             {
+
                 if (!isSpawning) break;
 
                 SpawnEnemy();
                 yield return new WaitForSeconds(spawnInterval);
             }
+
 
             if (!isSpawning || (maxTotalWaves > 0 && currentWave >= maxTotalWaves))
             {
@@ -139,9 +156,12 @@ public class EnemySpawner : MonoBehaviour
                 waveTimePanel.SetActive(true);
                 float remainingTime = waveInterval;
 
+
                 while (remainingTime > 0 && isSpawning)
                 {
+
                     waveCountdownTxt.text = Mathf.FloorToInt(remainingTime) + "";
+
                     yield return new WaitForSeconds(0.1f);
                     remainingTime -= 0.1f;
                 }
@@ -150,8 +170,10 @@ public class EnemySpawner : MonoBehaviour
             }
             else
             {
+
                 yield return new WaitForSeconds(waveInterval);
             }
+
 
             if (maxTotalWaves == 0)
             {
@@ -167,22 +189,26 @@ public class EnemySpawner : MonoBehaviour
             spawnInterval = Mathf.Max(spawnInterval - 0.3f, minSpawnInterval);
             enemySpeedMultiplier = Mathf.Min(enemySpeedMultiplier + 0.2f, 3f);
 
+
             Debug.Log("spawnInterval=" + spawnInterval);
 
             currentWave++;
         }
 
+
         StopSpawnWaves();
         Debug.Log($"Enemy spawning finished, total waves spawned: {currentWave - 1}");
     }
+
 
     private void SpawnEnemy()
     {
         if (enemyPrefab == null || startWaypoint == null)
         {
-            Debug.LogError("Enemy prefab or start waypoint not assigned!");
+            Debug.LogError("Enemy prefab or starting waypoint is not assigned!");
             return;
         }
+
 
         GameObject enemyObj = Instantiate(enemyPrefab, startWaypoint.transform.position, Quaternion.identity);
 
@@ -196,9 +222,11 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+
     public void StopSpawnWaves()
     {
         isSpawning = false;
+
 
         if (spawnCoroutine != null)
         {
@@ -206,6 +234,7 @@ public class EnemySpawner : MonoBehaviour
             spawnCoroutine = null;
         }
     }
+
 
     public int LoseHP(int num)
     {
@@ -226,6 +255,7 @@ public class EnemySpawner : MonoBehaviour
         return playerHP;
     }
 
+
     private void OnDestroy()
     {
         StopSpawnWaves();
@@ -235,6 +265,7 @@ public class EnemySpawner : MonoBehaviour
             _instance = null;
         }
     }
+
 
     private void OnDisable()
     {

@@ -34,7 +34,7 @@ public class AudioManager : MonoBehaviour
         bgmSource.volume = bgmVolume;
     }
 
-    #region 背景音（BGM）控制
+    #region （BGM）
 
     public void PlayBGM(AudioClip clip)
     {
@@ -51,7 +51,7 @@ public class AudioManager : MonoBehaviour
     public void SetBGMVolume(float volume) => bgmSource.volume = Mathf.Clamp01(volume);
     #endregion
 
-    #region 战斗音效（Battle SFX）控制
+    #region Battle SFX
 
     public void PlayBattleSFX(AudioClip clip, Vector3 pos = default)
     {

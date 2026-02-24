@@ -42,12 +42,12 @@ public class EnemyManager : MonoBehaviour
     public List<BaseEnemy> GetEnemiesInRange(Vector3 towerPosition, float range)
     {
         List<BaseEnemy> enemiesInRange = new List<BaseEnemy>();
-        
+
 
         foreach (BaseEnemy enemy in _aliveEnemies)
         {
             if (enemy == null || enemy.IsDead) continue;
-            
+
             float distance = Vector3.Distance(towerPosition, enemy.transform.position);
             if (distance <= range)
             {
@@ -69,6 +69,6 @@ public class EnemyManager : MonoBehaviour
 
     private void OnGUI()
     {
-       
+        // GUI.Label(new Rect(10, 50, 200, 30), $"´æ»îµÐÈË£º{_aliveEnemies.Count}");
     }
 }

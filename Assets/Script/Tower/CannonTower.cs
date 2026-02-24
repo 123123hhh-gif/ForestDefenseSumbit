@@ -15,16 +15,16 @@ public class CannonTower : BaseTower
     protected override void Shoot()
     {
 
-        if (_targetEnemy == null || bulletPrefab == null || _turretFirePoints == null) 
+        if (_targetEnemy == null || bulletPrefab == null || _turretFirePoints == null)
         {
-            Debug.LogWarning("射击条件不足：目标 = "+_targetEnemy+"  预制体 = "+bulletPrefab+"  射击点管理器 ="+_turretFirePoints);
+            Debug.LogWarning("Shooting conditions insufficient: Target = " + _targetEnemy + "  Prefab = " + bulletPrefab + "  Fire Point Manager =" + _turretFirePoints);
             return;
         }
 
         List<Transform> firePoints = _turretFirePoints.GetAllFirePoints();
         if (firePoints.Count == 0)
         {
-            Debug.LogWarning("没有可用的射击点！");
+            Debug.LogWarning("No available fire points!");
             return;
         }
 
@@ -47,8 +47,8 @@ public class CannonTower : BaseTower
 
             if(bulletBgm != null)
             {
-                 //AudioManager.Instance.PlayBattleSFX(bulletBgm);
-            }
+            AudioManager.Instance.PlayBattleSFX(bulletBgm);
+        }
     }
 }
 

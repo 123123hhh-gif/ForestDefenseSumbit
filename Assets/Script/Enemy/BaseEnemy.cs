@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BaseEnemy : MonoBehaviour
 {
-    [Header("敌人属性")]
+    [Header("Enemy Attributes")]
     public int maxHealth = 100;
 
 
@@ -12,10 +12,10 @@ public class BaseEnemy : MonoBehaviour
 
     private int _currentHealth;
     private bool _isDead = false;
-    private Waypoint _currentWaypoint; // 当前目标路径点
+    private Waypoint _currentWaypoint; // Current target waypoint
     private bool _hasReachedEnd = false;
 
-    // 公开属性
+    // Public properties
     public bool IsDead => _isDead;
 
 
@@ -23,7 +23,7 @@ public class BaseEnemy : MonoBehaviour
     private void Start()
     {
         _currentHealth = maxHealth;
-        // 生成时自动注册到管理器
+        // Automatically register to the manager when spawned
         if (EnemyManager.Instance != null)
         {
             EnemyManager.Instance.AddEnemy(this);
@@ -39,7 +39,7 @@ public class BaseEnemy : MonoBehaviour
         MoveToWaypoint();
     }
 
-    // 设置起始路径点
+    // Set the starting waypoint
     public void SetStartWaypoint(Waypoint startWaypoint)
     {
         _currentWaypoint = startWaypoint;
@@ -51,35 +51,35 @@ public class BaseEnemy : MonoBehaviour
 
     }
 
-    // 向路径点移动
+    // Move to the target waypoint
     protected virtual void MoveToWaypoint()
     {
         if (_currentWaypoint == null) return;
 
-        // 1. 计算方向（锁定Y轴，只在XZ平面移动）
+        // 1. Calculate direction (Lock Y-axis, only move on XZ plane)
         Vector3 targetPos = _currentWaypoint.transform.position;
         Vector3 direction = new Vector3(targetPos.x - transform.position.x, 0, targetPos.z - transform.position.z);
         direction.Normalize();
 
-        // 2. 仅在水平方向上转向，避免上下旋转
+        // 2. Rotate only horizontally to avoid up/down rotation
         if (direction.magnitude > 0.1f)
         {
-            // 计算目标旋转，强制Y轴为当前值，只修改X和Z轴
+            // Calculate target rotation, force Y-axis to current value, only modify X and Z axes
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             targetRotation = Quaternion.Euler(0, targetRotation.eulerAngles.y, 0);
 
-            // 瞬间转向，无缓冲
+            // Instant rotation with no easing
             transform.rotation = targetRotation;
         }
 
-        // 3. 用 MoveTowards 替代 Translate，移动更精准
+        // 3. Use MoveTowards instead of Translate for more precise movement
         transform.position = Vector3.MoveTowards(
             transform.position,
             targetPos,
             moveSpeed * Time.deltaTime
         );
 
-        // 4. 到达路径点后切换下一个
+        // 4. Switch to the next waypoint after reaching the current one
         if (Vector3.Distance(transform.position, targetPos) < 0.1f)
         {
             if (_currentWaypoint.isLastWaypoint)
@@ -91,12 +91,15 @@ public class BaseEnemy : MonoBehaviour
         }
     }
 
-    // 到达终点的核心逻辑（单独抽离，确保只执行一次）
+    // Core logic for reaching the end (extracted separately to ensure it is executed only once)
     private void OnReachEnd()
     {
+
         if (_hasReachedEnd || _isDead) return;
         _hasReachedEnd = true;
-        Debug.Log($"{gameObject.name} 到达终点，扣血{damageToPlayer}");
+        Debug.Log($"{gameObject.name} reached the end, deduct {damageToPlayer} HP from player");
+        // Add this log: Check if GameManager is null
+        Debug.Log("GameManager Instance: " + (GameManager.Instance == null ? "Null" : "Exist"));
 
 
         if (GameManager.Instance != null)
@@ -107,13 +110,14 @@ public class BaseEnemy : MonoBehaviour
         DestroyEnemy();
     }
 
-    // 受伤逻辑
+    // Take damage logic
     public void TakeDamage(int damage)
     {
+        Debug.Log("TakeDamage called!");
         if (_isDead) return;
 
         _currentHealth -= damage;
-        Debug.Log($"{gameObject.name} 受到 {damage} 伤害，剩余血量：{_currentHealth}");
+        Debug.Log($"{gameObject.name} took {damage} damage, remaining HP: {_currentHealth}");
 
         MonsterHpBar hp = this.GetComponent<MonsterHpBar>();
         hp.TakeDamage(damage);
@@ -125,11 +129,11 @@ public class BaseEnemy : MonoBehaviour
         }
     }
 
-    // 死亡逻辑
+    // Death logic
     protected virtual void Die()
     {
         _isDead = true;
-        Debug.Log($"{gameObject.name} 死亡");
+        Debug.Log($"{gameObject.name} died");
 
 
         if (GameManager.Instance != null)
@@ -141,7 +145,7 @@ public class BaseEnemy : MonoBehaviour
         DestroyEnemy();
     }
 
-    // 统一的敌人销毁逻辑
+    // Unified enemy destruction logic
     private void DestroyEnemy()
     {
         if (EnemyManager.Instance != null)
@@ -151,7 +155,7 @@ public class BaseEnemy : MonoBehaviour
         Destroy(gameObject, 1.1f);
     }
 
-    // 防止敌人被意外销毁时未移除
+    // Prevent the enemy from not being removed when accidentally destroyed
     private void OnDestroy()
     {
 
