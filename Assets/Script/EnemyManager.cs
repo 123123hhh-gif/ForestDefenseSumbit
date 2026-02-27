@@ -69,6 +69,6 @@ public class EnemyManager : MonoBehaviour
 
     private void OnGUI()
     {
-        // GUI.Label(new Rect(10, 50, 200, 30), $"¥ÊªÓµ–»À£∫{_aliveEnemies.Count}");
+   
     }
 }
