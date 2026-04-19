@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
-
+ 
     public static AudioManager Instance { get; private set; }
 
 
@@ -34,7 +34,7 @@ public class AudioManager : MonoBehaviour
         bgmSource.volume = bgmVolume;
     }
 
-    #region ��BGM��
+    #region 背景音（BGM）控制
 
     public void PlayBGM(AudioClip clip)
     {
@@ -51,7 +51,7 @@ public class AudioManager : MonoBehaviour
     public void SetBGMVolume(float volume) => bgmSource.volume = Mathf.Clamp01(volume);
     #endregion
 
-    #region Battle SFX
+    #region 战斗音效（Battle SFX）控制
 
     public void PlayBattleSFX(AudioClip clip, Vector3 pos = default)
     {

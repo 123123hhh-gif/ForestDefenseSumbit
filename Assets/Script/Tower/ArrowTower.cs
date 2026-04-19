@@ -11,14 +11,14 @@ public class ArrowTower : BaseTower
 
         if (_targetEnemy == null || arrowPrefab == null || _turretFirePoints == null) 
         {
-            Debug.LogWarning("Insufficient shooting conditions for the bow and arrow tower: The target/ prefab/ shooting point manager is empty");
+            Debug.LogWarning("弓箭塔射击条件不足：目标/预制体/射击点管理器为空");
             return;
         }
 
         List<Transform> firePoints = _turretFirePoints.GetAllFirePoints();
         if (firePoints.Count == 0)
         {
-            Debug.LogWarning("There are no available shooting points on the bow and arrow tower!");
+            Debug.LogWarning("弓箭塔没有可用的射击点！");
             return;
         }
 
@@ -35,11 +35,11 @@ public class ArrowTower : BaseTower
                 
                 Arrow arrow = arrowObj.GetComponent<Arrow>();
                 if (arrow == null) arrow = arrowObj.AddComponent<Arrow>();
-                arrow.SetTarget(_targetEnemy,this);
+                arrow.SetTarget(_targetEnemy, arrowSpeed, _currentData.damage);
 
             if(bulletBgm != null)
             {
-                AudioManager.Instance.PlayBattleSFX(bulletBgm);
+                 AudioManager.Instance.PlayBattleSFX(bulletBgm);
             }
         }
     }
@@ -56,16 +56,12 @@ public class Arrow : MonoBehaviour
     private float _lifeTime = 5f;
     private float _lifeTimer = 0f;
 
-    private BaseTower fatherTower;
-
-    public void SetTarget(Transform target, BaseTower tower)
+    public void SetTarget(Transform target, float speed, int damage)
     {
          Debug.Log("Shoot 4 ");
         _target = target;
-        fatherTower = tower;
-        
-        _speed = fatherTower.CurrentData.bulletSpeed;
-        _damage = fatherTower.CurrentData.damage;
+        _speed = speed;
+        _damage = damage;
         _lifeTimer = 0;
     }
 

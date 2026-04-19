@@ -1,15 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainScript : MonoBehaviour
 {
-    public AudioClip bgmWarriors; // Background music clip for main menu 
-
+    // Start is called before the first frame update
     void Start()
     {
-        //AudioManager.Instance.PlayBGM(bgmWarriors); // Play menu BGM
+        
     }
 
+    // Update is called once per frame
     void Update()
     {
         
@@ -17,31 +19,31 @@ public class MainScript : MonoBehaviour
 
     public void onBtnLevel1()
     {
-        SceneManager.LoadScene("L1"); // Placeholder scene loading; full level structure and progression system not finalized yet
+         SceneManager.LoadScene("L1");
     }
 
     public void onBtnLevel2()
     {
-        SceneManager.LoadScene("L2"); // Temporary direct scene jump before implementing proper level selection logic
+         SceneManager.LoadScene("L2");
     }
 
     public void onBtnLevel3()
     {
-        SceneManager.LoadScene("L3"); // Scene entry defined early; gameplay content may still be under development
+         SceneManager.LoadScene("L3");
     }
 
     public void onBtnLevel4()
     {
-        SceneManager.LoadScene("L4"); // Reserved level slot; structure defined before full content implementation
+         SceneManager.LoadScene("L4");
     }
 
     public void onBtnLevel5()
     {
-        SceneManager.LoadScene("L5"); // Scene reference prepared in advance for future expansion
+         SceneManager.LoadScene("L5");
     }
 
-    public void onBtnLevel6()
+     public void onBtnLevel6()
     {
-        SceneManager.LoadScene("SampleScene"); 
+         SceneManager.LoadScene("SampleScene");
     }
 }

@@ -38,14 +38,12 @@ public class DemoShooting : MonoBehaviour
         //Single shoot
         if (Input.GetButtonDown("Fire1"))
         {
-            Debug.Log("子弹编号 Prefab = "+ Prefab);
             Instantiate(Prefabs[Prefab], FirePoint.transform.position, FirePoint.transform.rotation);
         }
 
         //Fast shooting
         if (Input.GetMouseButton(1) && fireCountdown <= 0f)
         {
-             Debug.Log("子弹编号 Prefab = "+ Prefab);
             Instantiate(Prefabs[Prefab], FirePoint.transform.position, FirePoint.transform.rotation);
             fireCountdown = 0;
             fireCountdown += hSliderValue;

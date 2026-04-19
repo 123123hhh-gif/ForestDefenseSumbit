@@ -1,105 +1,81 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.EventSystems;
 
-public class BaseTower : MonoBehaviour, IPointerClickHandler
+public class BaseTower : MonoBehaviour
 {
-    [Header("Core References")]
-    public Transform baseTransform;
-    public Transform turretRoot;
+    [Header("核心引用")]
+    public Transform baseTransform; 
+    public Transform turretRoot; 
+    public TowerData initialData; 
 
     [Header("State")]
     protected TowerData _currentData;
-    protected Transform _targetEnemy;
+    protected Transform _targetEnemy; 
     private float _attackTimer;
     [HideInInspector]
     public TurretFirePoints _turretFirePoints;
 
     public AudioClip bulletBgm;
 
+
     public TowerData CurrentData => _currentData;
 
-    [HideInInspector]
-    public TowerPlace towerPlace;
-
-    protected virtual void Start()
+    private void Start()
     {
-        _turretFirePoints = turretRoot.gameObject.GetComponent<TurretFirePoints>();
-        Debug.Log("_turretFirePoints = " + _turretFirePoints);
+        
+        _currentData = initialData;
+
+        _turretFirePoints  = turretRoot.gameObject.GetComponent<TurretFirePoints>();
+        Debug.Log("_turretFirePoints = "+_turretFirePoints);
+
+        
         _attackTimer = 0;
     }
 
-    public void init(TowerData data)
+    private void Update()
     {
-        _currentData = data;
-    }
-
-    // Implement IPointerClickHandler interface to handle click events
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (eventData.button == PointerEventData.InputButton.Left)
-        {
-            Debug.Log($"Tower clicked: {eventData.pointerId}");
-            // Left click: Open upgrade/detail panel
-            UIManager.Instance.ShowUpgradePanel(this);
-        }
-    }
-
-    protected virtual void Update()
-    {
-        // Validate if current target is still valid
+       
         ValidateTarget();
 
-        // If no valid target, find a new one
-        if (!HasTarget())
+       
+        if (_targetEnemy == null)
         {
             FindTarget();
             return;
         }
 
-        // Rotate turret towards target and attack
+       
         RotateTurretToTarget();
         AttackTarget();
     }
 
-    protected virtual bool HasTarget()
-    {
-        
-        if (_targetEnemy == null)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
 
-    // Check if current target is still valid (alive, in range, exists)
-    protected virtual void ValidateTarget()
+
+
+    private void ValidateTarget()
     {
         if (_targetEnemy == null) return;
-        Debug.Log("not return");
-        BaseEnemy enemy = _targetEnemy.GetComponent<BaseEnemy>();
 
+        BaseEnemy enemy = _targetEnemy.GetComponent<BaseEnemy>();
+        
         if (enemy == null || enemy.IsDead || !IsTargetInRange())
         {
             _targetEnemy = null;
         }
     }
 
-    // Find the closest valid enemy in attack range
-    protected virtual void FindTarget()
+   
+    private void FindTarget()
     {
         if (EnemyManager.Instance == null)
         {
-            Debug.LogWarning("EnemyManager not found!");
+            Debug.LogWarning("EnemyManager 未找到！");
             return;
         }
 
-        // Get all enemies within attack range
+       
         List<BaseEnemy> enemiesInRange = EnemyManager.Instance.GetEnemiesInRange(
-            transform.position,
+            transform.position, 
             _currentData.attackRange
         );
 
@@ -109,7 +85,7 @@ public class BaseTower : MonoBehaviour, IPointerClickHandler
             return;
         }
 
-        // Find the closest enemy from the list
+       
         BaseEnemy closestEnemy = null;
         float closestDistance = Mathf.Infinity;
 
@@ -128,146 +104,120 @@ public class BaseTower : MonoBehaviour, IPointerClickHandler
         _targetEnemy = closestEnemy?.transform;
     }
 
-    // Smoothly rotate turret to face target
-    protected virtual void RotateTurretToTarget()
+   
+    private void RotateTurretToTarget()
     {
         if (_targetEnemy == null || turretRoot == null) return;
 
         Vector3 direction = _targetEnemy.position - turretRoot.position;
-        // Prevent rotation jitter when target is too close
+       
         if (direction.magnitude < 0.1f) return;
 
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         turretRoot.rotation = Quaternion.Lerp(
-            turretRoot.rotation,
-            targetRotation,
+            turretRoot.rotation, 
+            targetRotation, 
             Time.deltaTime * _currentData.rotateSpeed
         );
     }
 
-    // Check if turret is facing the target within a certain angle threshold
-    protected virtual bool IsTurretFacingTarget()
+    private bool IsTurretFacingTarget()
     {
         if (_targetEnemy == null || turretRoot == null) return false;
-
-        // Get current forward direction of turret and normalized direction to target
+        
+       
         Vector3 currentForward = turretRoot.forward;
         Vector3 targetDirection = (_targetEnemy.position - turretRoot.position).normalized;
-
-        // Calculate angle between turret forward and target direction
+        
+       
         float angle = Vector3.Angle(currentForward, targetDirection);
-        return angle < 25f; // Attack only when angle is within 25 degrees
+        return angle < 25f; 
     }
 
-    // Handle attack logic (cooldown and shooting)
+   
     private void AttackTarget()
     {
+
         if (_targetEnemy == null) return;
 
-        // Only attack when turret is facing the target
+
+       
         if (!IsTurretFacingTarget())
         {
+           
             return;
         }
 
         _attackTimer += Time.deltaTime;
-        // Debug.Log("AttackTarget _attackTimer = " + _attackTimer + " _currentData.attackRate = " + _currentData.attackRate);
+        // Debug.Log("AttackTarge3 _attackTimer = "+ _attackTimer+" _currentData.attackRate = "+ _currentData.attackRate);
         if (_attackTimer < _currentData.attackRate) return;
 
         _attackTimer = 0;
         Shoot();
     }
 
-    // Perform shooting action (virtual for override in child classes)
+    
     protected virtual void Shoot()
     {
-        // Check if fire point manager is initialized
+        
+        
         if (_turretFirePoints == null)
         {
-            Debug.LogWarning("Fire point manager not initialized, cannot shoot!");
+            Debug.LogWarning("射击点管理器未初始化，无法射击！");
             return;
         }
 
-        // Get all fire points from the manager
+       
         List<Transform> firePoints = _turretFirePoints.GetAllFirePoints();
         if (firePoints.Count == 0)
         {
-            Debug.LogWarning($"Turret {turretRoot.name} has no available fire points!");
+            Debug.LogWarning($"炮塔{turretRoot.name}没有可用的射击点！");
             return;
         }
 
-        // Shoot from each fire point
+       
         foreach (Transform firePoint in firePoints)
         {
             if (firePoint != null && _targetEnemy != null)
             {
-                Debug.Log($"Shooting at {_targetEnemy.name} from {firePoint.name}, damage: {_currentData.damage}");
-                // Deal damage to enemy
+                Debug.Log($"从{firePoint.name}射击{_targetEnemy.name}，伤害：{_currentData.damage}");
+                // 给敌人扣血
                 BaseEnemy enemy = _targetEnemy.GetComponent<BaseEnemy>();
                 if (enemy != null) enemy.TakeDamage(_currentData.damage);
             }
         }
     }
 
-    // Upgrade tower to next level (return success status)
+    
     public bool Upgrade()
     {
-        // Check if tower is already at max level
+        
         if (_currentData.nextLevelData == null)
         {
-            Debug.Log($"{_currentData.towerName} has reached max level");
+            Debug.Log($"{_currentData.towerName}已达满级");
             return false;
         }
 
-        // Check if player has enough gold for upgrade
+       
         if (!GameManager.Instance.CheckEnoughGold(_currentData.nextLevelData.cost))
         {
-            Debug.Log("Not enough gold to upgrade");
+            Debug.Log("金币不足，无法升级");
             return false;
         }
 
-        Debug.Log($"{gameObject.name} upgraded to {_currentData.towerName}");
+        
+        GameManager.Instance.SpendGold(_currentData.nextLevelData.cost);
+       
+        _currentData = _currentData.nextLevelData;
+
+        Debug.Log($"{gameObject.name}升级为{_currentData.towerName}");
         return true;
     }
 
-    // Check if target is within attack range
+    
     private bool IsTargetInRange()
     {
         if (_targetEnemy == null) return false;
         return Vector3.Distance(transform.position, _targetEnemy.position) <= _currentData.attackRange;
-    }
-
-    // Destroy tower (with optional sell refund)
-    public void DestroyTower(bool isSell = false)
-    {
-        // Clean up tower references and coroutines
-        CleanupTower();
-
-        // Refund gold if selling
-        if (isSell && GameManager.Instance != null)
-        {
-            int refundGold = Mathf.RoundToInt(_currentData.cost * 0.7f);
-            GameManager.Instance.AddGold(refundGold);
-            Debug.Log($"Sold tower {gameObject.name}, refunded gold: {refundGold}");
-        }
-
-        Destroy(gameObject);
-    }
-
-    // Clean up tower resources and references
-    private void CleanupTower()
-    {
-        StopAllCoroutines();
-        _targetEnemy = null;
-        _turretFirePoints = null;
-    }
-
-    // Clean up on destroy
-    private void OnDestroy()
-    {
-        _targetEnemy = null;
-        _currentData = null;
-        towerPlace = null;
-        Debug.Log($"Tower {gameObject.name} destroyed, OnDestroy triggered");
     }
 }

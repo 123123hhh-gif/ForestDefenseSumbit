@@ -9,19 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93623e978b631bd4f8ddfc565bac763b, type: 3}
+  m_Script: {fileID: 11500000, guid: 230e52fcee5c0f64887d4e247f7d1d89, type: 3}
   m_Name: FineArrowData1
   m_EditorClassIdentifier: 
-  towerName: Adept Arrow Tower
-  iconPath: towerIcon/Icon_ItemIcon_Arrow
+  towerName: FineArrowData1
   level: 1
-  cost: 15
-  attackRange: 5
+  cost: 10
+  attackRange: 100
   attackRate: 0.5
-  damage: 2
-  rotateSpeed: 10
-  nextLevelData: {fileID: 11400000, guid: bc4dcee5becb3bc4db83847892afd8e3, type: 2}
-  towerPrefab: {fileID: 5794722645008495564, guid: e5afc6da48dc83044a1ef0bebdd59bbb, type: 3}
-  bulletSpeed: 30
-  bulletPosOffset: {x: 0, y: 0, z: 0}
-  bulletRotOffset: {x: 0, y: 0, z: 0}
+  damage: 10
+  rotateSpeed: 2
+  nextLevelData: {fileID: 0}
+  towerPrefab: {fileID: 5794722645008495564, guid: acbe560cf5fc0454eb1d071ffcfb0adf, type: 3}

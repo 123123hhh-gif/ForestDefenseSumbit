@@ -9,19 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93623e978b631bd4f8ddfc565bac763b, type: 3}
+  m_Script: {fileID: 11500000, guid: 230e52fcee5c0f64887d4e247f7d1d89, type: 3}
   m_Name: FineCannonData1
   m_EditorClassIdentifier: 
-  towerName: Adept Cannon Tower
-  iconPath: towerIcon/Icon_ItemIcon_Bomb
+  towerName: FineCannonData1
   level: 1
-  cost: 30
-  attackRange: 15
-  attackRate: 1.5
-  damage: 10
-  rotateSpeed: 6
-  nextLevelData: {fileID: 11400000, guid: e049d3bc9f5d3bd4a88d527a022c977e, type: 2}
-  towerPrefab: {fileID: 6385410840003427062, guid: 9507fdd1f26b9b548b90dc4c710d3f62, type: 3}
-  bulletSpeed: 30
-  bulletPosOffset: {x: 0, y: 0, z: 0}
-  bulletRotOffset: {x: 0, y: 0, z: 0}
+  cost: 15
+  attackRange: 150
+  attackRate: 0.6
+  damage: 20
+  rotateSpeed: 2
+  nextLevelData: {fileID: 0}
+  towerPrefab: {fileID: 6385410840003427062, guid: 7f7aba6c5962b1341b4b336ba59d7f0f, type: 3}

@@ -6,6 +6,12 @@ public class FineCannonTower : BaseTower
 {
     [Header("CONFIG")]
     public GameObject bulletPrefab;
+    public float speed = 0.5f; 
+
+
+    public Vector3 bulletPosOffset = Vector3.zero;
+
+    public Vector3 bulletRotOffset = new Vector3(0, 0, 0);
 
     public bool showDebugGizmos = true;
 
@@ -13,16 +19,16 @@ public class FineCannonTower : BaseTower
 
     protected override void Shoot()
     {
-        if (_targetEnemy == null || bulletPrefab == null || _turretFirePoints == null)
+        if (_targetEnemy == null || bulletPrefab == null || _turretFirePoints == null) 
         {
-            Debug.LogWarning("Tower shooting conditions insufficient: Target/Prefab/Fire Point Manager is null");
+            Debug.LogWarning("塔射击条件不足：目标/预制体/射击点管理器为空");
             return;
         }
 
         List<Transform> firePoints = _turretFirePoints.GetAllFirePoints();
         if (firePoints.Count == 0)
         {
-            Debug.LogWarning("No available fire points for tower!");
+            Debug.LogWarning("塔没有可用的射击点！");
             return;
         }
 
@@ -30,26 +36,27 @@ public class FineCannonTower : BaseTower
         {
             if (firePoint == null) continue;
 
-            Vector3 spawnPos = firePoint.TransformPoint(CurrentData.bulletPosOffset);
+
+            Vector3 spawnPos = firePoint.TransformPoint(bulletPosOffset);
             Vector3 dirToEnemy = _targetEnemy.position - spawnPos;
             Quaternion targetRot = Quaternion.LookRotation(dirToEnemy);
-            targetRot *= Quaternion.Euler(CurrentData.bulletRotOffset);
+            targetRot *= Quaternion.Euler(bulletRotOffset);
 
-            GameObject obj = Instantiate(bulletPrefab, spawnPos, targetRot);
-            obj.transform.SetParent(null);
-
-
-            ParticleMoverBullet bulletMover = obj.GetComponentInChildren<ParticleMoverBullet>();
+            GameObject arrowObj = Instantiate(bulletPrefab, spawnPos, targetRot);
+            arrowObj.transform.SetParent(null); 
+            
+            // ParticleMoverBullet bulletMover = arrowObj.GetComponent<ParticleMoverBullet>();
+            ParticleMoverBullet bulletMover = arrowObj.GetComponentInChildren<ParticleMoverBullet>();
             if (bulletMover != null)
             {
+                bulletMover.speed = this.speed * 30; 
                 bulletMover.fatherTower = this;
-                bulletMover.SetTarget(_targetEnemy);
-
+                // bulletMover.OnHit += OnBulletHitEnemy;
             }
 
-            if (bulletBgm != null)
+            if(bulletBgm != null)
             {
-                AudioManager.Instance.PlayBattleSFX(bulletBgm);
+                 AudioManager.Instance.PlayBattleSFX(bulletBgm);
             }
         }
     }
@@ -66,18 +73,18 @@ public class FineCannonTower : BaseTower
         {
             if (firePoint == null) continue;
 
-            // Draw original fire point (white sphere)
+            // 绘制原始射击点（白色球）
             Gizmos.color = Color.white;
             Gizmos.DrawWireSphere(firePoint.position, 0.1f);
 
-            // Draw offset spawn position (red sphere)
-            Vector3 spawnPos = firePoint.TransformPoint(CurrentData.bulletPosOffset);
+            // 绘制偏移后的发射位置（红色球）
+            Vector3 spawnPos = firePoint.TransformPoint(bulletPosOffset);
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(spawnPos, 0.1f);
 
-            // Draw bullet direction (red line pointing to enemy)
+            // 绘制子弹朝向（红色线，指向敌人）
             Vector3 dirToEnemy = _targetEnemy.position - spawnPos;
-            Quaternion targetRot = Quaternion.LookRotation(dirToEnemy) * Quaternion.Euler(CurrentData.bulletRotOffset);
+            Quaternion targetRot = Quaternion.LookRotation(dirToEnemy) * Quaternion.Euler(bulletRotOffset);
             Gizmos.DrawLine(spawnPos, spawnPos + targetRot * Vector3.forward * 2f);
         }
     }

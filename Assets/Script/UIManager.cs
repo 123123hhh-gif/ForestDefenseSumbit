@@ -1,5 +1,3 @@
-using TMPro;
-using TMPro.Examples;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,13 +6,11 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
-    [Header("upgradePanel")]
+    [Header("升级面板")]
     public GameObject upgradePanel;
-    public TextMeshProUGUI towerNameText;
-    public TextMeshProUGUI upgradeCostText;
+    public Text towerNameText;
+    public Text upgradeCostText;
     public Button upgradeButton;
-
-    public Button sellButton;
     // public Button closeButton;
 
     public GameObject victoryPanel;
@@ -24,15 +20,9 @@ public class UIManager : MonoBehaviour
 
     public GameObject TowerSelectPanel;
 
-    public GameObject tipsPanel;
-
     private BaseTower _currentSelectedTower;
 
     private TowerPlace _curPlace;
-
-    private TipsType tipsType;
-
-
 
 
 
@@ -51,11 +41,10 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-
+       
         upgradePanel.SetActive(false);
-
+       
         upgradeButton.onClick.AddListener(OnUpgradeButtonClick);
-        sellButton.onClick.AddListener(OnSellButtonClick);
         // closeButton.onClick.AddListener(HideUpgradePanel);
     }
 
@@ -64,13 +53,33 @@ public class UIManager : MonoBehaviour
 
         bgmSlider.value = AudioManager.Instance.bgmVolume;
         sfxSlider.value = AudioManager.Instance.battleVolume;
-
+        
         bgmSlider.onValueChanged.AddListener(AudioManager.Instance.SetBGMVolume);
         sfxSlider.onValueChanged.AddListener(AudioManager.Instance.SetBattleVolume);
     }
 
 
+    public void ShowUpgradePanel(BaseTower tower)
+    {
+        _currentSelectedTower = tower;
+        TowerData nextData = tower.CurrentData.nextLevelData;
 
+        if (nextData == null)
+        {
+            towerNameText.text = $"{tower.CurrentData.towerName}（满级）";
+            upgradeCostText.text = "无";
+            upgradeButton.interactable = false;
+        }
+        else
+        {
+            towerNameText.text = $"{tower.CurrentData.towerName} → {nextData.towerName}";
+            upgradeCostText.text = $"升级费用：{nextData.cost}";
+            upgradeButton.interactable = GameManager.Instance.CheckEnoughGold(nextData.cost);
+        }
+
+        
+        showGameObjectPanel(upgradePanel);
+    }
 
 
     public void HideUpgradePanel()
@@ -79,97 +88,16 @@ public class UIManager : MonoBehaviour
         _currentSelectedTower = null;
     }
 
-
-    public void ShowUpgradePanel(BaseTower tower)
-    {
-        _currentSelectedTower = tower;
-        TowerData nextData = _currentSelectedTower.CurrentData.nextLevelData;
-
-        Debug.Log("Load the upgrade panel，_currentSelectedTower = " + _currentSelectedTower + " , name = " + _currentSelectedTower.CurrentData.towerName);
-
-        if (nextData == null)
-        {
-            towerNameText.text = $"{_currentSelectedTower.CurrentData.towerName}\n → \n(max level)";
-            upgradeCostText.text = "no information";
-            upgradeButton.interactable = false;
-        }
-        else
-        {
-            towerNameText.text = $"{_currentSelectedTower.CurrentData.towerName} \n → \n{nextData.towerName}";
-            upgradeCostText.text = $"upgrade cost:{nextData.cost}";
-            upgradeButton.interactable = GameManager.Instance.CheckEnoughGold(nextData.cost);
-        }
-
-
-        showGameObjectPanel(upgradePanel);
-    }
-
-    private void OnSellButtonClick()
-    {
-
-
-        ShowTipsPanel(TipsType.SellTower);
-    }
-    private void ShowTipsPanel(TipsType _tipsType)
-    {
-
-        tipsType = _tipsType;
-        string tipsStr = "";
-
-        switch (tipsType)
-        {
-            case TipsType.SellTower:
-                //How to add line breaks in a string?
-                tipsStr = $"Confirm the sale? \n Selling a defense tower will only return 70% of the spent gold!";
-                break;
-            default:
-                break;
-        }
-
-        // Text tipsText = tipsPanel.transform.Find("desc").GetComponent<Text>();
-
-        //Search for the "desc" component under the "tipsPanel" and assign a value to it
-        TextMeshProUGUI tipsText = tipsPanel.transform.Find("desc").GetComponent<TextMeshProUGUI>();
-        if (tipsText != null)
-        {
-            tipsText.text = tipsStr;
-        }
-
-        tipsPanel.transform.SetAsLastSibling();
-        showGameObjectPanel(tipsPanel);
-    }
-
-    public void OnSellConfirmed()
-    {
-        if (tipsType == TipsType.SellTower)
-        {
-            if (_currentSelectedTower != null)
-            {
-                _currentSelectedTower.towerPlace.RemoveTower(true);
-                HideUpgradePanel();
-            }
-        }
-
-        hideGameObjectPanel(tipsPanel);
-
-    }
-
-
+  
     private void OnUpgradeButtonClick()
     {
         if (_currentSelectedTower != null)
         {
-            bool isOK = GameManager.Instance.CheckEnoughGold(_currentSelectedTower.CurrentData.nextLevelData.cost);
-            if (!isOK)
-                return;
-
-            _currentSelectedTower.towerPlace.RemoveTower();
-
-
-            BaseTower newTower = GameManager.Instance.PlaceTower(_currentSelectedTower.towerPlace, _currentSelectedTower.CurrentData.nextLevelData);
-
-            Debug.Log("Upgrade successful，newTower = " + newTower + " , name = " + newTower.CurrentData.towerName);
-            ShowUpgradePanel(newTower);
+            bool upgradeSuccess = _currentSelectedTower.Upgrade();
+            if (upgradeSuccess)
+            {
+                ShowUpgradePanel(_currentSelectedTower); 
+            }
         }
     }
 
@@ -193,18 +121,12 @@ public class UIManager : MonoBehaviour
     public void onOpenVictory()
     {
         VictoryPanel victoryP = victoryPanel.GetComponent<VictoryPanel>();
-        victoryP.UpdateStarsByHp(EnemySpawner.Instance.playerHP, EnemySpawner.Instance.playerHPMax);
+        victoryP.UpdateStarsByHp(EnemySpawner.Instance.playerHP,EnemySpawner.Instance.playerHPMax);
         showGameObjectPanel(victoryPanel);
     }
     public void onCloseVictory()
     {
         hideGameObjectPanel(victoryPanel);
-    }
-
-    public void onConfirmBtnClick()
-    {
-
-        hideGameObjectPanel(tipsPanel);
     }
 
     public void onOpenLose()
@@ -228,30 +150,30 @@ public class UIManager : MonoBehaviour
 
     public void startPlaceTower(TowerData _data)
     {
-        GameManager.Instance.PlaceTower(_curPlace, _data);
+        GameManager.Instance.PlaceTower(_curPlace,_data);
     }
 
     public void hideGameObjectPanel(GameObject obj)
     {
-        if (obj != null)
+        if(obj != null)
         {
             obj.SetActive(false);
         }
         else
         {
-            Debug.LogError("obj not value !! obj = " + obj);
+            Debug.LogError("obj not value !! obj = "+ obj);
         }
 
     }
     public void showGameObjectPanel(GameObject obj)
     {
-        if (obj != null)
+        if(obj != null)
         {
-            obj.SetActive(true);
+             obj.SetActive(true);
         }
         else
         {
-            Debug.LogError("obj not value !! obj = " + obj);
+            Debug.LogError("obj not value !! obj = "+ obj);
         }
     }
 
@@ -264,11 +186,4 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("23222222222222222");
     }
-}
-
-
-public enum TipsType
-{
-    None,
-    SellTower,   
 }

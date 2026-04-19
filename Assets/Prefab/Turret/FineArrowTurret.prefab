@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 2254272934197769020}
   m_Layer: 0
   m_Name: FirePoint
-  m_TagString: FirePoint
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,7 +142,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300002, guid: 8a115204405d1a744b8b57aa18d12e4c, type: 3}
+  m_Mesh: {fileID: 4300002, guid: 62607923423a706409bafa7308296f84, type: 3}
   m_Bones:
   - {fileID: 7280821353371772500}
   - {fileID: 7280821353371772502}
