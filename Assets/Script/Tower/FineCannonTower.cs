@@ -6,12 +6,6 @@ public class FineCannonTower : BaseTower
 {
     [Header("CONFIG")]
     public GameObject bulletPrefab;
-    public float speed = 0.5f; 
-
-
-    public Vector3 bulletPosOffset = Vector3.zero;
-
-    public Vector3 bulletRotOffset = new Vector3(0, 0, 0);
 
     public bool showDebugGizmos = true;
 
@@ -36,21 +30,20 @@ public class FineCannonTower : BaseTower
         {
             if (firePoint == null) continue;
 
-
-            Vector3 spawnPos = firePoint.TransformPoint(bulletPosOffset);
+            Vector3 spawnPos = firePoint.TransformPoint(CurrentData.bulletPosOffset);
             Vector3 dirToEnemy = _targetEnemy.position - spawnPos;
             Quaternion targetRot = Quaternion.LookRotation(dirToEnemy);
-            targetRot *= Quaternion.Euler(bulletRotOffset);
+            targetRot *= Quaternion.Euler(CurrentData.bulletRotOffset);
 
-            GameObject arrowObj = Instantiate(bulletPrefab, spawnPos, targetRot);
-            arrowObj.transform.SetParent(null); 
+            GameObject obj = Instantiate(bulletPrefab, spawnPos, targetRot);
+            obj.transform.SetParent(null); 
             
             // ParticleMoverBullet bulletMover = arrowObj.GetComponent<ParticleMoverBullet>();
-            ParticleMoverBullet bulletMover = arrowObj.GetComponentInChildren<ParticleMoverBullet>();
+            ParticleMoverBullet bulletMover = obj.GetComponentInChildren<ParticleMoverBullet>();
             if (bulletMover != null)
             {
-                bulletMover.speed = this.speed * 30; 
                 bulletMover.fatherTower = this;
+                bulletMover.SetTarget(_targetEnemy);
                 // bulletMover.OnHit += OnBulletHitEnemy;
             }
 
@@ -78,13 +71,13 @@ public class FineCannonTower : BaseTower
             Gizmos.DrawWireSphere(firePoint.position, 0.1f);
 
             // 绘制偏移后的发射位置（红色球）
-            Vector3 spawnPos = firePoint.TransformPoint(bulletPosOffset);
+            Vector3 spawnPos = firePoint.TransformPoint(CurrentData.bulletPosOffset);
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(spawnPos, 0.1f);
 
             // 绘制子弹朝向（红色线，指向敌人）
             Vector3 dirToEnemy = _targetEnemy.position - spawnPos;
-            Quaternion targetRot = Quaternion.LookRotation(dirToEnemy) * Quaternion.Euler(bulletRotOffset);
+            Quaternion targetRot = Quaternion.LookRotation(dirToEnemy) * Quaternion.Euler(CurrentData.bulletRotOffset);
             Gizmos.DrawLine(spawnPos, spawnPos + targetRot * Vector3.forward * 2f);
         }
     }

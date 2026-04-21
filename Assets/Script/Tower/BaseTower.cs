@@ -1,12 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
-public class BaseTower : MonoBehaviour
+public class BaseTower : MonoBehaviour,IPointerClickHandler
 {
     [Header("核心引用")]
     public Transform baseTransform; 
     public Transform turretRoot; 
-    public TowerData initialData; 
 
     [Header("State")]
     protected TowerData _currentData;
@@ -20,25 +20,53 @@ public class BaseTower : MonoBehaviour
 
     public TowerData CurrentData => _currentData;
 
+    [HideInInspector]
+    public TowerPlace towerPlace;
+
+
+
+
+    //箭塔 攻击距离近 攻速快 伤害低
+    //炮塔 攻击距离远 攻速慢 伤害高
+    //法师塔 攻击距离远 攻速中等 伤害中等 
+    //多重塔 攻击距离中等 攻速中等 伤害低 可同时攻击多个目标
+    //射速塔 攻击距离中等 攻速极快 伤害极低
+
+
+
     private void Start()
     {
-        
-        _currentData = initialData;
 
         _turretFirePoints  = turretRoot.gameObject.GetComponent<TurretFirePoints>();
         Debug.Log("_turretFirePoints = "+_turretFirePoints);
-
-        
         _attackTimer = 0;
     }
 
-    private void Update()
+    public void init(TowerData data)
+    {
+        _currentData = data;
+    }
+
+    // 实现 IPointerClickHandler 接口，处理点击事件
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            Debug.Log($"点击了炮塔：{eventData.pointerId}");
+            // 左键点击：打开升级/详情面板
+            UIManager.Instance.ShowUpgradePanel(this);
+        }
+    }
+
+
+
+    protected virtual void Update()
     {
        
         ValidateTarget();
 
        
-        if (_targetEnemy == null)
+        if (!HasTarget())
         {
             FindTarget();
             return;
@@ -49,10 +77,19 @@ public class BaseTower : MonoBehaviour
         AttackTarget();
     }
 
+    protected virtual bool HasTarget()
+    {
+        if (_targetEnemy == null)
+        {
+            return false;
+        }else
+        {
+            return true;
+        }
+    }
 
 
-
-    private void ValidateTarget()
+    protected virtual void ValidateTarget()
     {
         if (_targetEnemy == null) return;
 
@@ -65,7 +102,7 @@ public class BaseTower : MonoBehaviour
     }
 
    
-    private void FindTarget()
+    protected virtual void FindTarget()
     {
         if (EnemyManager.Instance == null)
         {
@@ -105,7 +142,7 @@ public class BaseTower : MonoBehaviour
     }
 
    
-    private void RotateTurretToTarget()
+    protected virtual void RotateTurretToTarget()
     {
         if (_targetEnemy == null || turretRoot == null) return;
 
@@ -121,7 +158,7 @@ public class BaseTower : MonoBehaviour
         );
     }
 
-    private bool IsTurretFacingTarget()
+    protected virtual bool IsTurretFacingTarget()
     {
         if (_targetEnemy == null || turretRoot == null) return false;
         
@@ -205,11 +242,6 @@ public class BaseTower : MonoBehaviour
             return false;
         }
 
-        
-        GameManager.Instance.SpendGold(_currentData.nextLevelData.cost);
-       
-        _currentData = _currentData.nextLevelData;
-
         Debug.Log($"{gameObject.name}升级为{_currentData.towerName}");
         return true;
     }
@@ -220,4 +252,55 @@ public class BaseTower : MonoBehaviour
         if (_targetEnemy == null) return false;
         return Vector3.Distance(transform.position, _targetEnemy.position) <= _currentData.attackRange;
     }
+
+
+
+
+
+    public void DestroyTower(bool isSell = false)
+    {
+
+        CleanupTower();
+        if (isSell && GameManager.Instance != null)
+        {
+            int refundGold = Mathf.RoundToInt(_currentData.cost * 0.7f);
+            GameManager.Instance.AddGold(refundGold);
+            Debug.Log($"出售炮塔{gameObject.name}，返还金币：{refundGold}");
+        }
+
+        Destroy(gameObject);
+    }
+
+
+    private void CleanupTower()
+    {
+        StopAllCoroutines();
+        _targetEnemy = null;
+        _turretFirePoints = null;
+        // foreach (Transform child in transform)
+        // {
+        //     if (child.CompareTag("Bullet") || child.CompareTag("Effect"))
+        //     {
+        //         Destroy(child.gameObject);
+        //     }
+        // }
+
+    }
+
+
+    private void OnDestroy()
+    {
+
+        _targetEnemy = null;
+        _currentData = null;
+        towerPlace = null;
+        Debug.Log($"炮塔{gameObject.name}已被销毁，OnDestroy触发");
+    }
+
+
+
+
+
+
+
 }

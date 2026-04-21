@@ -135,11 +135,8 @@ public class GameManager : MonoBehaviour
 
 
 
-    public void PlaceTower(TowerPlace place,TowerData _data)
+    public BaseTower PlaceTower(TowerPlace place,TowerData _data)
     {
-
-
-
         SpendGold(_data.cost);
 
 
@@ -150,11 +147,13 @@ public class GameManager : MonoBehaviour
         BaseTower tower = towerObj.GetComponent<BaseTower>();
         if (tower != null)
         {
-            tower.initialData = _data;
+            tower.init(_data);
+            tower.towerPlace = place;
 
             place.SetTower(tower);
         }
         UIManager.Instance.onCloseTowerSelectPanel();
+        return tower;
     }
 
 
@@ -335,3 +334,6 @@ public void ResetGame()
 
 
 }
+
+
+

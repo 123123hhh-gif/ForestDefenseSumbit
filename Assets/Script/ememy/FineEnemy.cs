@@ -46,8 +46,11 @@ public class FineEnemy : BaseEnemy
         // }
     // }
 
+    private bool isTure = false;
     protected override void MoveToWaypoint()
     {
+
+
         base.MoveToWaypoint();
         SetWalkingState(true);
     }

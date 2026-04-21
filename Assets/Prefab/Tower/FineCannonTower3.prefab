@@ -148,7 +148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5950717216595076223}
-  - component: {fileID: 8283290927291453617}
+  - component: {fileID: 7423890480343658393}
   m_Layer: 0
   m_Name: FineCannonTower3
   m_TagString: Untagged
@@ -173,7 +173,7 @@ Transform:
   - {fileID: 5774779402277903795}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8283290927291453617
+--- !u!114 &7423890480343658393
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,14 +182,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6385410840003427062}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1d0827d95000c845995eb6df4a934a5, type: 3}
+  m_Script: {fileID: 11500000, guid: d399b2238328b094d855e8d1a34f3e70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   baseTransform: {fileID: 4663369904185313007}
   turretRoot: {fileID: 5774779402277903795}
+  initialData: {fileID: 11400000, guid: 135d3fb67e259084ab74a3ad1c46fdb1, type: 2}
   _turretFirePoints: {fileID: 0}
   bulletBgm: {fileID: 8300000, guid: 1131d19616fd1ff4ab5b09e8087a913c, type: 3}
-  towerPlace: {fileID: 0}
   bulletPrefab: {fileID: 5587139246508074412, guid: fd3825cc97442364ca061633320fb2e3, type: 3}
   showDebugGizmos: 1
 --- !u!1001 &706693994124348659

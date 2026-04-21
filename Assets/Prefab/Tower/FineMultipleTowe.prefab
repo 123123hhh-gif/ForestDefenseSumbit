@@ -149,6 +149,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4595122226485762942}
+  - component: {fileID: 5676194042961759040}
   m_Layer: 0
   m_Name: FineMultipleTowe
   m_TagString: Untagged
@@ -173,6 +174,26 @@ Transform:
   - {fileID: 3848655597680465580}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5676194042961759040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515312121339962085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcfc86b7ede35794d9fec13d87f1bb22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseTransform: {fileID: 7063384876693040202}
+  turretRoot: {fileID: 3848655597680465580}
+  initialData: {fileID: 11400000, guid: 6cb0e7567d85bc2448e50af17cd10064, type: 2}
+  _turretFirePoints: {fileID: 0}
+  bulletBgm: {fileID: 8300000, guid: 4cd4d86bf5efd814d89ab0fa61ad1239, type: 3}
+  bulletPrefab: {fileID: 605772207711517875, guid: 36e8f3d20b9dbdd4aa3a2a69bec9314c, type: 3}
+  showDebugGizmos: 1
+  attackNumber: 3
 --- !u!1 &2887810337687474928
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,7 +507,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3848655597680465580}
-  - component: {fileID: 1811795707901131330}
+  - component: {fileID: 2374932091270732113}
   m_Layer: 0
   m_Name: FineMultipleTurret
   m_TagString: Untagged
@@ -511,7 +532,7 @@ Transform:
   - {fileID: 2887810337687965396}
   m_Father: {fileID: 4595122226485762942}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1811795707901131330
+--- !u!114 &2374932091270732113
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -520,10 +541,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7118873432601988330}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1837ddbb763c0f4ca8c786eae8835e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 42844a8aeae8ef64293c137df73e854d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePoints: []
+  firePoints:
+  - {fileID: 6838415773613174981}
   autoCollectChildFirePoints: 1
 --- !u!1 &8899706268820800660
 GameObject:

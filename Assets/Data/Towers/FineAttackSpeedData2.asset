@@ -9,19 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93623e978b631bd4f8ddfc565bac763b, type: 3}
+  m_Script: {fileID: 11500000, guid: 230e52fcee5c0f64887d4e247f7d1d89, type: 3}
   m_Name: FineAttackSpeedData2
   m_EditorClassIdentifier: 
-  towerName: Expert AttackSpeed Tower
-  iconPath: towerIcon/icon_lightning_purple
+  towerName: FineAttackSpeedData2
   level: 2
-  cost: 10
-  attackRange: 6
-  attackRate: 0.2
-  damage: 2
-  rotateSpeed: 14
+  cost: 20
+  attackRange: 200
+  attackRate: 0.05
+  damage: 3
+  rotateSpeed: 20
   nextLevelData: {fileID: 11400000, guid: 0e1cb9b8c5ba19041a2cef318d5ef379, type: 2}
-  towerPrefab: {fileID: 7306096392730689747, guid: 48a9747082edd4147ad28eeea6c03e37, type: 3}
+  towerPrefab: {fileID: 7306096392730689747, guid: 7720bb27472ecd44ea58829d3e8f7dd9, type: 3}
   bulletSpeed: 30
   bulletPosOffset: {x: 0, y: 0, z: 0}
-  bulletRotOffset: {x: 0, y: 0, z: 0}
+  bulletRotOffset: {x: -20, y: -5, z: 0}

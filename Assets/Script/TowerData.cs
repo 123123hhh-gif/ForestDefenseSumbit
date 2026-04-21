@@ -19,4 +19,9 @@ public class TowerData : ScriptableObject
  
     public TowerData nextLevelData; 
     public GameObject towerPrefab; 
+
+    [Header("BulletConfig")]
+    public float bulletSpeed = 30f;
+    public Vector3 bulletPosOffset = Vector3.zero;
+    public Vector3 bulletRotOffset = new Vector3(0, 0, 0);
 }

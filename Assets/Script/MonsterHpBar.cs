@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class MonsterHpBar : MonoBehaviour
 {
     [Header("血条配置")]
@@ -18,78 +17,69 @@ public class MonsterHpBar : MonoBehaviour
 
     void Start()
     {
-
         currentHp = maxHp;
-        
         
         if (hpBarPrefab != null && hpFollowPoint != null)
         {
-           
+            // 计算初始位置（仅基于跟随点，无旋转影响）
             Vector3 targetPos = hpFollowPoint.position + new Vector3(0, hpBarOffsetY, 0);
-           
+            // 实例化血条时固定旋转（设为0，或你想要的固定角度）
             hpBarInstance = Instantiate(hpBarPrefab, targetPos, Quaternion.identity);
             
             hpSlider = hpBarInstance.GetComponentInChildren<Slider>();
             
-          
+            // 配置Canvas（仅保留必要的相机关联，移除旋转相关）
             Canvas hpCanvas = hpBarInstance.GetComponent<Canvas>();
             if (hpCanvas != null)
             {
                 hpCanvas.worldCamera = Camera.main;
                 hpCanvas.planeDistance = 2f;
+                // 关键：将Canvas的渲染模式设为World Space（确保UI不随相机旋转）
+                hpCanvas.renderMode = RenderMode.WorldSpace;
             }
             
-            
+            // 初始化血条数值
             hpSlider.maxValue = maxHp;
             hpSlider.value = currentHp;
-            
-           
-            hpBarInstance.transform.LookAt(Camera.main.transform);
-            hpBarInstance.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
-            
-           
+
+            // 彻底移除朝向相机的代码！！
         }
     }
 
     void LateUpdate()
     {
-       
         if (hpBarInstance != null && hpFollowPoint != null)
         {
-           
+            // 仅计算位置，完全不涉及旋转
             Vector3 targetPos = hpFollowPoint.position + new Vector3(0, hpBarOffsetY, 0);
-           
+            
+            // 只更新位置，旋转始终保持初始的Quaternion.identity（无旋转）
             hpBarInstance.transform.position = Vector3.Lerp(
                 hpBarInstance.transform.position, 
                 targetPos, 
                 Time.deltaTime * smoothFollowSpeed
             );
-            
-            
-            hpBarInstance.transform.LookAt(Camera.main.transform);
-            hpBarInstance.transform.rotation = Quaternion.LookRotation(
-                Camera.main.transform.forward
-            );
+
+            // 【重要】强制锁定血条旋转，防止任何意外旋转
+            hpBarInstance.transform.rotation = Quaternion.identity; // 固定为无旋转，也可设为你想要的角度（如Quaternion.Euler(0, 90, 0)）
         }
     }
-
 
     public void TakeDamage(float damage)
     {
         currentHp = Mathf.Clamp(currentHp - damage, 0, maxHp);
-        hpSlider.value = currentHp;
-        
+        if (hpSlider != null)
+        {
+            hpSlider.value = currentHp;
+        }
 
         ShowHpBar();
         
-      
         if (currentHp <= 0)
         {
             HideHpBar();
-           
         }
     }
-
 
     public void ShowHpBar()
     {
@@ -102,7 +92,6 @@ public class MonsterHpBar : MonoBehaviour
         }
     }
 
-
     public void HideHpBar()
     {
         if (hpBarInstance != null)
@@ -111,7 +100,6 @@ public class MonsterHpBar : MonoBehaviour
         }
     }
 
-    
     void OnDrawGizmosSelected()
     {
         if (hpFollowPoint != null)
@@ -120,7 +108,6 @@ public class MonsterHpBar : MonoBehaviour
             Gizmos.DrawSphere(hpFollowPoint.position + new Vector3(0, hpBarOffsetY, 0), 0.1f);
         }
     }
-
 
     private void OnDestroy()
     {

@@ -39,9 +39,10 @@ public class CannonTower : BaseTower
                 obj.transform.LookAt(_targetEnemy); 
 
                
-                Cannon arrow = obj.GetComponent<Cannon>();
-                if (arrow == null) arrow = obj.AddComponent<Cannon>();
-                arrow.SetTarget(_targetEnemy, speed, _currentData.damage);
+                Cannon cannon = obj.GetComponent<Cannon>();
+                if (cannon == null) cannon = obj.AddComponent<Cannon>();
+
+                cannon.SetTarget(_targetEnemy,this);
         }
 
             if(bulletBgm != null)
@@ -56,6 +57,10 @@ public class CannonTower : BaseTower
 
 public class Cannon : MonoBehaviour
 {
+
+
+    private BaseTower fatherTower;
+
     private Transform _target;
     private float _speed;
     private int _damage;
@@ -63,12 +68,14 @@ public class Cannon : MonoBehaviour
     private float _lifeTime = 5f;
     private float _lifeTimer = 0f;
 
-    public void SetTarget(Transform target, float speed, int damage)
+    public void SetTarget(Transform target, BaseTower tower)
     {
          Debug.Log("Shoot 4 ");
         _target = target;
-        _speed = speed;
-        _damage = damage;
+        fatherTower = tower;
+
+        _speed = fatherTower.CurrentData.bulletSpeed;
+        _damage = fatherTower.CurrentData.damage;
         _lifeTimer = 0;
     }
 

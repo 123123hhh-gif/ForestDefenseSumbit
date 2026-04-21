@@ -7,13 +7,12 @@ public class FineArrowTower : BaseTower
 
     [Header("CONFIG")]
     public GameObject arrowPrefab;
-    public float arrowSpeed = 0.5f; 
 
 
     
 
-    public Vector3 bulletPosOffset = Vector3.zero;
-    public Vector3 bulletRotOffset = new Vector3(0, 0, 0);
+    // public Vector3 bulletPosOffset = Vector3.zero;
+    // public Vector3 bulletRotOffset = new Vector3(0, 0, 0);
     public bool showDebugGizmos = true;
 
     // public float enemyCenterYOffset = -1.0f;
@@ -41,10 +40,10 @@ public class FineArrowTower : BaseTower
             if (firePoint == null) continue;
 
 
-            Vector3 spawnPos = firePoint.TransformPoint(bulletPosOffset);
+            Vector3 spawnPos = firePoint.TransformPoint(CurrentData.bulletPosOffset);
             Vector3 dirToEnemy = _targetEnemy.position - spawnPos;
             Quaternion targetRot = Quaternion.LookRotation(dirToEnemy);
-            targetRot *= Quaternion.Euler(bulletRotOffset);
+            targetRot *= Quaternion.Euler(CurrentData.bulletRotOffset);
 
             GameObject arrowObj = Instantiate(arrowPrefab, spawnPos, targetRot);
             arrowObj.transform.SetParent(null); 
@@ -54,9 +53,8 @@ public class FineArrowTower : BaseTower
             ParticleMoverBullet bulletMover = arrowObj.GetComponentInChildren<ParticleMoverBullet>();
             if (bulletMover != null)
             {
-                bulletMover.speed = this.arrowSpeed * 30; 
                 bulletMover.fatherTower = this;
-
+                bulletMover.SetTarget(_targetEnemy);
   
             }
 

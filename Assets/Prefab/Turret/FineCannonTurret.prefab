@@ -72,7 +72,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6479146271451696480}
-  m_Mesh: {fileID: 4300000, guid: 68d49fc7633507e4bafc6d8756ed3098, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 8e5f19d8b10f1cf47a04c10e964afae3, type: 3}
 --- !u!23 &6479146271449699232
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -155,7 +155,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6479146271451696482}
-  m_Mesh: {fileID: 4300002, guid: 68d49fc7633507e4bafc6d8756ed3098, type: 3}
+  m_Mesh: {fileID: 4300002, guid: 8e5f19d8b10f1cf47a04c10e964afae3, type: 3}
 --- !u!23 &6479146271449699234
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -208,6 +208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6479146271451599168}
   - component: {fileID: 6479146271444418210}
+  - component: {fileID: 3526584787256546188}
   m_Layer: 0
   m_Name: FineCannonTurret
   m_TagString: Untagged
@@ -253,3 +254,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3526584787256546188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6479146271451696486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42844a8aeae8ef64293c137df73e854d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoints:
+  - {fileID: 9201073877782637864}
+  autoCollectChildFirePoints: 1

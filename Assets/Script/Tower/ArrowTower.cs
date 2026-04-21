@@ -35,7 +35,7 @@ public class ArrowTower : BaseTower
                 
                 Arrow arrow = arrowObj.GetComponent<Arrow>();
                 if (arrow == null) arrow = arrowObj.AddComponent<Arrow>();
-                arrow.SetTarget(_targetEnemy, arrowSpeed, _currentData.damage);
+                arrow.SetTarget(_targetEnemy,this);
 
             if(bulletBgm != null)
             {
@@ -56,12 +56,16 @@ public class Arrow : MonoBehaviour
     private float _lifeTime = 5f;
     private float _lifeTimer = 0f;
 
-    public void SetTarget(Transform target, float speed, int damage)
+    private BaseTower fatherTower;
+
+    public void SetTarget(Transform target, BaseTower tower)
     {
          Debug.Log("Shoot 4 ");
         _target = target;
-        _speed = speed;
-        _damage = damage;
+        fatherTower = tower;
+        
+        _speed = fatherTower.CurrentData.bulletSpeed;
+        _damage = fatherTower.CurrentData.damage;
         _lifeTimer = 0;
     }
 

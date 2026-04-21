@@ -16,6 +16,7 @@ public class BaseEnemy : MonoBehaviour
     // 公开属性
     public bool IsDead => _isDead;
 
+
     private void Start()
     {
         _currentHealth = maxHealth;
@@ -29,7 +30,9 @@ public class BaseEnemy : MonoBehaviour
     private void Update()
     {
         if (_isDead || _hasReachedEnd || _currentWaypoint == null) return;
-        // 向当前路径点移动
+
+        addDebuff();
+
         MoveToWaypoint();
     }
 
@@ -40,45 +43,50 @@ public class BaseEnemy : MonoBehaviour
          _hasReachedEnd = false;
     }
 
+    protected virtual void addDebuff()
+    {
+
+    }
+
     // 向路径点移动
-protected virtual void MoveToWaypoint()
-{
-    if (_currentWaypoint == null) return;
-
-    // 1. 计算方向（锁定Y轴，只在XZ平面移动）
-    Vector3 targetPos = _currentWaypoint.transform.position;
-    Vector3 direction = new Vector3(targetPos.x - transform.position.x, 0, targetPos.z - transform.position.z);
-    direction.Normalize();
-
-    // 2. 仅在水平方向上转向，避免上下旋转
-    if (direction.magnitude > 0.1f)
+    protected virtual void MoveToWaypoint()
     {
-        // 计算目标旋转，强制Y轴为当前值，只修改X和Z轴
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-        targetRotation = Quaternion.Euler(0, targetRotation.eulerAngles.y, 0);
-        
-        // 瞬间转向，无缓冲
-        transform.rotation = targetRotation;
-    }
+        if (_currentWaypoint == null) return;
 
-    // 3. 用 MoveTowards 替代 Translate，移动更精准
-    transform.position = Vector3.MoveTowards(
-        transform.position, 
-        targetPos, 
-        moveSpeed * Time.deltaTime
-    );
+        // 1. 计算方向（锁定Y轴，只在XZ平面移动）
+        Vector3 targetPos = _currentWaypoint.transform.position;
+        Vector3 direction = new Vector3(targetPos.x - transform.position.x, 0, targetPos.z - transform.position.z);
+        direction.Normalize();
 
-    // 4. 到达路径点后切换下一个
-    if (Vector3.Distance(transform.position, targetPos) < 0.1f)
-    {
-        if (_currentWaypoint.isLastWaypoint)
+        // 2. 仅在水平方向上转向，避免上下旋转
+        if (direction.magnitude > 0.1f)
         {
-            OnReachEnd();
-            return;
+            // 计算目标旋转，强制Y轴为当前值，只修改X和Z轴
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            targetRotation = Quaternion.Euler(0, targetRotation.eulerAngles.y, 0);
+            
+            // 瞬间转向，无缓冲
+            transform.rotation = targetRotation;
         }
-        _currentWaypoint = _currentWaypoint.nextWaypoint;
+
+        // 3. 用 MoveTowards 替代 Translate，移动更精准
+        transform.position = Vector3.MoveTowards(
+            transform.position, 
+            targetPos, 
+            moveSpeed * Time.deltaTime
+        );
+
+        // 4. 到达路径点后切换下一个
+        if (Vector3.Distance(transform.position, targetPos) < 0.1f)
+        {
+            if (_currentWaypoint.isLastWaypoint)
+            {
+                OnReachEnd();
+                return;
+            }
+            _currentWaypoint = _currentWaypoint.nextWaypoint;
+        }
     }
-}
 
         // 到达终点的核心逻辑（单独抽离，确保只执行一次）
     private void OnReachEnd()
@@ -118,10 +126,14 @@ protected virtual void MoveToWaypoint()
     {
         _isDead = true;
         Debug.Log($"{gameObject.name} 死亡");
-        // 增加玩家金币
-        GameManager.Instance.AddGold(10);
-        GameManager.Instance.killNum ++;
-        // 从管理器移除
+
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.AddGold(10);
+            GameManager.Instance.killNum++;
+        }
+
         DestroyEnemy();
     }
 
@@ -132,12 +144,13 @@ protected virtual void MoveToWaypoint()
         {
             EnemyManager.Instance.RemoveEnemy(this);
         }
-        Destroy(gameObject, 0.5f);
+        Destroy(gameObject, 1.1f);
     }
 
     // 防止敌人被意外销毁时未移除
     private void OnDestroy()
     {
+
         if (EnemyManager.Instance != null)
         {
             EnemyManager.Instance.RemoveEnemy(this);

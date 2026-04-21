@@ -1,3 +1,5 @@
+using TMPro;
+using TMPro.Examples;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,6 +13,8 @@ public class UIManager : MonoBehaviour
     public Text towerNameText;
     public Text upgradeCostText;
     public Button upgradeButton;
+
+    public Button sellButton;
     // public Button closeButton;
 
     public GameObject victoryPanel;
@@ -20,9 +24,15 @@ public class UIManager : MonoBehaviour
 
     public GameObject TowerSelectPanel;
 
+    public GameObject tipsPanel;
+
     private BaseTower _currentSelectedTower;
 
     private TowerPlace _curPlace;
+
+    private TipsType tipsType;
+
+
 
 
 
@@ -45,6 +55,7 @@ public class UIManager : MonoBehaviour
         upgradePanel.SetActive(false);
        
         upgradeButton.onClick.AddListener(OnUpgradeButtonClick);
+        sellButton.onClick.AddListener(OnSellButtonClick);
         // closeButton.onClick.AddListener(HideUpgradePanel);
     }
 
@@ -59,27 +70,7 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void ShowUpgradePanel(BaseTower tower)
-    {
-        _currentSelectedTower = tower;
-        TowerData nextData = tower.CurrentData.nextLevelData;
 
-        if (nextData == null)
-        {
-            towerNameText.text = $"{tower.CurrentData.towerName}（满级）";
-            upgradeCostText.text = "无";
-            upgradeButton.interactable = false;
-        }
-        else
-        {
-            towerNameText.text = $"{tower.CurrentData.towerName} → {nextData.towerName}";
-            upgradeCostText.text = $"升级费用：{nextData.cost}";
-            upgradeButton.interactable = GameManager.Instance.CheckEnoughGold(nextData.cost);
-        }
-
-        
-        showGameObjectPanel(upgradePanel);
-    }
 
 
     public void HideUpgradePanel()
@@ -88,16 +79,97 @@ public class UIManager : MonoBehaviour
         _currentSelectedTower = null;
     }
 
+
+    public void ShowUpgradePanel(BaseTower tower)
+    {
+        _currentSelectedTower = tower;
+        TowerData nextData = _currentSelectedTower.CurrentData.nextLevelData;
+
+         Debug.Log("加载升级面板，_currentSelectedTower = "+ _currentSelectedTower +" , name = "+ _currentSelectedTower.CurrentData.towerName);
+
+        if (nextData == null)
+        {
+            towerNameText.text = $"{_currentSelectedTower.CurrentData.towerName}（满级）";
+            upgradeCostText.text = "无";
+            upgradeButton.interactable = false;
+        }
+        else
+        {
+            towerNameText.text = $"{_currentSelectedTower.CurrentData.towerName} → {nextData.towerName}";
+            upgradeCostText.text = $"升级费用：{nextData.cost}";
+            upgradeButton.interactable = GameManager.Instance.CheckEnoughGold(nextData.cost);
+        }
+
+        
+        showGameObjectPanel(upgradePanel);
+    }
+
+    private void OnSellButtonClick()
+    {
+
+        
+        ShowTipsPanel(TipsType.SellTower);  
+    }
+    private void ShowTipsPanel(TipsType _tipsType)
+    {
+
+        tipsType = _tipsType;
+        string tipsStr = "";
+
+        switch(tipsType)
+        {
+            case TipsType.SellTower:
+                //字符串换行怎么添加
+                tipsStr = $"Confirm the sale? \n Selling a defense tower will only return 70% of the spent gold!";
+                break;
+            default:
+                break;
+        }
+
+        // Text tipsText = tipsPanel.transform.Find("desc").GetComponent<Text>();
+
+        //查找 tipsPanel 下的 desc 组件 并赋值
+        TextMeshProUGUI tipsText = tipsPanel.transform.Find("desc").GetComponent<TextMeshProUGUI>();
+        if(tipsText != null)
+        {
+            tipsText.text = tipsStr;
+        }
+
+        tipsPanel.transform.SetAsLastSibling();
+        showGameObjectPanel(tipsPanel);
+    }
+
+    public void OnSellConfirmed()
+    {
+        if(tipsType == TipsType.SellTower)
+        {
+            if (_currentSelectedTower != null)
+            {
+                _currentSelectedTower.towerPlace.RemoveTower(true);
+                HideUpgradePanel();
+            }
+        }
+
+        hideGameObjectPanel(tipsPanel);
+
+    }
+
   
     private void OnUpgradeButtonClick()
     {
         if (_currentSelectedTower != null)
         {
-            bool upgradeSuccess = _currentSelectedTower.Upgrade();
-            if (upgradeSuccess)
-            {
-                ShowUpgradePanel(_currentSelectedTower); 
-            }
+            bool isOK = GameManager.Instance.CheckEnoughGold(_currentSelectedTower.CurrentData.nextLevelData.cost);
+            if (!isOK)
+                return;
+
+            _currentSelectedTower.towerPlace.RemoveTower();
+
+           
+            BaseTower newTower = GameManager.Instance.PlaceTower(_currentSelectedTower.towerPlace,_currentSelectedTower.CurrentData.nextLevelData);
+           
+           Debug.Log("升级成功，newTower = "+ newTower +" , name = "+ newTower.CurrentData.towerName);
+            ShowUpgradePanel(newTower);
         }
     }
 
@@ -127,6 +199,12 @@ public class UIManager : MonoBehaviour
     public void onCloseVictory()
     {
         hideGameObjectPanel(victoryPanel);
+    }
+
+    public void onConfirmBtnClick()
+    {
+
+        hideGameObjectPanel(tipsPanel);
     }
 
     public void onOpenLose()
@@ -186,4 +264,11 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("23222222222222222");
     }
+}
+
+
+public enum TipsType
+{
+    None,       
+    SellTower,     // 弓箭塔
 }

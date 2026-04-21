@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ParticleMoverBullet : MonoBehaviour
 {
-    public float speed = 15f;
     public float hitOffset = 0f;
     public bool UseFirePointRotation;
     public GameObject hit;
@@ -15,17 +14,20 @@ public class ParticleMoverBullet : MonoBehaviour
 
     public float maxFlyDistance = 50f;
     public float maxLifeTime = 5f;
-
+    private float rotateSpeed = 720f;
+    private Transform _targetEnemy;
 
     [HideInInspector]
     public BaseTower fatherTower;
     private Vector3 _startPos;
-
+    private float speed = 0f;
     void Start()
     {
         _startPos = transform.position;
         StartCoroutine(TimeoutDestroy());
 
+        speed = fatherTower != null ? fatherTower.CurrentData.bulletSpeed : 15f;
+        
         if (flash != null)
         {
             var flashInstance = Instantiate(flash, transform.position, transform.rotation); 
@@ -45,25 +47,51 @@ public class ParticleMoverBullet : MonoBehaviour
         }
     }
 
+    public void SetTarget(Transform target)
+    {
+        _targetEnemy = target;
+    }
+
     void FixedUpdate()
     {
-        if (speed != 0)
-        {
-            transform.position += transform.forward * (speed * Time.deltaTime);
 
+
+        // if (_targetEnemy != null && !_targetEnemy.IsDead) {
+        //     // 计算朝向目标的方向
+        //     Vector3 dirToTarget = (targetEnemy.position - transform.position).normalized;
+        //     // 平滑转向（可选，无则立即转向）
+        //     Quaternion targetRot = Quaternion.LookRotation(dirToTarget);
+        //     transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, rotateSpeed * Time.deltaTime);
+        //     // 沿新朝向移动
+        //     transform.position += transform.forward * speed * Time.deltaTime;
+        // }
+
+        if (speed != 0 && _targetEnemy != null)
+        {
+
+            Vector3 dirToTarget = (_targetEnemy.position - transform.position).normalized;
+            Quaternion targetRot = Quaternion.LookRotation(dirToTarget);
+            targetRot *= Quaternion.Euler(fatherTower.CurrentData.bulletRotOffset);
             
-            float currentDistance = Vector3.Distance(transform.position, _startPos);
-            if (currentDistance >= maxFlyDistance)
-            {
-                DestroyBullet();
-                return;
-            }
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, rotateSpeed * Time.deltaTime);
+            transform.position += transform.forward * (speed * Time.deltaTime);
+        }
+
+        float currentDistance = Vector3.Distance(transform.position, _startPos);
+        if (currentDistance >= maxFlyDistance)
+        {
+            DestroyBullet();
+            return;
         }
     }
 
 void OnCollisionEnter(Collision collision)
 {
     Debug.Log("碰撞对象：" + collision.gameObject.name);
+    if(collision.gameObject.CompareTag("Enemy") == false)
+    {
+        return; 
+    }
     speed = 0;
     ContactPoint contact = collision.contacts[0];
     Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
@@ -106,6 +134,8 @@ void OnCollisionEnter(Collision collision)
     }
 
     DestroyBullet();
+
+
 }
 
 
