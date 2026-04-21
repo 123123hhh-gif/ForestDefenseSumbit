@@ -35,7 +35,11 @@ public class EnemySpawner : MonoBehaviour
     [Header("生成配置")]
     public Waypoint startWaypoint; // 敌人起始路径点
     public GameObject enemyPrefab; // 敌人预制体
-    public float spawnInterval = 3f; // 生成间隔（秒）
+    public float spawnInterval = 1f; // 生成间隔（秒）
+
+    public float enemySpeedMultiplier = 1f; // 敌人速度倍率
+
+    public float enemyHealthMultiplier = 1f; // 敌人生命倍率
     public int waveCount = 5; // 每波生成数量
     public float waveInterval = 10f; // 波次间隔
 
@@ -171,9 +175,22 @@ public class EnemySpawner : MonoBehaviour
             }
 
             
+            if(maxTotalWaves == 0)
+            {
+               waveCount = waveCount + 2;
+                enemyHealthMultiplier = enemyHealthMultiplier + 0.1f;
+            }
+            else
+            {
+                waveCount = Mathf.Min(waveCount + 2, maxWaveCount);
+                enemyHealthMultiplier = Mathf.Min(enemyHealthMultiplier + 0.1f, 3f);
+            }
+            
+            spawnInterval = Mathf.Max(spawnInterval - 0.3f, minSpawnInterval);
+            enemySpeedMultiplier = Mathf.Min(enemySpeedMultiplier + 0.2f, 3f);
+           
 
-            waveCount = Mathf.Min(waveCount + 2, maxWaveCount);
-            spawnInterval = Mathf.Max(spawnInterval - 0.2f, minSpawnInterval);
+            Debug.Log("spawnInterval=" + spawnInterval);
             
             currentWave++;
         }
@@ -198,6 +215,9 @@ public class EnemySpawner : MonoBehaviour
         BaseEnemy enemy = enemyObj.GetComponent<BaseEnemy>();
         if (enemy != null)
         {
+            enemy.moveSpeed *= enemySpeedMultiplier;
+            enemy.maxHealth = Mathf.RoundToInt(enemy.maxHealth * enemyHealthMultiplier);
+        
             enemy.SetStartWaypoint(startWaypoint);
         }
     }

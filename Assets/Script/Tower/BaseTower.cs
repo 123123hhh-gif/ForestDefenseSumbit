@@ -26,15 +26,11 @@ public class BaseTower : MonoBehaviour,IPointerClickHandler
 
 
 
-    //箭塔 攻击距离近 攻速快 伤害低
-    //炮塔 攻击距离远 攻速慢 伤害高
-    //法师塔 攻击距离远 攻速中等 伤害中等 
-    //多重塔 攻击距离中等 攻速中等 伤害低 可同时攻击多个目标
-    //射速塔 攻击距离中等 攻速极快 伤害极低
 
 
 
-    private void Start()
+
+    protected virtual void Start()
     {
 
         _turretFirePoints  = turretRoot.gameObject.GetComponent<TurretFirePoints>();

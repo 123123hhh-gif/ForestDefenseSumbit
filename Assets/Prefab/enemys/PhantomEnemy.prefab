@@ -1017,7 +1017,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eb4be454ec0a3845bab4c64f6811dac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 60
   moveSpeed: 2
   damageToPlayer: 1
 --- !u!114 &8837678109602272425
@@ -1036,7 +1036,7 @@ MonoBehaviour:
   hpFollowPoint: {fileID: 3807360802385198382}
   hpBarOffsetY: 1.5
   smoothFollowSpeed: 5
-  maxHp: 100
+  maxHp: 60
 --- !u!1 &6210127346073472220
 GameObject:
   m_ObjectHideFlags: 0

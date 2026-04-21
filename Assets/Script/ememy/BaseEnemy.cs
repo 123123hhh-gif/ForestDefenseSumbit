@@ -4,6 +4,8 @@ public class BaseEnemy : MonoBehaviour
 {
     [Header("敌人属性")]
     public int maxHealth = 100;
+
+
     public float moveSpeed = 2f;
 
     public int damageToPlayer = 1;
@@ -15,6 +17,7 @@ public class BaseEnemy : MonoBehaviour
 
     // 公开属性
     public bool IsDead => _isDead;
+    
 
 
     private void Start()
@@ -114,6 +117,7 @@ public class BaseEnemy : MonoBehaviour
 
         MonsterHpBar hp = this.GetComponent<MonsterHpBar>();
         hp.TakeDamage(damage);
+        hp.maxHp = maxHealth;
 
         if (_currentHealth <= 0)
         {

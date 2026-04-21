@@ -1,11 +1,13 @@
 using UnityEngine;
 
 // 塔的配置数据，每个塔型/等级对应一个实例
-[CreateAssetMenu(fileName = "NewTowerData", menuName = "TD/Tower Data")]
+[CreateAssetMenu(fileName = "NewTowerData", menuName = "TD/Tower Data/Base Tower",order =1)]
 public class TowerData : ScriptableObject
 {
 
     public string towerName; 
+
+    public string iconPath;
     public int level; 
     public int cost; 
     public float attackRange; 

@@ -71,8 +71,17 @@ public class ParticleMoverBullet : MonoBehaviour
 
             Vector3 dirToTarget = (_targetEnemy.position - transform.position).normalized;
             Quaternion targetRot = Quaternion.LookRotation(dirToTarget);
-            targetRot *= Quaternion.Euler(fatherTower.CurrentData.bulletRotOffset);
-            
+
+
+            if(fatherTower == null || fatherTower.CurrentData == null)
+            {
+                Debug.Log("Tower upgrade in progress. Lost parent class.");
+
+            }
+            else
+            {
+                targetRot *= Quaternion.Euler(fatherTower.CurrentData.bulletRotOffset);
+            }
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, rotateSpeed * Time.deltaTime);
             transform.position += transform.forward * (speed * Time.deltaTime);
         }
@@ -128,7 +137,7 @@ void OnCollisionEnter(Collision collision)
 
     // BaseEnemy enemy = collision.collider.GetComponent<BaseEnemy>();
     BaseEnemy enemy = collision.collider.GetComponentInParent<BaseEnemy>();
-    if (enemy != null && !enemy.IsDead) 
+    if (enemy != null && !enemy.IsDead && fatherTower != null && fatherTower.CurrentData != null) 
     {
         enemy.TakeDamage(fatherTower.CurrentData.damage);
     }

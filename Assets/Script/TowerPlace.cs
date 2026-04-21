@@ -63,8 +63,12 @@ public class TowerPlace : MonoBehaviour
     {
         isOccupied = false;
 
-        placedTower.DestroyTower(isSell);
-        placedTower = null;
+        if (placedTower != null)
+        {
+            placedTower.DestroyTower(isSell);
+            placedTower = null;
+        }
+
         
 
         if (placeRenderer != null)

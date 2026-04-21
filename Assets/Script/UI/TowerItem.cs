@@ -1,25 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TowerItem : MonoBehaviour
 {
 
-    public TowerData initialData; 
-    public TextMeshProUGUI valueTxt;
 
-    public GameObject tipsPanel;
+    public TextMeshProUGUI valueTxt;
+    public TextMeshProUGUI nameTxt;
+
 
     private TowerData _currentData;
-    private float autoHideDelay = 0.5f;
+
+    public Image iconImage;
+    [HideInInspector]
+    public TowersPanel parentPanel;
     // Start is called before the first frame update
     void Start()
     {
-            tipsPanel.SetActive(false);
-           _currentData = initialData;
 
-           valueTxt.text = _currentData.cost+"";
+    }
+
+    public void init(TowerData data)
+    {
+        
+        _currentData = data;
+        valueTxt.text = _currentData.cost + "";
+        nameTxt.text = _currentData.towerName;
+
+        //加载图标
+        Sprite iconSprite = Resources.Load<Sprite>(_currentData.iconPath);
+        iconImage.sprite = iconSprite;
     }
 
 
@@ -36,24 +50,12 @@ public class TowerItem : MonoBehaviour
         }
         else
         {
-            ShowGoldNotEnoughTip();
+            parentPanel.ShowGoldNotEnoughTip();
             
         }
     }
 
 
       
-    private void ShowGoldNotEnoughTip()
-    {
-       
-        tipsPanel.SetActive(true);
-        CancelInvoke(nameof(HideGoldNotEnoughTip));
-        Invoke(nameof(HideGoldNotEnoughTip), autoHideDelay);
-    }
 
-
-    private void HideGoldNotEnoughTip()
-    {
-        tipsPanel.SetActive(false);
-    }
 }

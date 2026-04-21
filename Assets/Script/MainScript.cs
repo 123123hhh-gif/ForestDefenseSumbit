@@ -3,47 +3,75 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class MainScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    private static MainScript _instance;
+
+    public static MainScript Instance
     {
-        
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<MainScript>();
+
+                if (_instance == null)
+                {
+                    GameObject singletonObj = new GameObject("MainScript_Singleton");
+                    _instance = singletonObj.AddComponent<MainScript>();
+                }
+            }
+            return _instance;
+        }
     }
 
-    // Update is called once per frame
+
+    public AudioClip bgmWarriors;
+    public GameObject userNamePanel;
+    public GameObject LevelPanel;
+    public GameObject BgPanel;
+    public GameObject StoryPanel;
+
+
+    private void Awake()
+    {
+
+        if (_instance == null)
+        {
+            _instance = this;
+
+          //   DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+
+            if (this != _instance)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
+
+    void Start()
+    {
+        AudioManager.Instance.PlayBGM(bgmWarriors);
+    }
+
+
     void Update()
     {
         
     }
 
-    public void onBtnLevel1()
-    {
-         SceneManager.LoadScene("L1");
-    }
 
-    public void onBtnLevel2()
+    public void startGame()
     {
-         SceneManager.LoadScene("L2");
-    }
-
-    public void onBtnLevel3()
-    {
-         SceneManager.LoadScene("L3");
-    }
-
-    public void onBtnLevel4()
-    {
-         SceneManager.LoadScene("L4");
-    }
-
-    public void onBtnLevel5()
-    {
-         SceneManager.LoadScene("L5");
-    }
-
-     public void onBtnLevel6()
-    {
-         SceneManager.LoadScene("SampleScene");
+        userNamePanel.SetActive(false);
+        LevelPanel.SetActive(true);
+        BgPanel.SetActive(false);
+        StoryPanel.SetActive(false);
     }
 }

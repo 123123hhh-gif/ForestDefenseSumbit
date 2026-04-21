@@ -20,6 +20,14 @@ public class FineMultipleTower : BaseTower
 
     private List<BaseEnemy> _nearestEnemies = new List<BaseEnemy>();
 
+    protected override void Start()
+    {
+        base.Start();
+        //强转成 MultipleTowerData 类型
+        MultipleTowerData tmpData = CurrentData as MultipleTowerData;
+        attackNumber = tmpData.AttackNumber;
+    }
+
     protected override bool HasTarget()
     {
         return _nearestEnemies.Count > 0;
@@ -68,7 +76,7 @@ public class FineMultipleTower : BaseTower
     protected override void ValidateTarget()
     {
         base.ValidateTarget();
-        Debug.Log("ValidateTarget in FineMultipleTower called");
+        // Debug.Log("ValidateTarget in FineMultipleTower called");
         
         // if (_targetEnemy == null) return;
 

@@ -10,8 +10,8 @@ public class UIManager : MonoBehaviour
 
     [Header("升级面板")]
     public GameObject upgradePanel;
-    public Text towerNameText;
-    public Text upgradeCostText;
+    public TextMeshProUGUI towerNameText;
+    public TextMeshProUGUI upgradeCostText;
     public Button upgradeButton;
 
     public Button sellButton;
@@ -89,14 +89,14 @@ public class UIManager : MonoBehaviour
 
         if (nextData == null)
         {
-            towerNameText.text = $"{_currentSelectedTower.CurrentData.towerName}（满级）";
-            upgradeCostText.text = "无";
+            towerNameText.text = $"{_currentSelectedTower.CurrentData.towerName}\n → \n(max level)";
+            upgradeCostText.text = "no information";
             upgradeButton.interactable = false;
         }
         else
         {
-            towerNameText.text = $"{_currentSelectedTower.CurrentData.towerName} → {nextData.towerName}";
-            upgradeCostText.text = $"升级费用：{nextData.cost}";
+            towerNameText.text = $"{_currentSelectedTower.CurrentData.towerName} \n → \n{nextData.towerName}";
+            upgradeCostText.text = $"upgrade cost:{nextData.cost}";
             upgradeButton.interactable = GameManager.Instance.CheckEnoughGold(nextData.cost);
         }
 

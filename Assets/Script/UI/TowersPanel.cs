@@ -24,40 +24,40 @@ public class TowersPanel : MonoBehaviour
 
     public void init()
     {
-        if (currentLevelData == null)
+        if(currentLevelData == null)
         {
             Debug.LogError("currentLevelData is null");
             return;
         }
-
-        if (currentLevelData.availableTowers.Count <= 0)
+            
+        if(currentLevelData.availableTowers.Count <= 0)
         {
             Debug.LogError("currentLevelData.availableTowers is empty");
-            return;
+             return;
         }
 
-        if (currentLevelData.towerItemPrefab == null)
+        if(currentLevelData.towerItemPrefab == null)
         {
             Debug.LogError("currentLevelData.towerItemPrefab is null");
-            return;
+             return;
         }
+           
 
-
-        for (int i = 0; i < currentLevelData.availableTowers.Count; i++)
+        for(int i=0;i< currentLevelData.availableTowers.Count;i++)
         {
             TowerData data = currentLevelData.availableTowers[i];
-            GameObject itemObj = Instantiate(currentLevelData.towerItemPrefab, gridGroup.transform);
+            GameObject itemObj = Instantiate(currentLevelData.towerItemPrefab,gridGroup.transform);
             TowerItem itemComp = itemObj.GetComponent<TowerItem>();
             itemComp.parentPanel = this;
             itemComp.init(data);
         }
 
-    }
+    }   
 
 
     public void ShowGoldNotEnoughTip()
     {
-        tipsPanel.transform.SetAsLastSibling();
+       tipsPanel.transform.SetAsLastSibling();
         tipsPanel.SetActive(true);
         CancelInvoke(nameof(HideGoldNotEnoughTip));
         Invoke(nameof(HideGoldNotEnoughTip), autoHideDelay);
