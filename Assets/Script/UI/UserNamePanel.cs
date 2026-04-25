@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class UserNamePanel : MonoBehaviour
 {
-    private const string USER_NAME_KEY = "Game_User_Name";
 
     public TextMeshProUGUI txt_NameTip;
     public TMP_InputField input_Name;
@@ -23,7 +22,7 @@ public class UserNamePanel : MonoBehaviour
     private void InitUserNameUI()
     {
 
-        string currentName = PlayerPrefs.GetString(USER_NAME_KEY, "");
+        string currentName = PlayerPrefs.GetString(GameDataHub.KEY_CURRENT_USER, "");
         if (!string.IsNullOrEmpty(currentName))
         {
             txt_NameTip.text = $"Current nickname:{currentName}";
@@ -50,10 +49,12 @@ public class UserNamePanel : MonoBehaviour
     private void OnStartGameClick()
     {
 
-        string currentName = PlayerPrefs.GetString(USER_NAME_KEY, "");
+        string currentName = PlayerPrefs.GetString(GameDataHub.KEY_CURRENT_USER, "");
         if (!string.IsNullOrEmpty(currentName))
         {
             txt_NameTip.text = $"Current nickname:{currentName}\nReady to start the game!";
+
+            GameDataHub.Instance.SwitchUser(currentName); 
             Invoke("startGame", 2f);
         }
         else
@@ -85,7 +86,7 @@ public class UserNamePanel : MonoBehaviour
         }
 
 
-        PlayerPrefs.SetString(USER_NAME_KEY, newName);
+        PlayerPrefs.SetString(GameDataHub.KEY_CURRENT_USER, newName);
         PlayerPrefs.Save(); 
 
 
@@ -95,7 +96,7 @@ public class UserNamePanel : MonoBehaviour
 
     public void ClearUserName()
     {
-        PlayerPrefs.DeleteKey(USER_NAME_KEY);
+        PlayerPrefs.DeleteKey(GameDataHub.KEY_CURRENT_USER);
         PlayerPrefs.Save();
         InitUserNameUI(); 
         txt_NameTip.text = "The nickname has been cleared. Please reset it!";

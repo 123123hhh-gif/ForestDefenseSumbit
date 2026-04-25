@@ -1,15 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelPanel : MonoBehaviour
 {
+
+    public TextMeshProUGUI userNameText;
+    void Start()
+    {
+        initData();
+    }
+
+    public void initData()
+    {
+        string userName = GameDataHub.Instance.CurrentUserName;
+        userNameText.text = userName;
+    }
+
+
     public void onBtnLevel1()
     {
         SceneManager.LoadScene("L1");
     }
-
+ 
     public void onBtnLevel2()
     {
         SceneManager.LoadScene("L2");
