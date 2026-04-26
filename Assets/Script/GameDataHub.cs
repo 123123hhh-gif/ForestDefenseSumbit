@@ -3,16 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-
 public class GameDataHub : MonoBehaviour
 {
-
     private static GameDataHub _instance;
-
     private const string DEFAULT_USER_NAME = "Guest";
-
     public const string KEY_CURRENT_USER = "Game_User_Name";
-
 
     // 排行榜数据存储键（PlayerPrefs用）
     private const string RANK_DATA_KEY = "PlayerRankData";
@@ -22,6 +17,8 @@ public class GameDataHub : MonoBehaviour
     // 当前排行榜数据
     private List<PlayerData> _rankList = new List<PlayerData>();
 
+    // 替换原有List，用Dictionary存储道具ID和对应的数量（支持多数量）
+    private Dictionary<string, int> _propCountDict = new Dictionary<string, int>();
 
     public static GameDataHub Instance
     {
@@ -41,7 +38,6 @@ public class GameDataHub : MonoBehaviour
     }
 
     private string _currentUserName;
-
     public string CurrentUserName
     {
         get => string.IsNullOrEmpty(_currentUserName) ? DEFAULT_USER_NAME : _currentUserName;
@@ -57,9 +53,7 @@ public class GameDataHub : MonoBehaviour
         }
     }
 
-
     public int CurrentLevel { get; private set; } = 1;
-
     public int Gold { get; private set; } = 0;
 
     private void Awake()
@@ -73,7 +67,6 @@ public class GameDataHub : MonoBehaviour
 
         _instance = this;
         DontDestroyOnLoad(gameObject);
-
 
         // 加载该用户的存档数据
         LoadGameData();
@@ -121,6 +114,18 @@ public class GameDataHub : MonoBehaviour
         SaveGameData();
     }
 
+    /// <summary>
+    /// 扣除金币（新增：道具购买时用，自动存档）
+    /// </summary>
+    /// <returns>是否扣除成功（金币足够返回true）</returns>
+    public bool SubtractGold(int amount)
+    {
+        if (amount < 0 || Gold < amount) return false;
+        Gold -= amount;
+        SaveGameData();
+        return true;
+    }
+
     // -------------------------- 按用户隔离的存档/读档逻辑 --------------------------
     /// <summary>
     /// 加载当前用户的本地存档数据
@@ -138,6 +143,9 @@ public class GameDataHub : MonoBehaviour
             Gold = PlayerPrefs.GetInt(GetUserPrefKey("Gold"));
         else
             Gold = 0; // 新用户默认0金币
+
+        // 加载当前用户的道具数据（新增）
+        LoadPropData();
     }
 
     /// <summary>
@@ -150,6 +158,9 @@ public class GameDataHub : MonoBehaviour
         // 保存当前用户的金币
         PlayerPrefs.SetInt(GetUserPrefKey("Gold"), Gold);
 
+        // 保存当前用户的道具数据（新增）
+        SavePropData();
+
         PlayerPrefs.Save(); // 强制保存
     }
 
@@ -160,17 +171,20 @@ public class GameDataHub : MonoBehaviour
     {
         CurrentLevel = 1;
         Gold = 0;
+        // 重置道具数据（新增）
+        _propCountDict.Clear();
         SaveGameData();
     }
-
 
     public void DeleteUserData(string userName)
     {
         string validName = string.IsNullOrEmpty(userName) ? DEFAULT_USER_NAME : userName.Trim();
 
         PlayerPrefs.DeleteKey($"{validName}_CurrentLevel");
-
         PlayerPrefs.DeleteKey($"{validName}_Gold");
+        // 删除道具数据（新增）
+        PlayerPrefs.DeleteKey($"{validName}_PurchasedProps");
+
         PlayerPrefs.Save();
 
         if (validName == CurrentUserName)
@@ -179,10 +193,8 @@ public class GameDataHub : MonoBehaviour
         }
     }
 
-
-
     #region RankIng System
-        /// <summary>
+    /// <summary>
     /// 从本地加载排行榜数据
     /// </summary>
     private void LoadRankData()
@@ -191,7 +203,7 @@ public class GameDataHub : MonoBehaviour
         {
             // 从PlayerPrefs获取存储的JSON字符串
             string jsonData = PlayerPrefs.GetString(RANK_DATA_KEY, "");
-            
+
             if (!string.IsNullOrEmpty(jsonData))
             {
                 // 反序列化为列表
@@ -205,7 +217,7 @@ public class GameDataHub : MonoBehaviour
         }
     }
 
-     /// <summary>
+    /// <summary>
     /// 保存排行榜数据到本地
     /// </summary>
     private void SaveRankData()
@@ -215,7 +227,7 @@ public class GameDataHub : MonoBehaviour
             // 包装类用于序列化列表
             RankDataWrapper wrapper = new RankDataWrapper();
             wrapper.playerList = _rankList;
-            
+
             // 序列化为JSON字符串并保存
             string jsonData = JsonUtility.ToJson(wrapper);
             PlayerPrefs.SetString(RANK_DATA_KEY, jsonData);
@@ -270,7 +282,7 @@ public class GameDataHub : MonoBehaviour
     {
         // 按总星数降序排序（星数高的在前）
         _rankList = _rankList.OrderByDescending(p => p.totalStars).ToList();
-        
+
         // 如果数量超过10，则截取前10名
         if (_rankList.Count > MAX_RANK_COUNT)
         {
@@ -316,6 +328,158 @@ public class GameDataHub : MonoBehaviour
     {
         public List<PlayerData> playerList = new List<PlayerData>();
     }
+    #endregion
 
+    #region Prop System
+    /// <summary>
+    /// 加载当前用户的道具数据（按用户隔离）
+    /// </summary>
+    private void LoadPropData()
+    {
+        _propCountDict.Clear();
+        string purchasedStr = PlayerPrefs.GetString(GetUserPrefKey("PurchasedProps"), "");
+        if (!string.IsNullOrEmpty(purchasedStr))
+        {
+            // 数据格式：道具ID:数量,道具ID:数量 （如 "item1:3,item2:1"）
+            string[] propPairs = purchasedStr.Split(',');
+            foreach (string pair in propPairs)
+            {
+                string[] keyValue = pair.Split(':');
+                if (keyValue.Length == 2 && !string.IsNullOrEmpty(keyValue[0]) && int.TryParse(keyValue[1], out int count))
+                {
+                    _propCountDict[keyValue[0]] = count;
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// 保存当前用户的道具数据到本地
+    /// </summary>
+    private void SavePropData()
+    {
+        // 拼接数据：道具ID:数量,道具ID:数量
+        List<string> propStrList = new List<string>();
+        foreach (var kvp in _propCountDict)
+        {
+            propStrList.Add($"{kvp.Key}:{kvp.Value}");
+        }
+        string purchasedStr = string.Join(",", propStrList);
+        PlayerPrefs.SetString(GetUserPrefKey("PurchasedProps"), purchasedStr);
+    }
+
+    /// <summary>
+    /// 购买道具（自动扣金币+存档）
+    /// </summary>
+    /// <param name="propId">道具唯一ID</param>
+    /// <param name="price">道具售价</param>
+    /// <param name="buyCount">购买数量（默认1）</param>
+    /// <returns>是否购买成功</returns>
+    public bool PurchaseProp(string propId, int price, int buyCount = 1)
+    {
+        if (string.IsNullOrEmpty(propId) || price < 0 || buyCount < 1)
+        {
+            Debug.LogWarning("购买道具参数错误");
+            return false;
+        }
+
+        // 扣金币
+        if (!SubtractGold(price * buyCount))
+        {
+            Debug.Log("金币不足，购买失败");
+            return false;
+        }
+
+        // 更新道具数量
+        if (_propCountDict.ContainsKey(propId))
+        {
+            _propCountDict[propId] += buyCount;
+        }
+        else
+        {
+            _propCountDict[propId] = buyCount;
+        }
+
+        SaveGameData(); // 自动存档
+        Debug.Log($"成功购买道具 {propId} x{buyCount}，当前数量：{_propCountDict[propId]}");
+        return true;
+    }
+
+    /// <summary>
+    /// 使用道具（减少数量，数量为0时移除该道具）
+    /// </summary>
+    /// <param name="propId">道具唯一ID</param>
+    /// <param name="useCount">使用数量（默认1）</param>
+    /// <returns>是否使用成功</returns>
+    public bool UseProp(string propId, int useCount = 1)
+    {
+        if (string.IsNullOrEmpty(propId) || useCount < 1)
+        {
+            Debug.LogWarning("使用道具参数错误");
+            return false;
+        }
+
+        if (!_propCountDict.ContainsKey(propId) || _propCountDict[propId] < useCount)
+        {
+            Debug.Log($"道具 {propId} 数量不足，使用失败");
+            return false;
+        }
+
+        // 减少数量
+        _propCountDict[propId] -= useCount;
+        // 数量为0时移除键（避免冗余）
+        if (_propCountDict[propId] <= 0)
+        {
+            _propCountDict.Remove(propId);
+        }
+
+        SaveGameData(); // 自动存档
+        Debug.Log($"成功使用道具 {propId} x{useCount}");
+        return true;
+    }
+
+    /// <summary>
+    /// 获取指定道具的数量
+    /// </summary>
+    /// <param name="propId">道具唯一ID</param>
+    /// <returns>道具数量（无则返回0）</returns>
+    public int GetPropCount(string propId)
+    {
+        if (string.IsNullOrEmpty(propId) || !_propCountDict.ContainsKey(propId))
+        {
+            return 0;
+        }
+        return _propCountDict[propId];
+    }
+
+    /// <summary>
+    /// 获取当前用户拥有的所有道具（ID+数量），以列表形式返回
+    /// </summary>
+    /// <returns>道具列表（每个元素包含ID和数量）</returns>
+    public List<PropData> GetAllProps()
+    {
+        List<PropData> propList = new List<PropData>();
+        foreach (var kvp in _propCountDict)
+        {
+            propList.Add(new PropData(kvp.Key, kvp.Value));
+        }
+        return propList;
+    }
+
+    /// <summary>
+    /// 道具数据模型（用于外部获取道具列表）
+    /// </summary>
+    [Serializable]
+    public class PropData
+    {
+        public string propId; // 道具唯一ID
+        public int count;     // 道具数量
+
+        public PropData(string id, int cnt)
+        {
+            propId = id;
+            count = cnt;
+        }
+    }
     #endregion
 }

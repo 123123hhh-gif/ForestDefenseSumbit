@@ -26,6 +26,11 @@ public class UIManager : MonoBehaviour
 
     public GameObject tipsPanel;
 
+
+    public Button bagButton; 
+
+    public BagPanel bagPanel; 
+
     private BaseTower _currentSelectedTower;
 
     private TowerPlace _curPlace;
@@ -67,6 +72,17 @@ public class UIManager : MonoBehaviour
         
         bgmSlider.onValueChanged.AddListener(AudioManager.Instance.SetBGMVolume);
         sfxSlider.onValueChanged.AddListener(AudioManager.Instance.SetBattleVolume);
+
+
+        if (bagButton != null && bagPanel != null)
+        {
+            bagButton.onClick.RemoveAllListeners();
+            bagButton.onClick.AddListener(OnBagButtonClicked);
+        }
+        else
+        {
+            Debug.LogError("The reference to the wrap button or the backpack panel on the main interface is null!");
+        }
     }
 
 
@@ -258,6 +274,12 @@ public class UIManager : MonoBehaviour
     public void onSceneSwitcher()
     {
         SceneManager.LoadScene("MainScene");
+    }
+
+
+    public void OnBagButtonClicked()
+    {
+        bagPanel.ToggleBag();
     }
 
     public void onTest()
