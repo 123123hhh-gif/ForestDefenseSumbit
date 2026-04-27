@@ -113,6 +113,9 @@ public class EnemySpawner : MonoBehaviour
 
         
         StartSpawnWaves();
+
+        PropSpawner.Instance.ClearAllSpawnedItems();
+        PropSpawner.Instance.StartSpawnItems();
     }
 
     public void StartSpawnWaves()
@@ -216,7 +219,7 @@ public class EnemySpawner : MonoBehaviour
         if (enemy != null)
         {
             enemy.moveSpeed *= enemySpeedMultiplier;
-            enemy.maxHealth = Mathf.RoundToInt(enemy.maxHealth * enemyHealthMultiplier);
+            enemy.baseMaxHealth = Mathf.RoundToInt(enemy.baseMaxHealth * enemyHealthMultiplier);
         
             enemy.SetStartWaypoint(startWaypoint);
         }

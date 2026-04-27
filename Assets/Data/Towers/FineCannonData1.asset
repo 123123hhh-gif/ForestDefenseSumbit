@@ -16,7 +16,7 @@ MonoBehaviour:
   iconPath: towerIcon/Icon_ItemIcon_Bomb
   level: 1
   cost: 30
-  attackRange: 15
+  attackRange: 40
   attackRate: 1.5
   damage: 10
   rotateSpeed: 6

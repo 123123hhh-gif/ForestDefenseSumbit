@@ -18,6 +18,8 @@ public class PropItemSO : ScriptableObject
     public string itemName;          // 道具名称
     public int price;                // 售价
     public ItemType itemType;        // 道具类型（代码识别用）
+
+    public float value;      
     [TextArea] public string desc;   // 功能描述
 
     [Header("编辑器预览")]

@@ -58,6 +58,12 @@ public class BagItem : MonoBehaviour
         }
     }
 
+    public void UpdateCount(int newCount)
+    {
+        _currentCount = newCount;
+        _numText.text = _currentCount.ToString();
+    }
+
     /// <summary>
     /// 获取当前道具的SO
     /// </summary>

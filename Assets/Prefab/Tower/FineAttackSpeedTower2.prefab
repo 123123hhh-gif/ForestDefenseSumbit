@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &757959291675729758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9201687161814043302}
+  m_Layer: 0
+  m_Name: HpFollowPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9201687161814043302
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757959291675729758}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.9599999, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 394192916181382128}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2998359917079122002
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,6 +344,7 @@ GameObject:
   m_Component:
   - component: {fileID: 394192916181382128}
   - component: {fileID: 3132552051520405714}
+  - component: {fileID: 2272051149095246198}
   m_Layer: 0
   m_Name: FineAttackSpeedTower2
   m_TagString: Untagged
@@ -335,6 +367,7 @@ Transform:
   m_Children:
   - {fileID: 4993854364278928116}
   - {fileID: 8523842259485482519}
+  - {fileID: 9201687161814043302}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3132552051520405714
@@ -351,11 +384,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseTransform: {fileID: 4993854364278928116}
   turretRoot: {fileID: 8523842259485482519}
-  initialData: {fileID: 0}
   _turretFirePoints: {fileID: 0}
   bulletBgm: {fileID: 8300000, guid: 621142d350e05bc458835aa7bbb34a60, type: 3}
+  maxHealth: 80
+  towerPlace: {fileID: 0}
   bulletPrefab: {fileID: 8424025423014831780, guid: f9d54d6594548e149a88fc8e17d8f145, type: 3}
   showDebugGizmos: 1
+--- !u!114 &2272051149095246198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7306096392730689747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce5c903e055b2d641908c5fd32475c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpBarPrefab: {fileID: 1061978079511432575, guid: 0d25296ef05170943bd8931ce697f4e0, type: 3}
+  hpFollowPoint: {fileID: 9201687161814043302}
+  hpBarOffsetY: 1.5
+  smoothFollowSpeed: 5
+  maxHp: 80
 --- !u!1 &8577507860278779439
 GameObject:
   m_ObjectHideFlags: 0

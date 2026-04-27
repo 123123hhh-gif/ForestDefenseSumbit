@@ -77,6 +77,16 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public int settleGoldCoins()
+    {
+        int gold =  _currentGold - startGold;
+        if(gold < 0)
+        {
+            gold = 0;
+        }
+        return gold;
+    }
+
 
 
 
@@ -105,6 +115,10 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = true;
         isVictory = true;
+
+
+        GameDataHub.Instance.AddGold(settleGoldCoins());
+        
         EnemySpawner.Instance.StopSpawnWaves();
         UIManager.Instance.onOpenVictory();
 
@@ -129,6 +143,14 @@ public class GameManager : MonoBehaviour
             EnemySpawner.Instance.StopSpawnWaves();
             Debug.Log("gameLose!");
         }
+    }
+
+    public void HealPlayer(int healAmount)
+    {
+        if (isGameOver) return;
+
+        EnemySpawner.Instance.HealHP(healAmount);
+        hpTxt.text = EnemySpawner.Instance.playerHP+"";
     }
 
 

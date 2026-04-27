@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: Enemy Speed Debuff
   price: 100
   itemType: 3
+  value: 0.5
   desc: Reduce the enemy's movement speed by 50% for 5 seconds
   icon: {fileID: 21300000, guid: 8dd2e4f91e6af489990c8ad79bd3dd4e, type: 3}
-  uniqueID: Enemy Speed Debuff_6ff3ab2026b969247b2e7a038e08a6b6
+  uniqueID: Enemy Speed Debuff_dc9119a5dcfcc3142bfbb79a7634ab5a

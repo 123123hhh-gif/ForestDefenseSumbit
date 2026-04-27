@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: Attack Damage Boost
   price: 100
   itemType: 2
+  value: 1.2
   desc: Increase attack damage by 20% for 10 seconds
   icon: {fileID: 21300000, guid: c6734ff892edb493f9f6e965ee17a252, type: 3}
-  uniqueID: Attack Damage Boost_6269ce061b47c2f4db5200b3036a8093
+  uniqueID: Attack Damage Boost_a8ce9560721c36547a4bf57f3b4ee018

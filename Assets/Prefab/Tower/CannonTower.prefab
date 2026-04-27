@@ -149,6 +149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3933595769761465942}
   - component: {fileID: -7198501160062411382}
+  - component: {fileID: 6454980705585570921}
   m_Layer: 0
   m_Name: CannonTower
   m_TagString: Untagged
@@ -171,6 +172,7 @@ Transform:
   m_Children:
   - {fileID: 1040483594026510408}
   - {fileID: 2180430500784073464}
+  - {fileID: 304344980437516024}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-7198501160062411382
@@ -187,11 +189,60 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseTransform: {fileID: 1040483594026510408}
   turretRoot: {fileID: 2180430500784073464}
-  initialData: {fileID: 11400000, guid: e5cd4140b5e8d6548a4ff6c9551c0d08, type: 2}
   _turretFirePoints: {fileID: 0}
   bulletBgm: {fileID: 8300000, guid: 1131d19616fd1ff4ab5b09e8087a913c, type: 3}
+  maxHealth: 100
+  towerPlace: {fileID: 0}
   bulletPrefab: {fileID: 6390667504790324395, guid: a8fce57a066762949a237d5e219b1c8b, type: 3}
   speed: 60
+--- !u!114 &6454980705585570921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8172476811887382427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce5c903e055b2d641908c5fd32475c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpBarPrefab: {fileID: 1061978079511432575, guid: 0d25296ef05170943bd8931ce697f4e0, type: 3}
+  hpFollowPoint: {fileID: 304344980437516024}
+  hpBarOffsetY: 1.5
+  smoothFollowSpeed: 5
+  maxHp: 100
+--- !u!1 &8430339307454537175
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 304344980437516024}
+  m_Layer: 0
+  m_Name: HpFollowPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &304344980437516024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8430339307454537175}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.9599999, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3933595769761465942}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8220765772745395500
 PrefabInstance:
   m_ObjectHideFlags: 0

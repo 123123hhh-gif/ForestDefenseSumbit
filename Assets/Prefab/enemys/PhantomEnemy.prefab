@@ -1020,6 +1020,9 @@ MonoBehaviour:
   maxHealth: 60
   moveSpeed: 2
   damageToPlayer: 1
+  counterAttackChance: 0.1
+  counterAttackDamage: 1
+  sourceTower: {fileID: 0}
 --- !u!114 &8837678109602272425
 MonoBehaviour:
   m_ObjectHideFlags: 0

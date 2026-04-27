@@ -10,7 +10,10 @@ public class FineEnemy : BaseEnemy
     private readonly int _isWalkingHash = Animator.StringToHash("IsWalking");
     private readonly int _isDeadHash = Animator.StringToHash("IsDead");
 
+    private readonly int _isAttackHash = Animator.StringToHash("IsAttack");
+
     private bool _isCurrentlyWalking = false;
+     private bool _isAttacking = false;
 
     private void Awake()
     {
@@ -49,10 +52,11 @@ public class FineEnemy : BaseEnemy
     private bool isTure = false;
     protected override void MoveToWaypoint()
     {
-
+        if (_isAttacking) return;
 
         base.MoveToWaypoint();
         SetWalkingState(true);
+        _isCurrentlyWalking = true;
     }
 
     protected override void Die()
@@ -66,6 +70,16 @@ public class FineEnemy : BaseEnemy
         if (_enemyAnimator == null) return;
 
         _enemyAnimator.SetBool(_isWalkingHash, isWalking);
+        _isCurrentlyWalking = isWalking;
+
+    }
+
+    public void SetAttackState(bool isAttack)
+    {
+        if (_enemyAnimator == null) return;
+
+        _enemyAnimator.SetBool(_isAttackHash, isAttack);
+        _isAttacking = isAttack;
 
     }
 
@@ -76,16 +90,32 @@ public class FineEnemy : BaseEnemy
 
         _enemyAnimator.SetTrigger(_isDeadHash);
         _enemyAnimator.SetBool(_isWalkingHash, false);
-        _isCurrentlyWalking = false;
+        SetWalkingState(false);
+        SetAttackState(false);
 
     }
 
     public void ResetAnimationState()
     {
         if (_enemyAnimator == null) return;
-
-        _enemyAnimator.SetBool(_isWalkingHash, false);
-
+        SetWalkingState(false);
+        SetAttackState(false);
         _enemyAnimator.ResetTrigger(_isDeadHash);
     }
+
+    protected override void PerformCounterAttack()
+    {
+        // base.PerformCounterAttack();
+        SetWalkingState(false);
+        SetAttackState(true);
+
+    }
+
+    public void OnAttackAnimationEnd()
+    {
+        sourceTower.TakeDamage(counterAttackDamage);
+        SetAttackState(false);
+        SetWalkingState(true);
+    }
+
 }

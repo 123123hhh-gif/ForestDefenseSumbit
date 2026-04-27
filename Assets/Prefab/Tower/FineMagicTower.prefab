@@ -42,6 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4595122226485762942}
   - component: {fileID: 8343188024823118438}
+  - component: {fileID: 2814803122168508007}
   m_Layer: 0
   m_Name: FineMagicTower
   m_TagString: Untagged
@@ -64,6 +65,7 @@ Transform:
   m_Children:
   - {fileID: 7063384876693040202}
   - {fileID: 7636313072728734527}
+  - {fileID: 4074047624497537437}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8343188024823118438
@@ -80,11 +82,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseTransform: {fileID: 7063384876693040202}
   turretRoot: {fileID: 7636313072728734527}
-  initialData: {fileID: 11400000, guid: 3f94736fcb63c9c42a2ac5eea81fe28d, type: 2}
   _turretFirePoints: {fileID: 0}
   bulletBgm: {fileID: 8300000, guid: b47df27e4eeea3c4bbe0c9d6b8c01922, type: 3}
+  maxHealth: 60
+  towerPlace: {fileID: 0}
   bulletPrefab: {fileID: 3994506852362298304, guid: 8bce144d082bbdc49b6ac2119e7f5af1, type: 3}
   showDebugGizmos: 1
+--- !u!114 &2814803122168508007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515312121339962085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce5c903e055b2d641908c5fd32475c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpBarPrefab: {fileID: 1061978079511432575, guid: 0d25296ef05170943bd8931ce697f4e0, type: 3}
+  hpFollowPoint: {fileID: 4074047624497537437}
+  hpBarOffsetY: 1.5
+  smoothFollowSpeed: 5
+  maxHp: 60
 --- !u!1 &1720049871055306680
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,6 +212,37 @@ CapsuleCollider:
   m_Height: 4.21
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: -0.00000023841858}
+--- !u!1 &7534752420800425406
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4074047624497537437}
+  m_Layer: 0
+  m_Name: HpFollowPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4074047624497537437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7534752420800425406}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.9599999, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4595122226485762942}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7462645511706491839
 PrefabInstance:
   m_ObjectHideFlags: 0

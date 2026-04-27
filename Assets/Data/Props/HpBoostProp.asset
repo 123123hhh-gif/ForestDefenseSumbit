@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: HP Boost
   price: 100
   itemType: 0
+  value: 1
   desc: Temporarily increase 1 point of health in the level
   icon: {fileID: 21300000, guid: f649c3166229440c88381809584e4d57, type: 3}
-  uniqueID: HP Boost_ce05fb7b99fa38245ac87fac50aca4b8
+  uniqueID: HP Boost_cb5c31e8e551ee04b8dcddea1a68c891

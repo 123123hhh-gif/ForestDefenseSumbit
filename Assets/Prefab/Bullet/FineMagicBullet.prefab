@@ -9906,6 +9906,10 @@ MonoBehaviour:
   UseFirePointRotation: 0
   hit: {fileID: 1714524745656972, guid: 2e33bbd89680b744a8f2b0727a31b0ca, type: 3}
   flash: {fileID: 1258350160538612, guid: d6042f989cc140942a980eadd962e2db, type: 3}
+  damage: 0
   maxFlyDistance: 50
   maxLifeTime: 5
+  buffType: 3
+  buffValue: 0.5
+  buffDuration: 3
   fatherTower: {fileID: 0}
