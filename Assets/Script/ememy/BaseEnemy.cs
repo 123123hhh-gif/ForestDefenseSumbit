@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class BaseEnemy : MonoBehaviour
 {
-    // ========== 基础属性 ==========
-    public int baseMaxHealth = 100;      // 初始最大生命值（不受Buff影响）
+
+    public int baseMaxHealth = 100;     
     public float moveSpeed = 2f;
     [SerializeField] private int damageToPlayer = 1;
 
@@ -12,37 +12,37 @@ public class BaseEnemy : MonoBehaviour
     public float counterAttackChance = 0.2f;
     public int counterAttackDamage = 10;
 
-    // ========== 生命值状态（2025-03-16 优化：统一管理） ==========
-    private int _maxHealth;            // 当前最大生命值（受Buff加成）
-    private int _currentHealth;       // 当前生命值
+
+    private int _maxHealth;            
+    private int _currentHealth;      
     private bool _isDead = false;
     private bool _hasReachedEnd = false;
 
-    // 对外只读属性
+
     public bool IsDead => _isDead;
     public int MaxHealth => _maxHealth;
     public int CurrentHealth => _currentHealth;
 
-    // ========== 移动相关 ==========
-    private Waypoint _currentWaypoint;
-    public float CurrentMoveSpeed { get; private set; }   // 受Buff影响后的移速
 
-    // ========== 伤害来源（用于反击） ==========
+    private Waypoint _currentWaypoint;
+    public float CurrentMoveSpeed { get; private set; }   
+
+
     public BaseTower sourceTower;
 
-    // ========== Buff 系统 ==========
+  
     protected List<Buff> activeBuffs = new List<Buff>();
     private float _moveSpeedMultiplier = 1f;
-    private int _maxHealthBonus = 0;        // 最大生命值固定值加成总和
+    private int _maxHealthBonus = 0;       
 
-    // ========== 初始化 ==========
+  
     private void Start()
     {
-        // 2025-03-16 [优化]：生命值从基础值开始
+
         _maxHealth = baseMaxHealth;
         _currentHealth = _maxHealth;
 
-        // 收集预制体上挂载的初始Buff
+
         activeBuffs = new List<Buff>();
         Buff[] initialBuffs = GetComponents<Buff>();
         foreach (Buff buff in initialBuffs)
@@ -50,22 +50,21 @@ public class BaseEnemy : MonoBehaviour
             activeBuffs.Add(buff);
         }
 
-        // 首次计算受Buff影响的属性
+
         RecalcStats();
 
-        // 注册到敌人管理器
+
         EnemyManager.Instance?.AddEnemy(this);
     }
 
-    // ========== Buff 属性重算 ==========
-    // 2025-03-16 [优化]：逻辑清晰，生命值同步规则明确
+
     protected virtual void RecalcStats()
     {
-        // 重置修正值
+
         _moveSpeedMultiplier = 1f;
         _maxHealthBonus = 0;
 
-        // 遍历所有Buff，累加效果
+
         foreach (Buff buff in activeBuffs)
         {
             switch (buff.buffType)
@@ -79,26 +78,24 @@ public class BaseEnemy : MonoBehaviour
             }
         }
 
-        // ----- 移动速度（乘算）-----
+
         CurrentMoveSpeed = moveSpeed * _moveSpeedMultiplier;
         CurrentMoveSpeed = Mathf.Max(0.01f, CurrentMoveSpeed);
 
-        // ----- 最大生命值（固定值加成）-----
+
         int newMaxHealth = baseMaxHealth + _maxHealthBonus;
         if (newMaxHealth != _maxHealth)
         {
             int delta = newMaxHealth - _maxHealth;
             _maxHealth = newMaxHealth;
 
-            // 同步当前生命值：
-            // - 若最大生命值增加，当前生命值也增加相同数值（相当于满血附加）
-            // - 若最大生命值减少，当前生命值不能超过新最大值
+
             _currentHealth += delta;
             _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
         }
     }
 
-    // ========== Buff 生命周期管理 ==========
+
     protected virtual void UpdateBuffs()
     {
         for (int i = activeBuffs.Count - 1; i >= 0; i--)
@@ -107,13 +104,13 @@ public class BaseEnemy : MonoBehaviour
             if (!buff.Tick(Time.deltaTime))
             {
                 activeBuffs.RemoveAt(i);
-                Destroy(buff);          // 销毁组件，防止内存泄漏
+                Destroy(buff);         
                 RecalcStats();
             }
         }
     }
 
-    // 外部添加Buff
+
     public void AddBuff(Buff buff)
     {
         if (buff == null) return;
@@ -126,21 +123,32 @@ public class BaseEnemy : MonoBehaviour
             return;
         }
 
+
+        for (int i = activeBuffs.Count - 1; i >= 0; i--)
+        {
+            Buff existingBuff = activeBuffs[i];
+            if (existingBuff.buffType == buff.buffType)
+            {
+                activeBuffs.RemoveAt(i);
+                Destroy(existingBuff);
+            }
+        }
+
         activeBuffs.Add(buff);
         RecalcStats();
     }
 
-    // 外部移除Buff
+
     public void RemoveBuff(Buff buff)
     {
         if (activeBuffs.Remove(buff))
         {
-            Destroy(buff);              // 主动移除时同时销毁组件
+            Destroy(buff);             
             RecalcStats();
         }
     }
 
-    // 动态挂载Buff（便捷方法）
+
     public Buff ApplyBuff(Buff.BuffType type, float value, float duration = -1f)
     {
         Buff buff = gameObject.AddComponent<Buff>();
@@ -151,7 +159,7 @@ public class BaseEnemy : MonoBehaviour
         return buff;
     }
 
-    // ========== 路径移动 ==========
+
     public void SetStartWaypoint(Waypoint startWaypoint)
     {
         _currentWaypoint = startWaypoint;
@@ -173,7 +181,7 @@ public class BaseEnemy : MonoBehaviour
             transform.rotation = targetRotation;
         }
 
-        // 使用受Buff影响的移速
+
         transform.position = Vector3.MoveTowards(
             transform.position,
             targetPos,
@@ -191,7 +199,7 @@ public class BaseEnemy : MonoBehaviour
         }
     }
 
-    // ========== 终点逻辑 ==========
+
     private void OnReachEnd()
     {
         if (_hasReachedEnd || _isDead) return;
@@ -201,33 +209,30 @@ public class BaseEnemy : MonoBehaviour
         DestroyEnemy();
     }
 
-    // ========== 生命值变更（核心） ==========
-    // 2025-03-16 [新增]：治疗/增加当前生命值
+
     public void Heal(int amount)
     {
         if (_isDead) return;
         _currentHealth = Mathf.Min(_currentHealth + amount, _maxHealth);
         _currentHealth = Mathf.Max(_currentHealth, 0);
 
-        // 更新血条UI（假设MonsterHpBar通过属性读取）
         MonsterHpBar hp = GetComponent<MonsterHpBar>();
-        if (hp != null) hp.UpdateHealth(_currentHealth, _maxHealth);  // 需要UI组件适配
+        if (hp != null) hp.UpdateHealth(_currentHealth, _maxHealth);  
     }
 
-    // 受伤逻辑（支持来源塔）
+
     public void TakeDamage(int damage, BaseTower source = null)
     {
         if (_isDead) return;
 
         _currentHealth -= damage;
         _currentHealth = Mathf.Max(_currentHealth, 0);
-        Debug.Log($"{gameObject.name} 受到 {damage} 伤害，剩余血量：{_currentHealth}");
+        // Debug.Log($"{gameObject.name} 受到 {damage} 伤害，剩余血量：{_currentHealth}");
 
-        // 更新血条UI
+
         MonsterHpBar hp = GetComponent<MonsterHpBar>();
         if (hp != null) hp.UpdateHealth(_currentHealth, _maxHealth);
 
-        // 反击
         sourceTower = source;
         if (sourceTower != null && _currentHealth > 0)
         {
@@ -240,7 +245,7 @@ public class BaseEnemy : MonoBehaviour
         }
     }
 
-    // ========== 反击 ==========
+
     private void TryCounterAttack()
     {
         if (Random.Range(0f, 1f) <= counterAttackChance)
@@ -254,7 +259,7 @@ public class BaseEnemy : MonoBehaviour
         sourceTower?.TakeDamage(counterAttackDamage);
     }
 
-    // ========== 死亡 ==========
+
     protected virtual void Die()
     {
         _isDead = true;
@@ -266,7 +271,7 @@ public class BaseEnemy : MonoBehaviour
         DestroyEnemy();
     }
 
-    // ========== 销毁清理 ==========
+
     private void DestroyEnemy()
     {
         EnemyManager.Instance?.RemoveEnemy(this);
@@ -278,7 +283,7 @@ public class BaseEnemy : MonoBehaviour
         EnemyManager.Instance?.RemoveEnemy(this);
     }
 
-    // ========== 每帧更新 ==========
+
     private void Update()
     {
         if (_isDead || _hasReachedEnd || _currentWaypoint == null) return;
@@ -290,7 +295,7 @@ public class BaseEnemy : MonoBehaviour
         //     ApplyBuff(Buff.BuffType.Heal, 20f, -1f); 
         // }
 
-        UpdateBuffs();      // 处理Buff过期
-        MoveToWaypoint();   // 移动
+        UpdateBuffs();     
+        MoveToWaypoint();   
     }
 }

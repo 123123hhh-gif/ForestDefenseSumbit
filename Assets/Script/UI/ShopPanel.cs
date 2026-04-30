@@ -26,26 +26,20 @@ public class ShopPanel : MonoBehaviour
         RefreshGoldUI();
     }
 
-    /// <summary>
-    /// 刷新整个商店界面
-    /// </summary>
+
     public void RefreshShopUI()
     {
         ClearShopItems();
         LoadShopItems();
     }
 
-    /// <summary>
-    /// 刷新金币显示
-    /// </summary>
+
     public void RefreshGoldUI()
     {
         _goldText.text = GameDataHub.Instance.Gold.ToString();
     }
 
-    /// <summary>
-    /// 清空商店列表
-    /// </summary>
+
     private void ClearShopItems()
     {
         foreach (Transform child in _gridTransform)
@@ -54,9 +48,7 @@ public class ShopPanel : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 加载并生成商店道具项
-    /// </summary>
+
     private void LoadShopItems()
     {
         if (_shopConfig == null || _shopItemPrefab == null || _gridTransform == null)

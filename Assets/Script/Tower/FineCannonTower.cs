@@ -43,9 +43,9 @@ public class FineCannonTower : BaseTower
             if (bulletMover != null)
             {
 
-                // 2025-03-16: 传递当前伤害值
+
                 bulletMover.damage = (int)CurrentDamage;
-                
+
                 bulletMover.fatherTower = this;
                 bulletMover.SetTarget(_targetEnemy);
                 // bulletMover.OnHit += OnBulletHitEnemy;
@@ -70,16 +70,16 @@ public class FineCannonTower : BaseTower
         {
             if (firePoint == null) continue;
 
-            // 绘制原始射击点（白色球）
+
             Gizmos.color = Color.white;
             Gizmos.DrawWireSphere(firePoint.position, 0.1f);
 
-            // 绘制偏移后的发射位置（红色球）
+
             Vector3 spawnPos = firePoint.TransformPoint(CurrentData.bulletPosOffset);
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(spawnPos, 0.1f);
 
-            // 绘制子弹朝向（红色线，指向敌人）
+
             Vector3 dirToEnemy = _targetEnemy.position - spawnPos;
             Quaternion targetRot = Quaternion.LookRotation(dirToEnemy) * Quaternion.Euler(CurrentData.bulletRotOffset);
             Gizmos.DrawLine(spawnPos, spawnPos + targetRot * Vector3.forward * 2f);

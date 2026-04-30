@@ -19,4 +19,3 @@ MonoBehaviour:
   availableTowers:
   - {fileID: 11400000, guid: 5dccc0a44579da54ebb69eb50a1b63a2, type: 2}
   - {fileID: 11400000, guid: f041567f8b372474080c7a19f2e2dd8b, type: 2}
-  - {fileID: 11400000, guid: 3f94736fcb63c9c42a2ac5eea81fe28d, type: 2}

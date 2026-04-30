@@ -7,22 +7,22 @@ using DG.Tweening;
 public class BagPanel : MonoBehaviour
 {
     [Header("核心引用")]
-    [SerializeField] private ShopSO _shopConfig; // 商店配置表，用于查找PropItemSO
-    [SerializeField] private GameObject _bagItemPrefab; // 道具项预制体
-    [SerializeField] private Transform _gridTransform; // GridLayoutGroup的父物体
-    [SerializeField] private RectTransform _bagPanelRect; // 背包面板的RectTransform
+    [SerializeField] private ShopSO _shopConfig; 
+    [SerializeField] private GameObject _bagItemPrefab; 
+    [SerializeField] private Transform _gridTransform;
+    [SerializeField] private RectTransform _bagPanelRect;
 
     [Header("详情面板引用")]
-    [SerializeField] private TextMeshProUGUI _nameText; // 道具名称文本
-    [SerializeField] private TextMeshProUGUI _descText; // 道具描述文本
-    [SerializeField] private Button _useBtn; // 使用按钮（功能后续添加）
+    [SerializeField] private TextMeshProUGUI _nameText; 
+    [SerializeField] private TextMeshProUGUI _descText; 
+    [SerializeField] private Button _useBtn; 
 
     [Header("动画设置")]
-    [SerializeField] private float _slideDuration = 0.3f; // 滑入/滑出动画时长
-    [SerializeField] private float _visibleUIWidth = 500f; // 背包UI宽度
-    private List<BagItem> _bagItems = new List<BagItem>(); // 所有生成的道具项列表
-    private BagItem _selectedItem; // 当前选中的道具项
-    private Vector2 _originalAnchoredPos; // 背包面板的初始锚点位置
+    [SerializeField] private float _slideDuration = 0.3f; 
+    [SerializeField] private float _visibleUIWidth = 500f; 
+    private List<BagItem> _bagItems = new List<BagItem>(); 
+    private BagItem _selectedItem; 
+    private Vector2 _originalAnchoredPos; 
 
     private bool _isBagOpen = false;
     public bool IsBagOpen => _isBagOpen;
@@ -33,7 +33,7 @@ public class BagPanel : MonoBehaviour
         ClearDetailPanel();
         gameObject.SetActive(false);
 
-        // 绑定使用按钮监听
+
         if (_useBtn != null)
         {
             _useBtn.onClick.RemoveAllListeners();
@@ -45,7 +45,7 @@ public class BagPanel : MonoBehaviour
         }
     }
 
-    // 原有方法：OpenBag、CloseBag、ToggleBag 保持不变
+  
     public void OpenBag()
     {
         gameObject.SetActive(true);
@@ -80,7 +80,7 @@ public class BagPanel : MonoBehaviour
         }
     }
 
-    // 原有方法：RefreshBagUI、ClearAllItems、LoadBagItems 保持不变
+
     public void RefreshBagUI()
     {
         ClearAllItems();
@@ -104,23 +104,23 @@ public class BagPanel : MonoBehaviour
             return;
         }
 
-        // 从GameDataHub获取当前用户的所有道具
+
         var userProps = GameDataHub.Instance.GetAllProps();
 
         foreach (var userProp in userProps)
         {
-            // 根据道具名称从ShopSO中查找对应的PropItemSO
+
             PropItemSO propSO = _shopConfig.sellItems.Find(so => so.itemName == userProp.propId);
 
             if (propSO != null)
             {
-                // 实例化道具项
+
                 GameObject itemObj = Instantiate(_bagItemPrefab, _gridTransform);
                 BagItem bagItem = itemObj.GetComponent<BagItem>();
 
                 if (bagItem != null)
                 {
-                    // 初始化道具项
+
                     bagItem.InitItem(propSO, userProp.count, this);
                     _bagItems.Add(bagItem);
                 }
@@ -132,9 +132,7 @@ public class BagPanel : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 选中一个道具项
-    /// </summary>
+
     public void SelectItem(BagItem item)
     {
         if (_selectedItem != null)
@@ -147,12 +145,10 @@ public class BagPanel : MonoBehaviour
         UpdateDetailPanel(_selectedItem.CurrentProp);
     }
 
-    /// <summary>
-    /// 优化后的道具使用逻辑（完全适配GameDataHub的实际方法）
-    /// </summary>
+
     public void onUserbtnClick()
     {
-        // 1. 基础空值校验
+
         if (_selectedItem == null)
         {
             Debug.LogWarning("BagPanel: 未选中任何道具，无法使用！");
@@ -161,10 +157,10 @@ public class BagPanel : MonoBehaviour
 
         PropItemSO currentProp = _selectedItem.CurrentProp;
         string propId = currentProp.itemName;
-        // 2. 从GameDataHub获取当前道具数量（使用你实际的GetPropCount方法）
+
         int currentCount = GameDataHub.Instance.GetPropCount(propId);
 
-        // 3. 道具数量校验
+
         if (currentCount <= 0)
         {
             Debug.LogWarning($"BagPanel: 道具【{propId}】数量不足，无法使用！");
@@ -173,7 +169,7 @@ public class BagPanel : MonoBehaviour
 
         Debug.Log($"使用道具：{propId}，当前数量：{currentCount}");
 
-        // 4. 根据道具类型执行对应逻辑
+
         bool useSuccess = false;
         switch (currentProp.itemType)
         {
@@ -194,7 +190,7 @@ public class BagPanel : MonoBehaviour
                 break;
         }
 
-        // 5. 使用成功后，调用GameDataHub的UseProp方法扣减数量
+
         if (useSuccess)
         {
             bool usePropSuccess = GameDataHub.Instance.UseProp(propId, 1);
@@ -276,9 +272,7 @@ public class BagPanel : MonoBehaviour
     #endregion
 
     #region 辅助方法
-    /// <summary>
-    /// 获取场景中所有激活的塔
-    /// </summary>
+
     private BaseTower[] GetAllActiveTowers()
     {
         BaseTower[] allTowers = FindObjectsOfType<BaseTower>();
@@ -293,15 +287,13 @@ public class BagPanel : MonoBehaviour
         return activeTowers.ToArray();
     }
 
-    /// <summary>
-    /// 使用道具后更新UI（适配GameDataHub的PropData模型）
-    /// </summary>
+
     private void UpdatePropCountAfterUse(string propId)
     {
         int newCount = GameDataHub.Instance.GetPropCount(propId);
         Debug.Log($"道具【{propId}】剩余数量：{newCount}");
 
-        // 数量为0时清空选中状态和详情面板
+
         if (newCount <= 0)
         {
             _selectedItem = null;
@@ -309,21 +301,19 @@ public class BagPanel : MonoBehaviour
         }
         else
         {
-            // 更新当前选中项的显示数量（需BagItem实现UpdateCount方法）
+
             if (_selectedItem != null)
             {
                 _selectedItem.UpdateCount(newCount);
             }
         }
 
-        // 刷新背包UI，保证数据和视图同步
+
         RefreshBagUI();
     }
     #endregion
 
-    /// <summary>
-    /// 更新详情面板
-    /// </summary>
+
     private void UpdateDetailPanel(PropItemSO propSO)
     {
         if (propSO != null)
@@ -338,9 +328,7 @@ public class BagPanel : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 清空详情面板
-    /// </summary>
+
     private void ClearDetailPanel()
     {
         _nameText.text = "";

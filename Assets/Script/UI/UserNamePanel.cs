@@ -55,11 +55,12 @@ public class UserNamePanel : MonoBehaviour
             txt_NameTip.text = $"Current nickname:{currentName}\nReady to start the game!";
 
             GameDataHub.Instance.SwitchUser(currentName); 
+            GameDataHub.Instance.isLogin = true;
             // if(currentName == "zgq")
             // {
             //      GameDataHub.Instance.AddGold(1000);
             // }
-            Invoke("startGame", 2f);
+            Invoke("startGame", 1f);
         }
         else
         {

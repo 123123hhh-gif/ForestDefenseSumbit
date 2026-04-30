@@ -9,10 +9,10 @@ public class ParticleMoverBullet : MonoBehaviour
     public GameObject hit;
     public GameObject flash;
 
-    // ========== 2025-03-16: 新增伤害字段，由发射塔传入 ==========
+
     [HideInInspector]
     public int damage = 0;
-    // =========================================================
+
 
     public float maxFlyDistance = 50f;
     public float maxLifeTime = 5f;
@@ -25,30 +25,29 @@ public class ParticleMoverBullet : MonoBehaviour
     private Transform _targetEnemy;
 
     [HideInInspector]
-    public BaseTower fatherTower;   // 保留引用，用于可能的特殊逻辑（如反伤溯源），但不再依赖其数据计算伤害
-
+    public BaseTower fatherTower;   
     private Vector3 _startPos;
     private float speed = 0f;
 
-    // 2025-03-16: 缓存初始旋转偏移（如果需要），但目前我们只使用发射时的初始旋转
-    // private Vector3 _bulletRotOffset;
+
+
 
     void Start()
     {
         _startPos = transform.position;
         StartCoroutine(TimeoutDestroy());
 
-        // 2025-03-16: 子弹速度从父塔获取，若父塔已销毁则使用默认值
+       
         if (fatherTower != null && fatherTower.CurrentData != null)
         {
             speed = fatherTower.CurrentData.bulletSpeed;
         }
         else
         {
-            speed = 15f; // 默认速度
+            speed = 15f;
         }
 
-        // 发射特效（保持原有逻辑）
+
         if (flash != null)
         {
             var flashInstance = Instantiate(flash, transform.position, transform.rotation);
@@ -75,8 +74,7 @@ public class ParticleMoverBullet : MonoBehaviour
 
     void FixedUpdate()
     {
-        // 2025-03-16: 重构追踪逻辑
-        // 1. 如果目标无效（null/已死亡），则直线飞行直至销毁
+
         bool targetValid = _targetEnemy != null;
         if (targetValid)
         {
@@ -89,21 +87,21 @@ public class ParticleMoverBullet : MonoBehaviour
         {
             if (targetValid)
             {
-                // 追踪目标：平滑转向并移动
+
                 Vector3 dirToTarget = (_targetEnemy.position - transform.position).normalized;
                 Quaternion targetRot = Quaternion.LookRotation(dirToTarget);
-                // 不再依赖父塔的旋转偏移，子弹发射时已包含初始偏移，追踪时不重复叠加
+
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, rotateSpeed * Time.deltaTime);
                 transform.position += transform.forward * (speed * Time.deltaTime);
             }
             else
             {
-                // 目标丢失：沿当前方向直线飞行
+
                 transform.position += transform.forward * (speed * Time.deltaTime);
             }
         }
 
-        // 超出最大飞行距离则销毁
+
         float currentDistance = Vector3.Distance(transform.position, _startPos);
         if (currentDistance >= maxFlyDistance)
         {
@@ -114,7 +112,7 @@ public class ParticleMoverBullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        // 只与敌人碰撞
+
         if (collision.gameObject.CompareTag("Enemy") == false)
             return;
 
@@ -123,7 +121,7 @@ public class ParticleMoverBullet : MonoBehaviour
         Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
         Vector3 pos = contact.point + contact.normal * hitOffset;
 
-        // 生成击中特效（保留原有逻辑）
+
         if (hit != null)
         {
             var hitInstance = Instantiate(hit, pos, rot);
@@ -151,13 +149,13 @@ public class ParticleMoverBullet : MonoBehaviour
             }
         }
 
-        // 2025-03-16: 使用传入的 damage 值，不再从父塔获取
+
         BaseEnemy enemy = collision.collider.GetComponentInParent<BaseEnemy>();
         if (enemy != null && !enemy.IsDead)
         {
-            enemy.ApplyBuff(buffType, buffValue, buffDuration); // 先应用Buff，再造成伤害
-            
-            enemy.TakeDamage(damage, fatherTower); // 传入父塔作为伤害来源，用于反伤等逻辑
+            enemy.ApplyBuff(buffType, buffValue, buffDuration); 
+
+            enemy.TakeDamage(damage, fatherTower); 
         }
 
         DestroyBullet();

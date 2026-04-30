@@ -31,7 +31,7 @@ public class TowerItem : MonoBehaviour
         valueTxt.text = _currentData.cost + "";
         nameTxt.text = _currentData.towerName;
 
-        //加载图标
+
         Sprite iconSprite = Resources.Load<Sprite>(_currentData.iconPath);
         iconImage.sprite = iconSprite;
     }

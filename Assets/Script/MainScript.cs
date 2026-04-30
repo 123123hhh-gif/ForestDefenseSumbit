@@ -58,6 +58,7 @@ public class MainScript : MonoBehaviour
     void Start()
     {
         AudioManager.Instance.PlayBGM(bgmWarriors);
+        loginState();
     }
 
 
@@ -73,5 +74,23 @@ public class MainScript : MonoBehaviour
         LevelPanel.SetActive(true);
         BgPanel.SetActive(false);
         StoryPanel.SetActive(false);
+    }
+
+    public void loginState()
+    {
+        if (GameDataHub.Instance.isLogin)
+        {
+            userNamePanel.SetActive(false);
+            LevelPanel.SetActive(true);
+            BgPanel.SetActive(false);
+            StoryPanel.SetActive(false);
+        }
+        else
+        {
+            userNamePanel.SetActive(false);
+            LevelPanel.SetActive(false);
+            BgPanel.SetActive(true);
+            StoryPanel.SetActive(false);
+        }
     }
 }

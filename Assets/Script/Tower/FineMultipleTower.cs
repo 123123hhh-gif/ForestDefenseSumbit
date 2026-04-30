@@ -23,7 +23,7 @@ public class FineMultipleTower : BaseTower
     protected override void Start()
     {
         base.Start();
-        //强转成 MultipleTowerData 类型
+
         MultipleTowerData tmpData = CurrentData as MultipleTowerData;
         attackNumber = tmpData.AttackNumber;
     }
@@ -90,59 +90,58 @@ public class FineMultipleTower : BaseTower
 
     protected override void FindTarget()
     {
-        // 1. 空值校验：确保敌人管理器单例存在，避免空引用报错
+
         if (EnemyManager.Instance == null)
         {
             Debug.LogWarning("EnemyManager 未找到！");
-            // 清空目标列表，避免残留旧数据
+
             _nearestEnemies.Clear();
             return;
         }
 
-        // 2. 获取当前单位攻击范围内的所有敌人
+
         List<BaseEnemy> enemiesInRange = EnemyManager.Instance.GetEnemiesInRange(
             transform.position, 
             _currentData.attackRange
         );
 
-        // 3. 清空旧的目标列表，避免数据污染
+
         _nearestEnemies.Clear();
 
-        // 4. 范围内无敌人：直接退出
+
         if (enemiesInRange.Count == 0)
         {
             return;
         }
 
-        // 5. 过滤：仅保留存活且非空的敌人（核心过滤逻辑）
+
         List<BaseEnemy> aliveEnemies = new List<BaseEnemy>();
         foreach (BaseEnemy enemy in enemiesInRange)
         {
-            // 跳过空对象、已死亡的敌人，避免操作无效目标
+
             if (enemy != null && !enemy.IsDead)
             {
                 aliveEnemies.Add(enemy);
             }
         }
 
-        // 6. 过滤后无存活敌人：直接退出
+
         if (aliveEnemies.Count == 0)
         {
             return;
         }
 
-        // 7. 排序：将存活敌人按「距离当前单位由近到远」排序（核心优化点）
+
         aliveEnemies.Sort((a, b) => 
         {
-            // 计算两个敌人到当前单位的距离
+
             float distanceA = Vector3.Distance(transform.position, a.transform.position);
             float distanceB = Vector3.Distance(transform.position, b.transform.position);
-            // 升序排序（返回负数：a在前；正数：b在前；0：位置不变）
+
             return distanceA.CompareTo(distanceB);
         });
 
-        // 8. 取值：取前3个（或全部，若不足3个），存入目标列表
-        int takeCount = Mathf.Min(aliveEnemies.Count, attackNumber); // 确保不超过3个
+        int takeCount = Mathf.Min(aliveEnemies.Count, attackNumber);
         for (int i = 0; i < takeCount; i++)
         {
             _nearestEnemies.Add(aliveEnemies[i]);
@@ -152,7 +151,7 @@ public class FineMultipleTower : BaseTower
         {
             Debug.Log("找到1个最近的存活敌人");
         }
-        // 可选：调试日志，方便验证结果
+
         Debug.Log($"找到{_nearestEnemies.Count}个最近的存活敌人，攻击范围：{_currentData.attackRange}");
     }
 
@@ -250,7 +249,7 @@ public class FineMultipleTower : BaseTower
         if (bulletMover != null)
         {
 
-            // 2025-03-16: 传递当前伤害值
+
             bulletMover.damage = (int)CurrentDamage;
 
             bulletMover.fatherTower = this;
@@ -274,16 +273,16 @@ public class FineMultipleTower : BaseTower
         {
             if (firePoint == null) continue;
 
-            // 绘制原始射击点（白色球）
+
             Gizmos.color = Color.white;
             Gizmos.DrawWireSphere(firePoint.position, 0.1f);
 
-            // 绘制偏移后的发射位置（红色球）
+
             Vector3 spawnPos = firePoint.TransformPoint(CurrentData.bulletPosOffset);
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(spawnPos, 0.1f);
 
-            // 绘制子弹朝向（红色线，指向敌人）
+
             Vector3 dirToEnemy = _targetEnemy.position - spawnPos;
             Quaternion targetRot = Quaternion.LookRotation(dirToEnemy) * Quaternion.Euler(CurrentData.bulletRotOffset);
             Gizmos.DrawLine(spawnPos, spawnPos + targetRot * Vector3.forward * 2f);

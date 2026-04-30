@@ -54,7 +54,7 @@ public class FineArrowTower : BaseTower
             if (bulletMover != null)
             {
 
-                // 2025-03-16: 传递当前伤害值
+
                 bulletMover.damage = (int)CurrentDamage;
 
                 bulletMover.fatherTower = this;

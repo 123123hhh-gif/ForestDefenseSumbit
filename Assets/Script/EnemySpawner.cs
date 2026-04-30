@@ -3,22 +3,21 @@ using System.Collections;
 using TMPro;
 using UnityEngine.UI;
 
-// 定时生成敌人，控制波次 - 单例版本
 public class EnemySpawner : MonoBehaviour
 {
-    // 单例实例（核心）
+
     private static EnemySpawner _instance;
-    // 公共访问属性
+
     public static EnemySpawner Instance
     {
         get
         {
-            // 如果实例为空，尝试在场景中查找
+
             if (_instance == null)
             {
                 _instance = FindObjectOfType<EnemySpawner>();
                 
-                // 如果查找不到，自动创建一个挂载对象
+
                 if (_instance == null)
                 {
                     GameObject spawnerObj = new GameObject("EnemySpawner (Singleton)");
@@ -33,20 +32,20 @@ public class EnemySpawner : MonoBehaviour
     public int LevelId = 1;
 
     [Header("生成配置")]
-    public Waypoint startWaypoint; // 敌人起始路径点
-    public GameObject enemyPrefab; // 敌人预制体
-    public float spawnInterval = 1f; // 生成间隔（秒）
+    public Waypoint startWaypoint; 
+    public GameObject enemyPrefab; 
+    public float spawnInterval = 1f;
 
-    public float enemySpeedMultiplier = 1f; // 敌人速度倍率
+    public float enemySpeedMultiplier = 1f;
 
-    public float enemyHealthMultiplier = 1f; // 敌人生命倍率
-    public int waveCount = 5; // 每波生成数量
-    public float waveInterval = 10f; // 波次间隔
+    public float enemyHealthMultiplier = 1f; 
+    public int waveCount = 5; 
+    public float waveInterval = 10f; 
 
     [Header("难度限制")]
-    public int maxWaveCount = 20; // 每波最大生成数量
-    public float minSpawnInterval = 0.5f; // 最小生成间隔
-    public int maxTotalWaves = 0; // 最大波数（0表示无限）
+    public int maxWaveCount = 20; 
+    public float minSpawnInterval = 0.5f; 
+    public int maxTotalWaves = 0;
 
     public int playerHP = 10;
     [HideInInspector]

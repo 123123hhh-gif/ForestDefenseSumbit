@@ -9910,6 +9910,6 @@ MonoBehaviour:
   maxFlyDistance: 50
   maxLifeTime: 5
   buffType: 3
-  buffValue: 0.5
-  buffDuration: 3
+  buffValue: 0.8
+  buffDuration: 1.5
   fatherTower: {fileID: 0}

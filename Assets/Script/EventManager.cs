@@ -16,7 +16,7 @@ public class EventManager : MonoBehaviour
             return;
         }
         Instance = this;
-        //过场景不删除
+
         DontDestroyOnLoad(gameObject);
     }
 

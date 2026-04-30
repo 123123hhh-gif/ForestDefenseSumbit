@@ -48,6 +48,8 @@ public class VictoryPanel : MonoBehaviour
                 starOnImages[i].gameObject.SetActive(true);
             }
         }
+        Debug.Log("UpdateStarsByHp finished = "+GameDataHub.Instance.CurrentUserName+" starCount = "+starCount);
+        GameDataHub.Instance.UpdatePlayerStars(GameDataHub.Instance.CurrentUserName,starCount);
     }
 
 
