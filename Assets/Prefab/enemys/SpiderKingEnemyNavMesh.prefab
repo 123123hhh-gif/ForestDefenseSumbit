@@ -260,10 +260,11 @@ GameObject:
   - component: {fileID: 1786055230160527066}
   - component: {fileID: 8070986862697390090}
   - component: {fileID: 4944139979523559245}
-  - component: {fileID: 6788632211741437206}
+  - component: {fileID: -6180215589147617001}
   - component: {fileID: 1108051268727931051}
+  - component: {fileID: -7023008259838495498}
   m_Layer: 0
-  m_Name: SpiderKingEnemy
+  m_Name: SpiderKingEnemyNavMesh
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -354,7 +355,7 @@ CapsuleCollider:
   m_Height: 2.1735647
   m_Direction: 1
   m_Center: {x: 0.01, y: 0.75, z: -0.01}
---- !u!114 &6788632211741437206
+--- !u!114 &-6180215589147617001
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -363,18 +364,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 568639069603075517}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eb4be454ec0a3845bab4c64f6811dac, type: 3}
+  m_Script: {fileID: 11500000, guid: 3202972b25c05f643af2e70aee3eef87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   baseMaxHealth: 80
   moveSpeed: 2
   damageToPlayer: 1
-  counterAttackChance: 0.3
-  counterAttackDamage: 2
+  counterAttackChance: 0.2
+  counterAttackDamage: 1
   _isDead: 0
   _hasReachedEnd: 0
   _currentWaypoint: {fileID: 0}
   sourceTower: {fileID: 0}
+  waypointReachedDistance: 0.5
 --- !u!114 &1108051268727931051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,6 +393,28 @@ MonoBehaviour:
   hpFollowPoint: {fileID: 1346679611813640291}
   hpBarOffsetY: 1.5
   smoothFollowSpeed: 2
+--- !u!195 &-7023008259838495498
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568639069603075517}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &575615557512404535
 GameObject:
   m_ObjectHideFlags: 0

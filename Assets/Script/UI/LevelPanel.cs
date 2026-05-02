@@ -37,7 +37,8 @@ public class LevelPanel : MonoBehaviour
 
     public void onBtnLevel4()
     {
-        SceneManager.LoadScene("L4");
+        // SceneManager.LoadScene("L4");
+        SceneManager.LoadScene("L4NavMesh");
     }
 
     public void onBtnLevel5()

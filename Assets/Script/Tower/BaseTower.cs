@@ -378,6 +378,7 @@ public class BaseTower : MonoBehaviour,IPointerClickHandler
 
     public void TakeDamage(int damage)
     {
+        if(gameObject == null) return;
         if (_isDead) return;
 
         _currentHealth -= damage;

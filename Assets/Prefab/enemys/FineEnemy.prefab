@@ -319,11 +319,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eb4be454ec0a3845bab4c64f6811dac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaxHealth: 100
+  baseMaxHealth: 80
   moveSpeed: 2
   damageToPlayer: 1
-  counterAttackChance: 0.3
-  counterAttackDamage: 4
+  counterAttackChance: 0.2
+  counterAttackDamage: 3
+  _isDead: 0
+  _hasReachedEnd: 0
+  _currentWaypoint: {fileID: 0}
   sourceTower: {fileID: 0}
 --- !u!114 &8402763275340648470
 MonoBehaviour:

@@ -15,8 +15,8 @@ public class BaseEnemy : MonoBehaviour
 
     private int _maxHealth;            
     private int _currentHealth;      
-    private bool _isDead = false;
-    private bool _hasReachedEnd = false;
+    public bool _isDead = false;
+    public bool _hasReachedEnd = false;
 
 
     public bool IsDead => _isDead;
@@ -24,7 +24,7 @@ public class BaseEnemy : MonoBehaviour
     public int CurrentHealth => _currentHealth;
 
 
-    private Waypoint _currentWaypoint;
+    public Waypoint _currentWaypoint;
     public float CurrentMoveSpeed { get; private set; }   
 
 
@@ -36,7 +36,7 @@ public class BaseEnemy : MonoBehaviour
     private int _maxHealthBonus = 0;       
 
   
-    private void Start()
+    protected virtual void Start()
     {
 
         _maxHealth = baseMaxHealth;
@@ -200,7 +200,7 @@ public class BaseEnemy : MonoBehaviour
     }
 
 
-    private void OnReachEnd()
+    public void OnReachEnd()
     {
         if (_hasReachedEnd || _isDead) return;
         _hasReachedEnd = true;
@@ -278,7 +278,7 @@ public class BaseEnemy : MonoBehaviour
         Destroy(gameObject, 1.1f);
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         EnemyManager.Instance?.RemoveEnemy(this);
     }

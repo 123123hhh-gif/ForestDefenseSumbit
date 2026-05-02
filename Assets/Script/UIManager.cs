@@ -284,6 +284,8 @@ public class UIManager : MonoBehaviour
 
     public void onTest()
     {
+
+        // Resources
         Debug.Log("23222222222222222");
     }
 }

@@ -15626,7 +15626,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7e30376514d7c44acbc0f231178e446a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b4dc6f3ee3a8242c9883fdb9d8b935d1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18022,6 +18022,10 @@ PrefabInstance:
     - target: {fileID: 883397705146022223, guid: 723ad9b9480b9784998ece2567dd7b2a, type: 3}
       propertyPath: m_Name
       value: BagPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 883397705146022223, guid: 723ad9b9480b9784998ece2567dd7b2a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6613414486811771291, guid: 723ad9b9480b9784998ece2567dd7b2a, type: 3}
       propertyPath: m_Pivot.x
