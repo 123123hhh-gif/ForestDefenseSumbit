@@ -14,7 +14,7 @@ public enum ItemType
 [CreateAssetMenu(fileName = "NewItem", menuName = "TD/prop Item", order = 2)]
 public class PropItemSO : ScriptableObject
 {
-    [Header("基础属性")]
+
     public string itemName;          
     public int price;                
     public ItemType itemType;        
@@ -22,7 +22,7 @@ public class PropItemSO : ScriptableObject
     public float value;      
     [TextArea] public string desc;   
 
-    [Header("编辑器预览")]
+
     public Sprite icon;              
     [HideInInspector] public string uniqueID; 
 

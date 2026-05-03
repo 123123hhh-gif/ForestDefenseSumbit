@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
     public float callInterval = 1f;
 
     private bool isGameOver = false;
-    private bool isVictory = false;
 
     private void Awake()
     {
@@ -114,7 +113,7 @@ public class GameManager : MonoBehaviour
     private void OnVictory()
     {
         isGameOver = true;
-        isVictory = true;
+
 
 
         GameDataHub.Instance.AddGold(settleGoldCoins());
@@ -189,7 +188,7 @@ public class GameManager : MonoBehaviour
     {
         _currentGold -= cost;
         UpdateGoldUI();
-        Debug.Log($"剩余金币：{_currentGold}");
+        Debug.Log($"Remaining coins:{_currentGold}");
     }
 
 
@@ -197,7 +196,7 @@ public class GameManager : MonoBehaviour
     {
         _currentGold += amount;
         UpdateGoldUI();
-        Debug.Log($"获得金币：{amount}，剩余：{_currentGold}");
+        Debug.Log($"Earned coins: {amount}, remaining: {_currentGold}");
     }
 
 
@@ -216,7 +215,6 @@ public void ResetGame()
     _currentGold = startGold; 
     killNum = 0; 
     isGameOver = false; 
-    isVictory = false;
 
 
     if (EnemySpawner.Instance != null)

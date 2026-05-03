@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class BagItem : MonoBehaviour
 {
-    [Header("组件引用")]
+    [Header("Component Reference")]
     [SerializeField] private Image _icon; 
     [SerializeField] private TextMeshProUGUI _numText; 
     [SerializeField] private GameObject _focus; 

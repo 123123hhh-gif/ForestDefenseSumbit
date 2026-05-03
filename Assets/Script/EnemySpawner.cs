@@ -31,7 +31,7 @@ public class EnemySpawner : MonoBehaviour
     [Header("LEVELID")]
     public int LevelId = 1;
 
-    [Header("生成配置")]
+    [Header("generate configuration")]
     public Waypoint startWaypoint; 
     public GameObject enemyPrefab; 
     public float spawnInterval = 1f;
@@ -42,7 +42,7 @@ public class EnemySpawner : MonoBehaviour
     public int waveCount = 5; 
     public float waveInterval = 10f; 
 
-    [Header("难度限制")]
+    [Header("difficulty limit")]
     public int maxWaveCount = 20; 
     public float minSpawnInterval = 0.5f; 
     public int maxTotalWaves = 0;
@@ -134,7 +134,7 @@ public class EnemySpawner : MonoBehaviour
 
         while (isSpawning && (maxTotalWaves == 0 || currentWave <= maxTotalWaves))
         {
-            Debug.Log($"生成第{currentWave}波敌人");
+            Debug.Log($"Generating wave {currentWave}");
             waveTxt.text = currentWave+"/"+maxTotalWaves;
             
 
@@ -199,7 +199,7 @@ public class EnemySpawner : MonoBehaviour
 
 
         StopSpawnWaves();
-        Debug.Log($"敌人生成结束，共生成{currentWave - 1}波");
+        Debug.Log($"Enemy generation finished, total waves generated: {currentWave - 1}");
     }
 
 
@@ -207,7 +207,7 @@ public class EnemySpawner : MonoBehaviour
     {
         if (enemyPrefab == null || startWaypoint == null)
         {
-            Debug.LogError("敌人预制体或起始路径点未赋值！");
+            Debug.LogError("Enemy prefab or start waypoint is not assigned！");
             return;
         }
 

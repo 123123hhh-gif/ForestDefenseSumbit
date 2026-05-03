@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class TurretFirePoints : MonoBehaviour
 {
-    [Header("射击点配置")]
+    [Header("firing point configuration")]
     public List<Transform> firePoints = new List<Transform>(); 
     public bool autoCollectChildFirePoints = true; 
 
@@ -31,7 +31,7 @@ public class TurretFirePoints : MonoBehaviour
             if (child.CompareTag(FIRE_POINT_TAG))
             {
                 firePoints.Add(child);
-                Debug.Log($"炮塔{gameObject.name}自动收集到射击点：{child.name}");
+                Debug.Log($"Turret {gameObject.name} automatically collected firing point: {child.name}");
             }
         }
     }

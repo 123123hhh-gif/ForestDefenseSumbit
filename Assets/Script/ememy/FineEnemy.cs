@@ -49,7 +49,7 @@ public class FineEnemy : BaseEnemy
         // }
     // }
 
-    private bool isTure = false;
+
     protected override void MoveToWaypoint()
     {
         if (_isAttacking) return;
@@ -113,9 +113,12 @@ public class FineEnemy : BaseEnemy
 
     public void OnAttackAnimationEnd()
     {
-        sourceTower.TakeDamage(counterAttackDamage);
+
         SetAttackState(false);
         SetWalkingState(true);
+
+            if (sourceTower == null) return;
+        sourceTower.TakeDamage(counterAttackDamage);
     }
 
 }

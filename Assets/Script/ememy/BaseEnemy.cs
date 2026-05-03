@@ -204,7 +204,7 @@ public class BaseEnemy : MonoBehaviour
     {
         if (_hasReachedEnd || _isDead) return;
         _hasReachedEnd = true;
-        Debug.Log($"{gameObject.name} 到达终点，扣血{damageToPlayer}");
+
         GameManager.Instance?.TakeDamage(damageToPlayer);
         DestroyEnemy();
     }
@@ -227,7 +227,7 @@ public class BaseEnemy : MonoBehaviour
 
         _currentHealth -= damage;
         _currentHealth = Mathf.Max(_currentHealth, 0);
-        // Debug.Log($"{gameObject.name} 受到 {damage} 伤害，剩余血量：{_currentHealth}");
+
 
 
         MonsterHpBar hp = GetComponent<MonsterHpBar>();

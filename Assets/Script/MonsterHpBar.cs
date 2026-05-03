@@ -4,12 +4,12 @@ using UnityEngine.UI;
 
 public class MonsterHpBar : MonoBehaviour
 {
-    [Header("血条预制体与挂点")]
+    [Header("Blood bar prefab and hanging point")]
     [SerializeField] private GameObject hpBarPrefab;      
     [SerializeField] private Transform hpFollowPoint;    
     [SerializeField] private float hpBarOffsetY = 1.5f;  
 
-    [Header("平滑跟随")]
+    [Header("Smooth following")]
     [SerializeField] private float smoothFollowSpeed = 5f;
 
 
@@ -27,7 +27,7 @@ public class MonsterHpBar : MonoBehaviour
         _enemy = GetComponentInParent<BaseEnemy>();
         if (_enemy == null)
         {
-            Debug.LogError($"[MonsterHpBar] 未找到 BaseEnemy 组件，血条将无法工作！", this);
+            Debug.LogError($"[MonsterHpBar] BaseEnemy component not found, health bar will not work!", this);
             enabled = false;
             return;
         }
@@ -39,7 +39,7 @@ public class MonsterHpBar : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"[MonsterHpBar] hpBarPrefab 或 hpFollowPoint 未赋值！", this);
+            Debug.LogError($"[MonsterHpBar] hpBarPrefab or hpFollowPoint is not assigned!", this);
             enabled = false;
         }
     }
@@ -57,7 +57,7 @@ public class MonsterHpBar : MonoBehaviour
         _hpSlider = _hpBarInstance.GetComponentInChildren<Slider>();
         if (_hpSlider == null)
         {
-            Debug.LogError($"[MonsterHpBar] 血条预制体中未找到 Slider 组件！", this);
+            Debug.LogError($"[MonsterHpBar] Health bar prefab does not contain a Slider component!", this);
             return;
         }
 
@@ -110,7 +110,7 @@ public class MonsterHpBar : MonoBehaviour
         if (_hpSlider.maxValue != maxHp)
             _hpSlider.maxValue = maxHp;
 
-        // Debug.Log($"[MonsterHpBar] 更新血量显示：当前HP={currentHp}，最大HP={maxHp}  _hpSlider.maxValue={_hpSlider.maxValue}", this);
+        // Debug.Log($"[MonsterHpBar] Updating health display: Current HP={currentHp}, Max HP={maxHp}  _hpSlider.maxValue={_hpSlider.maxValue}", this);
         _hpSlider.value = currentHp;
 
 

@@ -17,14 +17,14 @@ public class CannonTower : BaseTower
 
         if (_targetEnemy == null || bulletPrefab == null || _turretFirePoints == null) 
         {
-            Debug.LogWarning("射击条件不足：目标 = "+_targetEnemy+"  预制体 = "+bulletPrefab+"  射击点管理器 ="+_turretFirePoints);
+            Debug.LogWarning("Insufficient firing conditions: Target = "+_targetEnemy+"  Prefab = "+bulletPrefab+"  Firing point manager ="+_turretFirePoints);
             return;
         }
 
         List<Transform> firePoints = _turretFirePoints.GetAllFirePoints();
         if (firePoints.Count == 0)
         {
-            Debug.LogWarning("没有可用的射击点！");
+            Debug.LogWarning("The turret has no available shooting points!");
             return;
         }
 

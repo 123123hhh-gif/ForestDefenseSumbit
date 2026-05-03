@@ -188,7 +188,7 @@ public class GameDataHub : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.LogError("加载排行榜数据失败: " + e.Message);
+            Debug.LogError("Failed to load leaderboard data: " + e.Message);
             _rankList = new List<PlayerData>();
         }
     }
@@ -208,7 +208,7 @@ public class GameDataHub : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.LogError("保存排行榜数据失败: " + e.Message);
+            Debug.LogError("Failed to save the leaderboard data: " + e.Message);
         }
     }
 
@@ -217,7 +217,7 @@ public class GameDataHub : MonoBehaviour
     {
         if (addStars < 0)
         {
-            Debug.LogWarning("新增星数不能为负数");
+            Debug.LogWarning("The number of newly added stars cannot be negative");
             return;
         }
 
@@ -241,7 +241,7 @@ public class GameDataHub : MonoBehaviour
 
         SaveRankData();
 
-        Debug.Log($"玩家 {playerId} 星数已更新，当前总星数: {GetPlayerTotalStars(playerId)}");
+        Debug.Log($"Player {playerId} star count updated, current total stars: {GetPlayerTotalStars(playerId)}");
     }
 
 
@@ -277,7 +277,7 @@ public class GameDataHub : MonoBehaviour
         _rankList.Clear();
         PlayerPrefs.DeleteKey(RANK_DATA_KEY);
         PlayerPrefs.Save();
-        Debug.Log("排行榜数据已清空");
+        Debug.Log("Leaderboard data has been cleared");
     }
 
 
@@ -326,14 +326,14 @@ public class GameDataHub : MonoBehaviour
     {
         if (string.IsNullOrEmpty(propId) || price < 0 || buyCount < 1)
         {
-            Debug.LogWarning("购买道具参数错误");
+            Debug.LogWarning("Purchase prop parameters are invalid");
             return false;
         }
 
 
         if (!SubtractGold(price * buyCount))
         {
-            Debug.Log("金币不足，购买失败");
+            Debug.Log("Not enough gold, purchase failed");
             return false;
         }
 
@@ -348,7 +348,7 @@ public class GameDataHub : MonoBehaviour
         }
 
         SaveGameData(); 
-        Debug.Log($"成功购买道具 {propId} x{buyCount}，当前数量：{_propCountDict[propId]}");
+        Debug.Log($"Successfully purchased prop {propId} x{buyCount}, current quantity: {_propCountDict[propId]}");
         return true;
     }
 
@@ -357,13 +357,13 @@ public class GameDataHub : MonoBehaviour
     {
         if (string.IsNullOrEmpty(propId) || useCount < 1)
         {
-            Debug.LogWarning("使用道具参数错误");
+            Debug.LogWarning("Usage parameters for the prop are invalid");
             return false;
         }
 
         if (!_propCountDict.ContainsKey(propId) || _propCountDict[propId] < useCount)
         {
-            Debug.Log($"道具 {propId} 数量不足，使用失败");
+            Debug.Log($"Prop {propId} is not enough, usage failed");
             return false;
         }
 
@@ -376,7 +376,7 @@ public class GameDataHub : MonoBehaviour
         }
 
         SaveGameData();
-        Debug.Log($"成功使用道具 {propId} x{useCount}");
+        Debug.Log($"Successfully used prop {propId} x{useCount}");
         return true;
     }
 

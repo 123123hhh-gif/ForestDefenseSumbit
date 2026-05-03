@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ShopPanel : MonoBehaviour
 {
-    [Header("引用组件")]
+    [Header("Reference component")]
     [SerializeField] private ShopSO _shopConfig;
     [SerializeField] private GameObject _shopItemPrefab;
     [SerializeField] private Transform _gridTransform;
@@ -53,7 +53,7 @@ public class ShopPanel : MonoBehaviour
     {
         if (_shopConfig == null || _shopItemPrefab == null || _gridTransform == null)
         {
-            Debug.LogError("ShopPanel: 缺少必要的引用配置！");
+            Debug.LogError("ShopPanel: Missing necessary reference configuration！");
             return;
         }
 

@@ -93,7 +93,7 @@ public class FineMultipleTower : BaseTower
 
         if (EnemyManager.Instance == null)
         {
-            Debug.LogWarning("EnemyManager 未找到！");
+            Debug.LogWarning("EnemyManager null!");
 
             _nearestEnemies.Clear();
             return;
@@ -149,19 +149,19 @@ public class FineMultipleTower : BaseTower
         
         if(_nearestEnemies.Count == 1)
         {
-            Debug.Log("找到1个最近的存活敌人");
+            Debug.Log("Found 1 nearest surviving enemy");
         }
 
-        Debug.Log($"找到{_nearestEnemies.Count}个最近的存活敌人，攻击范围：{_currentData.attackRange}");
+        Debug.Log($"Found {_nearestEnemies.Count} nearest surviving enemies, attack range: {_currentData.attackRange}");
     }
 
 
     protected override void RotateTurretToTarget()
     {
-        if(_nearestEnemies.Count == 1)
-        {
-            Debug.Log("找到1个最近的存活敌人");
-        }
+        // if(_nearestEnemies.Count == 1)
+        // {
+        //     Debug.Log("Found 1 nearest surviving enemy");
+        // }
         if (_nearestEnemies.Count == 0 || turretRoot == null) return;
         BaseEnemy firstEnemy = _nearestEnemies[0];
         if (firstEnemy == null) return;
@@ -185,18 +185,18 @@ public class FineMultipleTower : BaseTower
     {
         if(_nearestEnemies.Count == 1)
         {
-            Debug.Log("找到1个最近的存活敌人");
+            Debug.Log("Found 1 nearest surviving enemy");
         }
         if (_targetEnemy == null || bulletPrefab == null || _turretFirePoints == null) 
         {
-            Debug.LogWarning("塔射击条件不足：目标/预制体/射击点管理器为空");
+            Debug.LogWarning("Insufficient tower shooting conditions: The target/prefabricated body/shooting point manager is empty");
             return;
         }
 
         List<Transform> firePoints = _turretFirePoints.GetAllFirePoints();
         if (firePoints.Count == 0)
         {
-            Debug.LogWarning("塔没有可用的射击点！");
+            Debug.LogWarning("The tower has no available shooting points!");
             return;
         }
 
@@ -227,7 +227,7 @@ public class FineMultipleTower : BaseTower
         if (_nearestEnemies.Contains(enemy))
         {
             _nearestEnemies.Remove(enemy);
-            Debug.Log($"从炮塔目标列表移除敌人：{enemy.gameObject.name}，剩余目标数：{_nearestEnemies.Count}");
+            Debug.Log($"From the tower's target list, removed enemy: {enemy.gameObject.name}, remaining targets: {_nearestEnemies.Count}");
         }
     }
 
@@ -257,7 +257,7 @@ public class FineMultipleTower : BaseTower
         }
         else
         {
-            Debug.LogWarning($"子弹{bulletObj.name}缺少ParticleMoverBullet组件！");
+            Debug.LogWarning($"Bullet {bulletObj.name} is missing the ParticleMoverBullet component!");
         }
     }
 

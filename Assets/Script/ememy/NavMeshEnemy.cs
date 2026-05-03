@@ -2,8 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 /// <summary>
-/// 使用 NavMeshAgent 进行寻路的怪物，仍按路点逐点移动。
-/// 需要场景中已烘焙 NavMesh。
+/// Monsters using NavMeshAgent for pathfinding still move point by point according to the waypoints.
 /// </summary>
 public class NavMeshEnemy : BaseEnemy
 {
@@ -20,7 +19,7 @@ public class NavMeshEnemy : BaseEnemy
     private bool _isCurrentlyWalking = false;
     private bool _isAttacking = false;
 
-    // 用于判断是否到达路点的距离阈值
+    // Distance threshold for determining whether a waypoint has been reached
     [SerializeField] private float waypointReachedDistance = 0.5f;
 
 
@@ -38,12 +37,11 @@ public class NavMeshEnemy : BaseEnemy
     {
         base.Start();
 
-        // 获取或添加 NavMeshAgent 组件
+
         _agent = GetComponent<NavMeshAgent>();
         if (_agent == null)
             _agent = gameObject.AddComponent<NavMeshAgent>();
 
-        // 配置 agent 参数（可根据需要调整）
         _agent.speed = CurrentMoveSpeed;
         _agent.angularSpeed = 360f;
         _agent.acceleration = 8f;
@@ -53,12 +51,12 @@ public class NavMeshEnemy : BaseEnemy
         _agent.height = 2f;
         _agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
 
-        // 让 agent 自动更新旋转，我们不需要自己控制旋转
+
         _agent.updateRotation = true;
-        _agent.updateUpAxis = false; // 如果希望保持 Y 轴向上
+        _agent.updateUpAxis = false; 
     }
 
-    // 重写速度刷新，使 agent 速度与 buff 系统同步
+    // Overwrite the speed refresh to synchronize the agent speed with the buff system
     protected override void RecalcStats()
     {
         base.RecalcStats();
@@ -66,29 +64,28 @@ public class NavMeshEnemy : BaseEnemy
             _agent.speed = CurrentMoveSpeed;
     }
 
-    // 重写移动逻辑，使用 NavMeshAgent 前往当前路点
+    // Rewriting the movement logic, using NavMeshAgent to navigate to the current waypoint
     protected override void MoveToWaypoint()
     {
         if (_isDead || _hasReachedEnd || _currentWaypoint == null)
             return;
 
-        // 设置目标路点
+        // Set target waypoint
         _agent.SetDestination(_currentWaypoint.transform.position);
 
-        // 检查是否到达当前路点
-        // 需要满足：没有正在计算的路径，且剩余距离小于停止距离
+        // Check whether the current waypoint has been reached
         if (!_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance)
         {
-            // 到达路点
+      
             if (_currentWaypoint.isLastWaypoint)
             {
                 OnReachEnd();
             }
             else
             {
-                // 切换到下一个路点
+                // Switch to the next waypoint
                 _currentWaypoint = _currentWaypoint.nextWaypoint;
-                // 立即设置新目标，防止 agent 停止
+                // Set a new goal immediately to prevent the agent from stopping
                 if (_currentWaypoint != null)
                     _agent.SetDestination(_currentWaypoint.transform.position);
             }
@@ -99,7 +96,7 @@ public class NavMeshEnemy : BaseEnemy
         _isCurrentlyWalking = true;
     }
 
-    // 重写死亡处理，禁用 agent
+    // Override the death handling and disable the agent
     protected override void Die()
     {
         if (_agent != null)
@@ -108,7 +105,7 @@ public class NavMeshEnemy : BaseEnemy
         TriggerDeath();
     }
 
-    // 可选：在 OnDestroy 中清理 agent
+    // Optional: Clean up the agent in OnDestroy
     protected override void OnDestroy()
     {
         if (_agent != null)
@@ -165,9 +162,12 @@ public class NavMeshEnemy : BaseEnemy
 
     public void OnAttackAnimationEnd()
     {
-        sourceTower.TakeDamage(counterAttackDamage);
+
         SetAttackState(false);
         SetWalkingState(true);
+
+        if (sourceTower == null) return;
+        sourceTower.TakeDamage(counterAttackDamage);
     }
 
 

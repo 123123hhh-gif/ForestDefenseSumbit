@@ -54,7 +54,7 @@ public class PropSpawner : MonoBehaviour
         _waypoints.Clear();
         if (startWaypoint == null)
         {
-            Debug.LogError("startWaypoint 未赋值！");
+            Debug.LogError("startWaypoint Unassigned!");
             return;
         }
 
@@ -151,7 +151,7 @@ public class PropSpawner : MonoBehaviour
     GameObject itemObj = Instantiate(prefab, spawnPos, Quaternion.identity);
     _spawnedItems.Add(itemObj);
 
-    // Debug.Log($"在路径上生成了道具：{prefab.name}，位置：{spawnPos}");
+
 }
 
 

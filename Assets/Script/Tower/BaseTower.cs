@@ -217,7 +217,7 @@ public class BaseTower : MonoBehaviour,IPointerClickHandler
     {
         if (EnemyManager.Instance == null)
         {
-            Debug.LogWarning("EnemyManager 未找到！");
+            Debug.LogWarning("EnemyManager null！");
             return;
         }
 
@@ -300,7 +300,7 @@ public class BaseTower : MonoBehaviour,IPointerClickHandler
         
         // if (_attackTimer < _currentData.attackRate) return;
 
-        Debug.Log($"攻击间隔：{_attackTimer}，当前攻击间隔：{CurrentAttackRate}");
+
 
         if (_attackTimer < CurrentAttackRate) return;
 
@@ -315,7 +315,7 @@ public class BaseTower : MonoBehaviour,IPointerClickHandler
         
         if (_turretFirePoints == null)
         {
-            Debug.LogWarning("射击点管理器未初始化，无法射击！");
+            Debug.LogWarning("The shooting point manager has not been initialized, unable to shoot!");
             return;
         }
 
@@ -323,7 +323,7 @@ public class BaseTower : MonoBehaviour,IPointerClickHandler
         List<Transform> firePoints = _turretFirePoints.GetAllFirePoints();
         if (firePoints.Count == 0)
         {
-            Debug.LogWarning($"炮塔{turretRoot.name}没有可用的射击点！");
+            Debug.LogWarning($"The turret {turretRoot.name} has no available shooting points!");
             return;
         }
 
@@ -333,7 +333,7 @@ public class BaseTower : MonoBehaviour,IPointerClickHandler
             if (firePoint != null && _targetEnemy != null)
             {
 
-                Debug.Log($"从{firePoint.name}射击{_targetEnemy.name}，伤害：{CurrentDamage}");
+
                 
                 BaseEnemy enemy = _targetEnemy.GetComponent<BaseEnemy>();
                 // if (enemy != null) enemy.TakeDamage(_currentData.damage);
@@ -348,14 +348,14 @@ public class BaseTower : MonoBehaviour,IPointerClickHandler
         
         if (_currentData.nextLevelData == null)
         {
-            Debug.Log($"{_currentData.towerName}已达满级");
+            Debug.Log($"{_currentData.towerName}Max level reached");
             return false;
         }
 
        
         if (!GameManager.Instance.CheckEnoughGold(_currentData.nextLevelData.cost))
         {
-            Debug.Log("金币不足，无法升级");
+            Debug.Log("Insufficient gold coins, unable to upgrade");
             return false;
         }
 
@@ -363,7 +363,7 @@ public class BaseTower : MonoBehaviour,IPointerClickHandler
         _currentData = _currentData.nextLevelData;
         RecalcStats();
 
-        Debug.Log($"{gameObject.name}升级为{_currentData.towerName}");
+        Debug.Log($"{gameObject.name} upgraded to {_currentData.towerName}");
         return true;
     }
 
@@ -378,11 +378,11 @@ public class BaseTower : MonoBehaviour,IPointerClickHandler
 
     public void TakeDamage(int damage)
     {
-        if(gameObject == null) return;
+        if(this == null) return;
         if (_isDead) return;
 
         _currentHealth -= damage;
-        Debug.Log($"{gameObject.name} 受到 {damage} 伤害，剩余血量：{_currentHealth}");
+        Debug.Log($"{gameObject.name} has received {damage} damage, with remaining health: {_currentHealth}");
 
         TowerHpBar hp = this.GetComponent<TowerHpBar>();
         hp.TakeDamage(damage);
@@ -414,7 +414,7 @@ public class BaseTower : MonoBehaviour,IPointerClickHandler
     protected virtual void Die()
     {
         _isDead = true;
-        Debug.Log($"{gameObject.name} 死亡");
+        Debug.Log($"{gameObject.name} has been destroyed!");
 
         
         // DestroyEnemy();
@@ -433,7 +433,7 @@ public class BaseTower : MonoBehaviour,IPointerClickHandler
         {
             int refundGold = Mathf.RoundToInt(_currentData.cost * 0.7f);
             GameManager.Instance.AddGold(refundGold);
-            Debug.Log($"出售炮塔{gameObject.name}，返还金币：{refundGold}");
+            Debug.Log($"Selling turret {gameObject.name}, refunding gold: {refundGold}");
         }
 
         Destroy(gameObject);
@@ -462,7 +462,7 @@ public class BaseTower : MonoBehaviour,IPointerClickHandler
         _targetEnemy = null;
         _currentData = null;
         towerPlace = null;
-        Debug.Log($"炮塔{gameObject.name}已被销毁，OnDestroy触发");
+        Debug.Log($"Turret {gameObject.name} has been destroyed, OnDestroy triggered");
     }
 
 

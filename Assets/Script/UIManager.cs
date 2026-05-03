@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
-    [Header("升级面板")]
+    [Header("Upgrade Panel")]
     public GameObject upgradePanel;
     public TextMeshProUGUI towerNameText;
     public TextMeshProUGUI upgradeCostText;
@@ -101,7 +101,7 @@ public class UIManager : MonoBehaviour
         _currentSelectedTower = tower;
         TowerData nextData = _currentSelectedTower.CurrentData.nextLevelData;
 
-         Debug.Log("加载升级面板，_currentSelectedTower = "+ _currentSelectedTower +" , name = "+ _currentSelectedTower.CurrentData.towerName);
+         Debug.Log("Loading upgrade panel, _currentSelectedTower = "+ _currentSelectedTower +" , name = "+ _currentSelectedTower.CurrentData.towerName);
 
         if (nextData == null)
         {
@@ -135,7 +135,7 @@ public class UIManager : MonoBehaviour
         switch(tipsType)
         {
             case TipsType.SellTower:
-                //字符串换行怎么添加
+     
                 tipsStr = $"Confirm the sale? \n Selling a defense tower will only return 70% of the spent gold!";
                 break;
             default:
@@ -144,7 +144,7 @@ public class UIManager : MonoBehaviour
 
         // Text tipsText = tipsPanel.transform.Find("desc").GetComponent<Text>();
 
-        //查找 tipsPanel 下的 desc 组件 并赋值
+
         TextMeshProUGUI tipsText = tipsPanel.transform.Find("desc").GetComponent<TextMeshProUGUI>();
         if(tipsText != null)
         {
@@ -184,7 +184,7 @@ public class UIManager : MonoBehaviour
            
             BaseTower newTower = GameManager.Instance.PlaceTower(_currentSelectedTower.towerPlace,_currentSelectedTower.CurrentData.nextLevelData);
            
-           Debug.Log("升级成功，newTower = "+ newTower +" , name = "+ newTower.CurrentData.towerName);
+           Debug.Log("Upgrade successful, newTower = "+ newTower +" , name = "+ newTower.CurrentData.towerName);
             ShowUpgradePanel(newTower);
         }
     }
@@ -294,5 +294,5 @@ public class UIManager : MonoBehaviour
 public enum TipsType
 {
     None,       
-    SellTower,     // 弓箭塔
+    SellTower,   
 }

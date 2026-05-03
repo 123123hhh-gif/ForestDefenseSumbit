@@ -6,18 +6,18 @@ using DG.Tweening;
 
 public class BagPanel : MonoBehaviour
 {
-    [Header("核心引用")]
+    [Header("core citation")]
     [SerializeField] private ShopSO _shopConfig; 
     [SerializeField] private GameObject _bagItemPrefab; 
     [SerializeField] private Transform _gridTransform;
     [SerializeField] private RectTransform _bagPanelRect;
 
-    [Header("详情面板引用")]
+    [Header("Details panel reference")]
     [SerializeField] private TextMeshProUGUI _nameText; 
     [SerializeField] private TextMeshProUGUI _descText; 
     [SerializeField] private Button _useBtn; 
 
-    [Header("动画设置")]
+    [Header("Animation Settings")]
     [SerializeField] private float _slideDuration = 0.3f; 
     [SerializeField] private float _visibleUIWidth = 500f; 
     private List<BagItem> _bagItems = new List<BagItem>(); 
@@ -41,7 +41,7 @@ public class BagPanel : MonoBehaviour
         }
         else
         {
-            Debug.LogError("BagPanel: 使用按钮 _useBtn 未赋值！");
+            Debug.LogError("BagPanel: The button _useBtn has not been assigned a value！");
         }
     }
 
@@ -100,7 +100,7 @@ public class BagPanel : MonoBehaviour
     {
         if (_shopConfig == null || _bagItemPrefab == null || _gridTransform == null)
         {
-            Debug.LogError("BagPanel: 缺少必要的引用配置！");
+            Debug.LogError("BagPanel: The required reference configurations are missing！");
             return;
         }
 
@@ -127,7 +127,7 @@ public class BagPanel : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning($"在ShopConfig中未找到名为 {userProp.propId} 的道具！");
+                Debug.LogWarning($"In ShopConfig, no prop found with name {userProp.propId}！");
             }
         }
     }
@@ -151,7 +151,7 @@ public class BagPanel : MonoBehaviour
 
         if (_selectedItem == null)
         {
-            Debug.LogWarning("BagPanel: 未选中任何道具，无法使用！");
+            Debug.LogWarning("BagPanel: No prop selected, cannot use！");
             return;
         }
 
@@ -163,11 +163,11 @@ public class BagPanel : MonoBehaviour
 
         if (currentCount <= 0)
         {
-            Debug.LogWarning($"BagPanel: 道具【{propId}】数量不足，无法使用！");
+            Debug.LogWarning($"BagPanel: Prop 【{propId}】 is insufficient in quantity, cannot be used！");
             return;
         }
 
-        Debug.Log($"使用道具：{propId}，当前数量：{currentCount}");
+        Debug.Log($"Using prop: {propId}, Current quantity: {currentCount}");
 
 
         bool useSuccess = false;
@@ -186,7 +186,7 @@ public class BagPanel : MonoBehaviour
                 useSuccess = UseEnemySpeedDebuffProp(currentProp);
                 break;
             default:
-                Debug.LogWarning($"BagPanel: 未实现的道具类型【{currentProp.itemType}】使用逻辑！");
+                Debug.LogWarning($"BagPanel: Unimplemented prop type 【{currentProp.itemType}】 usage logic！");
                 break;
         }
 
@@ -201,16 +201,16 @@ public class BagPanel : MonoBehaviour
         }
     }
 
-    #region 道具使用具体逻辑（无修改，适配原有逻辑）
+    #region Specific logic for using props (no modification, adapting to existing logic)
     private bool UseHealthBoostProp(PropItemSO propSO)
     {
         if (GameManager.Instance == null)
         {
-            Debug.LogError("BagPanel: GameManager.Instance 为空！");
+            Debug.LogError("BagPanel: GameManager.Instance is null！");
             return false;
         }
         GameManager.Instance.HealPlayer((int)propSO.value);
-        Debug.Log($"玩家生命值增加{propSO.value}点！");
+        Debug.Log($"Player health increased by {propSO.value} points！");
         return true;
     }
 
@@ -219,14 +219,14 @@ public class BagPanel : MonoBehaviour
         BaseTower[] allTowers = GetAllActiveTowers();
         if (allTowers.Length == 0)
         {
-            Debug.LogWarning("BagPanel: 场景中无可用的塔，无法使用攻速提升道具！");
+            Debug.LogWarning("BagPanel: Scene has no available towers, cannot use attack speed boost prop！");
             return false;
         }
         foreach (BaseTower tower in allTowers)
         {
             tower.ApplyBuff(Buff.BuffType.AttackSpeed, propSO.value, 5);
         }
-        Debug.Log($"所有塔的攻速增加{propSO.value * 100}%，持续5秒！");
+        Debug.Log($"All towers' attack speed increased by {propSO.value * 100}%, lasting for 5 seconds！");
         return true;
     }
 
@@ -235,14 +235,14 @@ public class BagPanel : MonoBehaviour
         BaseTower[] allTowers = GetAllActiveTowers();
         if (allTowers.Length == 0)
         {
-            Debug.LogWarning("BagPanel: 场景中无可用的塔，无法使用伤害提升道具！");
+            Debug.LogWarning("BagPanel: Scene has no available towers, cannot use attack damage boost prop！");
             return false;
         }
         foreach (BaseTower tower in allTowers)
         {
             tower.ApplyBuff(Buff.BuffType.Damage, propSO.value, 10);
         }
-        Debug.Log($"所有塔的伤害增加{propSO.value * 100}%，持续10秒！");
+        Debug.Log($"All towers' damage increased by {propSO.value * 100}%, lasting for 10 seconds！");
         return true;
     }
 
@@ -250,13 +250,13 @@ public class BagPanel : MonoBehaviour
     {
         if (EnemyManager.Instance == null)
         {
-            Debug.LogError("BagPanel: EnemyManager.Instance 为空！");
+            Debug.LogError("BagPanel: EnemyManager.Instance is null！");
             return false;
         }
         List<BaseEnemy> allEnemies = EnemyManager.Instance.GetAllAliveEnemies();
         if (allEnemies.Count == 0)
         {
-            Debug.LogWarning("BagPanel: 场景中无存活敌人，无法使用减速道具！");
+            Debug.LogWarning("BagPanel: Scene has no alive enemies, cannot use slow prop！");
             return false;
         }
         foreach (BaseEnemy enemy in allEnemies)
@@ -266,12 +266,12 @@ public class BagPanel : MonoBehaviour
                 enemy.ApplyBuff(Buff.BuffType.MoveSpeed, propSO.value, 5);
             }
         }
-        Debug.Log($"所有敌人的移动速度变化{propSO.value * 100}%，持续5秒！");
+        Debug.Log($"All enemies' movement speed changed by {propSO.value * 100}%, lasting for 5 seconds！");
         return true;
     }
     #endregion
 
-    #region 辅助方法
+    #region auxiliary method
 
     private BaseTower[] GetAllActiveTowers()
     {
@@ -291,7 +291,7 @@ public class BagPanel : MonoBehaviour
     private void UpdatePropCountAfterUse(string propId)
     {
         int newCount = GameDataHub.Instance.GetPropCount(propId);
-        Debug.Log($"道具【{propId}】剩余数量：{newCount}");
+        Debug.Log($"Prop 【{propId}】 Remaining Quantity: {newCount}");
 
 
         if (newCount <= 0)

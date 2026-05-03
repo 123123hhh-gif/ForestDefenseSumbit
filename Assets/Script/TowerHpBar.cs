@@ -3,13 +3,13 @@ using UnityEngine.UI;
 
 public class TowerHpBar : MonoBehaviour
 {
-    [Header("血条配置")]
+    [Header("HP bar configuration")]
     public GameObject hpBarPrefab; 
     public Transform hpFollowPoint; 
     public float hpBarOffsetY = 1.5f; 
     public float smoothFollowSpeed = 5f; 
 
-    [Header("塔属性")]
+    [Header("Tower attributes")]
     public float maxHp = 100f;
     private float currentHp;
     private Slider hpSlider; 
